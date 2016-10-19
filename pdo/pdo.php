@@ -1,7 +1,7 @@
 <?php
 require 'Task.php';
 try {
-    $pdo = new PDO('mysql:host=127.0.0.1;dbname=today', 'root', 'compass');
+    $pdo = new PDO('mysql:host=127.0.0.1;dbname = today', 'root', 'compass');
     echo "connected";
 }
 catch (PDOException $e) {
