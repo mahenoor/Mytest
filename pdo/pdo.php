@@ -9,4 +9,5 @@ catch (PDOException $e) {
 $statement = $pdo->prepare('select * from today');
 $statement->execute();
 var_dump($statement->fetchAll(PDO::FETCH_OBJ));
+require 'linkpdo.php';
 ?>  
