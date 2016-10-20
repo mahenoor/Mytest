@@ -1,6 +1,8 @@
 <?php
-require 'functions.php';
+require 'bootstrap.php';
 require 'Task.php';
-$pdo = connectToDb();
-$tasks = fetchAllTasks($pdo);
-?>  
+$pdo = connection::make();
+$query = new QueryBuilder($pdo);
+$tasks = $query->selectAll('today');
+die(var_dump($tasks));
+?>
