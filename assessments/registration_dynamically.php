@@ -2,10 +2,15 @@
 class Register
 {
     public $username;
+    
     public $email;
+    
     public $password;
+    
     public $cpassword;
+    
     public $gender;
+    
     public function username($username)
     {
         $this->username = $username;
@@ -52,7 +57,7 @@ class Register
     }
     public function display1()
     {
-        require 'form4.html';
+        require 'form.html';
     }
     public function display()
     {
