@@ -1,17 +1,22 @@
-<?php
-class Car{
-	public $comp;
-	public $price;
-	public $color = 'blue';
-	public function hello() {
-		return "i am a <i>" . $this-> comp . "</i>, and i am a <i>". $this -> color;
-	}
+ <?php
+class Car
+{
+    public $comp;
+    public $color = 'blue';
+    public $hasSunRoof = 'true';
+    public function hello()
+    {
+        return 'hello';
+    }
 }
-$bmw = new Car();
+$bmw  = new Car();
 $audi = new Car();
-$bmw -> comp = 'BMW';
-$bmw -> color = 'green';
-$audi-> comp = 'BMW';
-$audi -> color = 'green';
-echo $bmw -> hello();
+echo $bmw->color;
+echo "<br/ >";
+echo $audi->color;
+$bmw->color = 'red';
+echo $bmw->color;
+echo $bmw->hasSunRoof = 'false';
+echo $audi->hasSunRoof = 'true';
+echo $bmw->hello();
 ?>
