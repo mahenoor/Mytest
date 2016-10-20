@@ -7,20 +7,20 @@ class Register
     public $cpassword;
     public function username($username)
     {
-        $this->username=$username;
+        $this->username = $username;
     }
     public function email($email)
     {
-        $this->email=$email;
+        $this->email = $email;
 
     }
     public function password($password)
     {
-        $this->password=$password;
+        $this->password = $password;
     }
     public function cpassword($cpassword)
     {
-        $this->cpassword=$cpassword;
+        $this->cpassword = $cpassword;
     }
     public function validate1($password)
     {
@@ -36,9 +36,9 @@ class Register
     }
     public function validate3($password,$cpassword)
     {
-        if($password==$cpassword){
-            $this->password=$password;
-            $this->cpassword=$cpassword;
+        if($password == $cpassword){
+            $this->password = $password;
+            $this->cpassword = $cpassword;
         }
         else
         {
