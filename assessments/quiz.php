@@ -5,8 +5,8 @@
 <body>
 <?php
 if (isset($_GET['query'])) {
-    $quest = $_GET['query'];
-    echo $quest;
+    $question = $_GET['query'];
+    echo $question;
 } else {
     $quest = 0;
 }
@@ -29,11 +29,11 @@ $questions = array(
     )
 );
 ?>
-<form method="post" action="quiz81.php?query=<?php
-echo $quest + 1;
+<form method="post" action="quiz.php?query=<?php
+echo $question + 1;
 ?>">
 <?php
-$items = $questions[$quest];
+$items = $questions[$question];
 $m     = $items['q'];
 $n     = $items['a'];
 $q     = $items['b'];
