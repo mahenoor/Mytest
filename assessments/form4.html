@@ -1,0 +1,46 @@
+<!DOCTYPE version = "1.1" encoding = "UTF-8?">
+<html>
+<head><title>registration</title>
+<style type = "text/css">
+.registration{
+	text-align:center;
+	color:red;
+	padding:10px;
+
+}
+.button{
+	text-align:center;
+	color:red;
+	background:yellow;
+}
+</style></head>
+<body>
+<span class = "registration">
+<h2>Registration</h2>
+<form method = "POST" action = "">
+<table border = 5 align = center bordercolor = green >
+<tr>
+<th>Username:</th>
+<td><input type = "text" name = "username"  required></td>
+</tr>
+<tr>
+<th>user_email:</th>
+<td><input type = "email" name = "user_email"  required></td>
+</tr>
+<tr>
+<th>Enter user_password:</th>
+<td><input type = "password" name = "user_password"   required></td>
+</tr>
+<tr>
+<th>Enter user_confirmation_password:</th>
+<td><input type = "password" name = "user_confirmation_password"  required></td>
+</tr>
+<tr>
+<th>gender:</th>
+<td><input type = "radio" name = "gender" value = "male" required>male</td><br />
+<td><input type = "radio" name = "gender" value = "female" required>female</td>
+</tr>
+</span></table>
+<input type = "submit" name = "register" value = "Register" class = "button">
+</body>
+</html>
