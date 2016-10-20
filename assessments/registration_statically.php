@@ -2,9 +2,13 @@
 class Register
 {
     public $username;
+    
     public $email;
+    
     public $password;
+    
     public $cpassword;
+    
     public function username($username)
     {
         $this->username = $username;
