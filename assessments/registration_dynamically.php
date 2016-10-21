@@ -13,7 +13,7 @@ class Register
     public $gender;
     /* the below five functions are used to set the $username,$email,$password,$cpassword,$gender*/
     /* @param \$username
-        @return $username */
+       @return $username */
     public function username($username)
     {
         $this->username = $username;
@@ -51,7 +51,7 @@ class Register
         }
     }
     /* @param \$cpassword
-      @return $cpassword if condition is true else returns the error statemnt enclosed in echo */
+       @return $cpassword if condition is true else returns the error statemnt enclosed in echo */
     public function validate2($cpassword)
     {
         if (!preg_match("/[a-z]{6}/", $cpassword)) {
@@ -59,7 +59,7 @@ class Register
         }
     }
      /* @param \$password,$cpassword
-      @return $password,$cpassword if condition is true else returns the error statemnt enclosed in echo */
+        @return $password,$cpassword if condition is true else returns the error statemnt enclosed in echo */
     public function validate3($password, $cpassword)
     {
         if ($password == $cpassword) {
