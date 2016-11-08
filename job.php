@@ -11,5 +11,9 @@ class Job
 	{
 		$this->salary = $salary;
 	}
+	public function Name($name)
+	{
+		$this->name = $name;
+	}
 }
 ?>
