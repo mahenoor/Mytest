@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function validateForm() 
+{
+    var x = document.forms["myForm"]["name"].value;
+    var y = document.forms["myForm"]["email"].value;
+    var z = document.forms["myForm"]["usn"].value; 
+    document.write(x);
+    document.write(y);
+    document.write(z);
+}
+</script>
+</head>
+<body>
+<form method = "post" name = "myForm" action = ""
+onsubmit = "return validateForm()">
+Name: <input type = "text" name = "name" required>
+email: <input type = "email" name = "email" required>
+usn: <input type = "usn" name = "usn" required>
+<input type = "submit" value = "Submit">
+</form>
+</body>
+</html>
