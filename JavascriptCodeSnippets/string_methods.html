@@ -1,0 +1,25 @@
+<html>
+<body>
+<p id = "demo"></p>
+<script>
+var text = "Happy childrens day";
+document.getElementById("demo").innerHTML = text.length;
+</script>
+</body>
+</html> 
+
+<html>
+<body>
+<p id = "demo"></p>
+<p id = "p1">Happy childrens day;locate day</p>
+<button type = "button" onclick = "myFunction()">submit</button>
+<script>
+function myFunction()
+{
+	var str = document.getElementById("p1").innerHTML;
+	var pos = str.indexOf("day");
+	document.getElementById("demo").innerHTML = pos;
+}
+</script>
+</body>
+</html>
