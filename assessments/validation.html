@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type = "text/css">
+.button 
+{
+	text-align : center;
+	color : red;
+	background : yellow;
+	padding : 2px;
+}
+</style></head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("button").click(function() {
+            var favorite = [];
+            $.each($("input[name='vehicle']:checked"), function() {            
+                favorite.push($(this).val());
+            });
+			var gender = document.forms["myForm"]["gender"].value;
+			document.write(gender);
+			document.write("My favourite vehicles are: " + favorite.join(", "));
+			var city = document.forms["myForm"]["select"].value;
+			document.write(city);
+		});
+    });
+</script>
+<body>
+<form method="post" action="" name="myForm">
+<p>Select your gender</p>
+<input type="radio" name="gender" value="male" />Male<br />
+<input type="radio" name="gender" value="female" />Female<br />
+<input type="radio" name="gender" value="transgender" />Transgender<br />
+<p>Select your favourite vehicle</p>
+<input type="checkbox" name="vehicle" value="cycle" />Cycle<br />
+<input type="checkbox" name="vehicle" value="bike" />Bike<br />
+<input type="checkbox" name="vehicle" value="car" />Car<br />
+<input type="checkbox" name="vehicle" value="bus" />Bus<br />
+<p>Select your favourite tourist city</p>
+<select name="select" id ="select1">
+<option value="delhi">Delhi</option>
+<option value="banaglore">Bangalore</option>
+<option value="hyderabad">Hyderabad</option>
+<option value="kerala">Kerala</option>
+<option value="tamilnadu">Tamil Nadu</option>
+<option value="chennai">Chennai</option>
+</select>
+<br />
+<button type = "button">try</button>
+</form></body></html>
+
