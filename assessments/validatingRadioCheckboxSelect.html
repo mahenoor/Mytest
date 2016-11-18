@@ -1,0 +1,63 @@
+<html>
+<head>
+<style type = "text/css">
+.button 
+{
+	text-align : center;
+	color : red;
+	background : yellow;
+	padding : 2px;
+}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("button").click(function() {
+        var vehicle = [];
+        $.each($("input[name='vehicle']:checked"), function() {            
+            vehicle.push($(this).val());
+        });
+        document.getElementById("check1").innerHTML = vehicle.join(", ");
+        var gender = document.forms["myForm"]["gender"].value;
+        document.getElementById("radio1").innerHTML = gender;
+        var city = document.getElementById("mySelect").value;
+        document.getElementById("select1").innerHTML = city;
+        document.write(vehicle);
+        document.write(gender);
+        document.write(city);
+        if (!vehicle || !gender || !city) {
+            alert("error");
+        }
+    });
+});
+</script>
+</head>
+<body>
+<div id="check1"></div>
+<p id="radio1"></p>
+<p id="select1"></p>
+<form method="post" action="" name="myForm">
+<p>Select your favourite vehicle</p>
+<input type="checkbox" name="vehicle" value="cycle" id="myCheckbox" />Cycle<br />
+<input type="checkbox" name="vehicle" value="bike" id="myCheckbox"/>Bike<br />
+<input type="checkbox" name="vehicle" value="car" id="myCheckbox"/>Car<br />
+<input type="checkbox" name="vehicle" value="bus" id="myCheckbox"/>Bus<br />
+<p>Select your gender</p>
+<input type="radio" name="gender" value="male" id="myRadio" />Male<br />
+<input type="radio" name="gender" value="female" id="myRadio"/>Female<br />
+<input type="radio" name="gender" value="transgender" id="myRadio"/>Transgender<br />
+<p>Select your favourite tourist city</p>
+<select name="city" id ="mySelect">
+<option value="delhi">Delhi</option>
+<option value="banaglore">Bangalore</option>
+<option value="hyderabad">Hyderabad</option>
+<option value="kerala">Kerala</option>
+<option value="tamilnadu">Tamil Nadu</option>
+<option value="chennai">Chennai</option>
+</select>
+<br />
+<button type="button" class="button">submit</button>
+</form>
+</body>
+</html>
+
