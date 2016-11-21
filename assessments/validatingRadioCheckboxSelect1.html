@@ -1,32 +1,33 @@
 <html>
 <head>
-<h1>Validating Radiobutton,Checkbox,Select tag</h1>
+<h1>Validating Radiobutton,checkbox,select tag</h1>
 <style type = "text/css">
 .button 
 {
-	text-align : center;
-	color : red;
-	background : yellow;
-	padding : 2px;
+    text-align : center;
+    color : red;
+    background : yellow;
+    padding : 2px;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("button").click(function() {
-        var vehicle = [];
+    $("button").click(function(){
+       
+        var vehicle= [];
         $.each($("input[name='vehicle']:checked"), function() {            
             vehicle.push($(this).val());
         });
         document.getElementById("check1").innerHTML = vehicle.join(", ");
         var gender = document.forms["myForm"]["gender"].value;
-        document.getElementById("radio1").innerHTML = gender;
+        document.getElementById("radio1").innerHTML =gender;
         var city = document.getElementById("mySelect").value;
         document.getElementById("select1").innerHTML = city;
         document.write(vehicle);
         document.write(gender);
         document.write(city);
-        if (!vehicle || !gender || !city) {
+        if(!vehicle || !gender || !city) {
             alert("error");
         }
     });
@@ -57,8 +58,8 @@ $(document).ready(function() {
 <option value="chennai">Chennai</option>
 </select>
 <br />
-<button type="button" class="button">submit</button>
+<button type="button">submit</button>
 </form>
 </body>
 </html>
-
+ 
