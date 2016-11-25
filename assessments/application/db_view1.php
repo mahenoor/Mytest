@@ -19,7 +19,7 @@ if ($result->num_rows > 0) {
     <th>Percentage</th>
     </tr>
     <?php
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
 ?>
         <tr>
         <td><?php echo $row["id"] ?></td>
@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
         <td width=250>
         <a href="db_delete.php?id=<?php echo $row['id'] ?>">delete</a>
         &nbsp
-        <a href="update.php?id=<?php echo $row['id'] ?>">update</a>
+        <a href="db_update1.php?id=<?php echo $row['id'] ?>">update</a>
         </tr>
         <?php
     }

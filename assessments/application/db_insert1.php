@@ -1,4 +1,7 @@
 <html>
+<head>
+<title>Student Information</title>
+</head>
 <?php
 require 'db_connect.php';
 if (isset($_POST['submit'])) {
@@ -9,12 +12,12 @@ if (isset($_POST['submit'])) {
     $subject1 = $_POST['subject1'];
     $subject2 = $_POST['subject2'];
     $subject3 = $_POST['subject3'];
-    $total = $_POST['total'];
-    $percentage = $_POST['percentage'];
+    $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
+    $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
     $insert_query = "INSERT INTO Student1( studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ( '$studentName', '$department', '$gender', '$Roll_no', '$subject1', '$subject2', 
         '$subject3', '$total', '$percentage' )";
     if (mysqli_query($conn,$insert_query)) {
-        echo "record inseted into database successfully";
+        echo "record inserted into database successfully";
     } else {
     echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
     }
@@ -57,10 +60,10 @@ Subject2<input type="text" name="subject2" value="" required/>
 Subject3<input type="text" name="subject3" value="" required/>
 <br/>
 <p>Enter total</p>
-total<input type="text" name="total" value="" required/>
+total<input type="text" name="total" value="" />
 <br/>
 <p>Enter percentage</p>
-percentage<input type="text" name="percentage" value="" required/>
+percentage<input type="text" name="percentage" value="" />
 <br/>
 <input type="submit" name="submit" value="submit">
 </form></body></html>
