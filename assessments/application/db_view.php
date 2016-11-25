@@ -1,8 +1,8 @@
 <html>
 <?php
 require 'db_connect.php';
-$sql1 = "SELECT * FROM Student1";
-$result = $conn->query($sql1);
+$view_query = "SELECT * FROM Student1";
+$result = $conn->query($view_query);
 if ($result->num_rows > 0) {
     ?>
     <table>
@@ -20,28 +20,30 @@ if ($result->num_rows > 0) {
     </tr>
     <?php
     while($row = $result->fetch_assoc()) {
-        echo "<tr>
-        <td>". $row["id"] ."</td>
-        <td>". $row["studentName"] ."</td>
-        <td>". $row["Department"] ."</td>
-        <td>". $row["Gender"] ."</td>
-        <td>". $row["Roll_no"] ."</td>
-        <td>". $row["Subject1"] ."</td>
-        <td>". $row["Subject2"] ."</td>
-        <td>". $row["Subject3"] ."</td>
-        <td>". $row["Total"] ."</td>
-        <td>". $row["Percentage"] ."</td>";
-        echo '<td width=250>';
-        echo '<a href="db_delete.php?id='. $row['id'] .'">delete</a>';
-        echo ' ';
-        echo '<a href="update.php?id='. $row['id'] .'">update</a>';
-        echo "</tr>";
+?>
+        <tr>
+        <td><?php echo $row["id"] ?></td>
+        <td><?php echo $row["studentName"] ?></td>
+        <td><?php echo $row["Department"] ?></td>
+        <td><?php echo $row["Gender"] ?></td>
+        <td><?php echo $row["Roll_no"] ?></td>
+        <td><?php echo $row["Subject1"] ?></td>
+        <td><?php echo $row["Subject2"] ?></td>
+        <td><?php echo $row["Subject3"] ?></td>
+        <td><?php echo $row["Total"] ?></td>
+        <td><?php echo $row["Percentage"] ?></td>
+        <td width=250>
+        <a href="db_delete.php?id=<?php echo $row['id'] ?>">delete</a>
+        &nbsp
+        <a href="update.php?id=<?php echo $row['id'] ?>">update</a>
+        </tr>
+        <?php
     }
-    ?>
+?>
     </table>
     <?php
     } else {
-     echo "0 results";
-    }
+    echo "0 results";
+}
 mysqli_close($conn);
 ?>
