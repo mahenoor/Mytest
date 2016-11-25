@@ -11,12 +11,12 @@ if (isset($_POST['submit'])) {
     $subject3 = $_POST['subject3'];
     $total = $_POST['total'];
     $percentage = $_POST['percentage'];
-    $sql = "INSERT INTO Student1( studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ( '$studentName', '$department', '$gender', '$Roll_no', '$subject1', '$subject2', 
+    $insert_query = "INSERT INTO Student1( studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ( '$studentName', '$department', '$gender', '$Roll_no', '$subject1', '$subject2', 
         '$subject3', '$total', '$percentage' )";
-    if (mysqli_query($conn,$sql)) {
+    if (mysqli_query($conn,$insert_query)) {
         echo "record inseted into database successfully";
     } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
     }
 } 
 mysqli_close($conn);
@@ -64,5 +64,3 @@ percentage<input type="text" name="percentage" value="" required/>
 <br/>
 <input type="submit" name="submit" value="submit">
 </form></body></html>
-
-
