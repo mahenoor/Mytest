@@ -11,7 +11,7 @@ else
 {
     echo "Database connected successfully";
 }
-    $sql = "DELETE FROM Student1 WHERE studentName='vali'";
+    $sql = "DELETE FROM Student1 WHERE Gender='female'";
     if (mysqli_query($conn, $sql)) {
        echo "Record deleted successfully";
     } else {
