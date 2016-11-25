@@ -1,22 +1,18 @@
-<html><?php
-$db_hostname = 'localhost';        
-$db_username = 'root';              
-$db_password = 'compass';                  
-$db_name = 'studentInformation';                
- $conn = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
- if(!$conn) {
-    echo "Unable to connect database".mysqli_error($conn);
-}
-else
+<?php
+require 'db_connect.php';
+$id = $_GET['id'];
+$delete_query = "DELETE FROM Student1 WHERE id='$id'";
+$result = $conn->query($delete_query);
+if ($result)
 {
-    echo "Database connected successfully";
-}
-    $sql = "DELETE FROM Student1 WHERE Gender='female'";
-    if (mysqli_query($conn, $sql)) {
-       echo "Record deleted successfully";
-    } else {
-    echo "Error deleting record: " . mysqli_error($conn);
-    }
-
+    echo "Record Deleted Successfully";
+?>    
+<br>
+<a href='db_view.php'> Back to main page </a>
+<?php
+} else {
+  echo "ERROR!" . mysqli_error($conn);
+}    
 mysqli_close($conn);
 ?>
+
