@@ -121,13 +121,8 @@ if (empty($subject3)) {
 }  
 ?>
 <br/>
-<p>Enter total</p>
-total<input type="text" name="total" value="" />
-<br/>
-<p>Enter percentage</p>
-percentage<input type="text" name="percentage" value="" />
-<br/>
 <input type="submit" name="submit" value="submit" class="button">
 </form>
+<a href="db_view1.php?">View the database</a>
 </body>
 </html>

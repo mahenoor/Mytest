@@ -11,13 +11,13 @@ if (isset($_POST['update'])) {
     $subject3 = $_POST['subject3'];
     $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
     $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
-    $update_query = "UPDATE Student1 SET studentName = '$studentName', ";
-	if($_POST['department']) {
-    	$update_query .= " department = '$department', ";
-    }
-	$update_query .= "gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
+    $update_query = "UPDATE Student1 SET studentName = '$studentName',";
+    if ($_POST['department']) {
+       $update_query .= " department = '$department', ";
+    } 
+    $update_query .= "gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
     $result = $conn->query($update_query);
-	if($result) {
+    if($result) {
     	echo "updated successfully";
     } else {
     	echo "error in updating records " .mysqli_error($conn);
@@ -43,6 +43,13 @@ $percentage = $row['Percentage'];
 <head>
 <h1 align="center">Update Information</h1>
 <title>Student Information</title>
+<style>
+.error
+{
+    color :yellow;
+    background : red;
+}
+</style>
 </head>
 <body bgcolor="pink">
 <form method="post" action="">
@@ -79,7 +86,7 @@ Subject2:<input type="text" name="subject2" value="<?php echo $subject2; ?>" />
 <p>Enter marks of Subject3:</p>
 Subject3:<input type="text" name="subject3" value="<?php echo $subject3; ?>" />
 <br/>
-<input type="submit" name="update" value="update">
+<input type="submit" name="update" value="update" class="error">
 </form>
 </body>
 </html>
