@@ -11,11 +11,8 @@ if (isset($_POST['update'])) {
     $subject3 = $_POST['subject3'];
     $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
     $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
-    $update_query = "UPDATE Student1 SET studentName = '$studentName',";
-    if ($_POST['department']) {
-       $update_query .= " department = '$department', ";
-    } 
-    $update_query .= "gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
+    $update_query = "UPDATE Student1 SET studentName = '$studentName', department = '$department', 
+     gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
     $result = $conn->query($update_query);
     if($result) {
     	echo "updated successfully";
@@ -59,15 +56,15 @@ Student Name:<input type="text" name="studentName" value="<?php echo $studentNam
 <p>Enter your Department:</p>
 Department:<select name="department">
 <option value="0">select</option>
-<option value="Computer Science">Computer Science</option>
-<option value="Electronics">Electronics</option>
-<option value="Mechanical">Mechanical</option>
-<option value="Civil">Civil</option>
-<option value="Electrical">Electrical</option>
-<option value="Aeronatics">Aeronatics</option>
-<option value="Chemical">Chemical</option>
-<option value="Metallurgy">Metallurgy</option>
-<option value="Medical electronics">Medical electronics</option>
+<option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
+<option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
+<option <?php if ($department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
+<option <?php if ($department == 'Civil') { ?> selected <?php } ?> value="Civil">Civil</option>
+<option <?php if ($department == 'Electrical') { ?> selected <?php } ?> value="Electrical">Electrical</option>
+<option <?php if ($department == 'Aeronatics') { ?> selected <?php } ?> value="Aeronatics">Aeronatics</option>
+<option <?php if ($department == 'Chemical') { ?> selected <?php } ?> value="Chemical">Chemical</option>
+<option <?php if ($department == 'Metallurgy') { ?> selected <?php } ?> value="Metallurgy">Metallurgy</option>
+<option <?php if ($department == 'Medical electronics') { ?> selected <?php } ?> value="Medical electronics">Medical electronics</option>
 </select>
 <br/>
 <p>Enter your gender:</p>
