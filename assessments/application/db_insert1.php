@@ -1,9 +1,19 @@
 <html>
 <head>
+<h1 align="center">Student Information</h1>
 <title>Student Information</title>
+<style type = "text/css">
+.button 
+{
+    text-align : center;
+    color : red;
+    background : yellow;
+    padding : 2px;
+}
+</style>
 </head>
 <?php
-require 'db_connect.php';
+require 'db_config.php';
 if (isset($_POST['submit'])) {
     $studentName = $_POST['studentName'];
     $department = $_POST['department'];
@@ -24,13 +34,13 @@ if (isset($_POST['submit'])) {
 } 
 mysqli_close($conn);
 ?>
-<body>
+<body bgcolor="pink">
 <form method="post" action="">
-<p>Enter your name</p>
-Student Name<input type="text" name="studentName" value="" required/>
+<p>Enter your name:</p>
+Student Name:<input type="text" name="studentName" value="" required/>
 <br/>
-<p>Enter your Department</p>
-<select name="department" required>
+<p>Enter your Department:</p>
+Department:<select name="department" required>
 <option value="0">select</option>
 <option value="Computer Science">Computer Science</option>
 <option value="Electronics">Electronics</option>
@@ -43,29 +53,31 @@ Student Name<input type="text" name="studentName" value="" required/>
 <option value="Medical electronics">Medical electronics</option>
 </select>
 <br/>
-<p>Enter your gender</p>
-<input type="radio" name="gender" value="male" required/>Male<br />
-<input type="radio" name="gender" value="female" required/>Female<br />
+<p>Enter your gender:</p>
+Gender:<input type="radio" name="gender" value="male" required/>Male &nbsp
+<input type="radio" name="gender" value="female" required/>Female
 <br/>
-<p>Enter your Roll_no</p>
-Roll_no<input type="text" name="Roll_no" value="" required/>
+<p>Enter your Roll_no:</p>
+Roll_no:<input type="text" name="Roll_no" value="" required/>
 <br/>
-<p>Enter marks of Subject1</p>
-Subject1<input type="text" name="subject1" value="" required/>
+<p>Enter marks of Subject1:</p>
+Subject1:<input type="text" name="subject1" value="" required/>
 <br/>
-<p>Enter marks of Subject2</p>
-Subject2<input type="text" name="subject2" value="" required/>
+<p>Enter marks of Subject2:</p>
+Subject2:<input type="text" name="subject2" value="" required/>
 <br/>
-<p>Enter marks of Subject3</p>
-Subject3<input type="text" name="subject3" value="" required/>
+<p>Enter marks of Subject3:</p>
+Subject3:<input type="text" name="subject3" value="" required/>
 <br/>
-<p>Enter total</p>
-total<input type="text" name="total" value="" />
+<p>Enter total:</p>
+total:<input type="text" name="total" value="" />
 <br/>
-<p>Enter percentage</p>
-percentage<input type="text" name="percentage" value="" />
+<p>Enter percentage:</p>
+percentage:<input type="text" name="percentage" value="" />
 <br/>
-<input type="submit" name="submit" value="submit">
-</form></body></html>
+<input type="submit" name="submit" value="Insert" class="button">
+</form>
+</body>
+</html>
 
 

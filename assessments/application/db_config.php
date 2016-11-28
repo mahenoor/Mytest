@@ -7,7 +7,4 @@ $conn = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
 if (!$conn) {
     echo "Unable to connect database" .mysqli_error($conn);
 }
-
-//if ($_POST['department']) {
-   // $department = $_POST['department'];
-   // }?>
+?>

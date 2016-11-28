@@ -1,11 +1,13 @@
 <html>
+<h1 align="center">View Student Information</h1>
 <?php
-require 'db_connect.php';
+require 'db_config.php';
 $view_query = "SELECT * FROM Student1";
 $result = $conn->query($view_query);
 if ($result->num_rows > 0) {
-    ?>
-    <table>
+?>  
+    <body bgcolor="sky blue">
+    <table width="8%" border="3">
     <tr>
     <th>id</th>
     <th>studentName</th>

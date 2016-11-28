@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require 'db_config.php';
 $id = $_GET['id'];
 if (isset($_POST['update'])) {
 	$studentName = $_POST['studentName'];
@@ -41,15 +41,16 @@ $percentage = $row['Percentage'];
 ?>
 <html>
 <head>
+<h1 align="center">Update Information</h1>
 <title>Student Information</title>
 </head>
-<body>
+<body bgcolor="pink">
 <form method="post" action="">
-<p>Enter your name</p>
-Student Name<input type="text" name="studentName" value="<?php echo $studentName; ?>" required/>
+<p>Enter your name:</p>
+Student Name:<input type="text" name="studentName" value="<?php echo $studentName; ?>" />
 <br/>
-<p>Enter your Department</p>
-<select name="department">
+<p>Enter your Department:</p>
+Department:<select name="department">
 <option value="0">select</option>
 <option value="Computer Science">Computer Science</option>
 <option value="Electronics">Electronics</option>
@@ -62,21 +63,23 @@ Student Name<input type="text" name="studentName" value="<?php echo $studentName
 <option value="Medical electronics">Medical electronics</option>
 </select>
 <br/>
-<p>Enter your gender</p>
-<input type="radio" <?php if($gender == "male") echo "checked" ?> name="gender" value="male" required/>Male<br />
-<input type="radio" <?php if($gender == "female") echo "checked" ?> name="gender" value="female" required/>Female<br />
+<p>Enter your gender:</p>
+Gender:<input type="radio" <?php if($gender == "male") echo "checked" ?> name="gender" value="male" />Male
+<input type="radio" <?php if($gender == "female") echo "checked" ?> name="gender" value="female" />Female
 <br/>
-<p>Enter your Roll_no</p>
-Roll_no<input type="text" name="Roll_no" value="<?php echo $Roll_no; ?>" required/>
+<p>Enter your Roll_no:</p>
+Roll_no:<input type="text" name="Roll_no" value="<?php echo $Roll_no; ?>" />
 <br/>
-<p>Enter marks of Subject1</p>
-Subject1<input type="text" name="subject1" value="<?php echo $subject1; ?>" required/>
+<p>Enter marks of Subject1:</p>
+Subject1:<input type="text" name="subject1" value="<?php echo $subject1; ?>" />
 <br/>
-<p>Enter marks of Subject2</p>
-Subject2<input type="text" name="subject2" value="<?php echo $subject2; ?>" required/>
+<p>Enter marks of Subject2:</p>
+Subject2:<input type="text" name="subject2" value="<?php echo $subject2; ?>" />
 <br/>
-<p>Enter marks of Subject3</p>
-Subject3<input type="text" name="subject3" value="<?php echo $subject3; ?>" required/>
+<p>Enter marks of Subject3:</p>
+Subject3:<input type="text" name="subject3" value="<?php echo $subject3; ?>" />
 <br/>
 <input type="submit" name="update" value="update">
-</form></body></html>
+</form>
+</body>
+</html>
