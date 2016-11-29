@@ -1,18 +1,17 @@
 <?php
-require 'db_connect.php';
-$id = $_GET['id'];
-$delete_query = "DELETE FROM Student1 WHERE id=$id";
+require 'config.php';
+if(!empty($_GET['id'])) {
+    $id = $_GET['id'];
+$delete_query = "DELETE FROM Student WHERE id=$id";
 $result = $conn->query($delete_query);
-if ($result)
-{
-    echo "Record Deleted Successfully";
-?>    
-<br>
-<a href='db_view1.php'> Back to main page </a>
-<?php
+echo "Record Deleted Successfully";
 } else {
   echo "ERROR!" . mysqli_error($conn);
-}    
+}
+?>
+<br>
+<a href='index.php'>Back to index page </a>
+<?php    
 mysqli_close($conn);
 ?>
 

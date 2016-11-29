@@ -1,5 +1,5 @@
 <?php
-require 'db_config.php';
+require 'config.php';
 $id = $_GET['id'];
 if (isset($_POST['update'])) {
 	$studentName = $_POST['studentName'];
@@ -11,7 +11,28 @@ if (isset($_POST['update'])) {
     $subject3 = $_POST['subject3'];
     $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
     $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
-    $update_query = "UPDATE Student1 SET studentName = '$studentName', department = '$department', 
+    if (empty($studentName)) {
+       $studentNameError = "*****please enter the name";
+    } 
+    if (empty($department)) {
+        $departmentError = "*****please enter dept";
+    } 
+    if (empty($gender)) {
+        $genderError = "*****please enter gender";
+    } 
+    if (empty($Roll_no)) {
+        $Roll_noError = "*****please enter roll_no";
+    } 
+    if (empty($subject1)) {
+        $subject1Error = "*****please enter subject1";
+    } 
+    if (empty($subject2)) {
+        $subject2Error = "*****please enter subject2";
+    } 
+    if (empty($subject3)) {
+        $subject3Error = "*****please enter subject3";
+    } 
+    $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
      gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
     $result = $conn->query($update_query);
     if($result) {
@@ -21,20 +42,20 @@ if (isset($_POST['update'])) {
     }
 }
 ?>
-<a href = "db_view1.php">back to view page</a>
+<a href = "index.php">back to index page</a>
 <?php
-$view_query = "SELECT * FROM Student1 where id=$id";
+$view_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($view_query);
-$row = $result->fetch_assoc();
-$studentName = $row['studentName'];
-$department = $row['Department'];
-$gender = $row['Gender'];
-$Roll_no = $row['Roll_no'];
-$subject1 = $row['Subject1'];
-$subject2 = $row['Subject2'];
-$subject3 = $row['Subject3'];
-$total = $row['Total'];
-$percentage = $row['Percentage'];
+$percentage  = $result->fetch_assoc();
+$studentName = $percentage['studentName'];
+$department = $percentage['Department'];
+$gender = $percentage['Gender'];
+$Roll_no = $percentage['Roll_no'];
+$subject1 = $percentage['Subject1'];
+$subject2 = $percentage['Subject2'];
+$subject3 = $percentage['Subject3'];
+$total = $percentage['Total'];
+$percentage = $percentage ['Percentage'];
 ?>
 <html>
 <head>
@@ -50,11 +71,20 @@ $percentage = $row['Percentage'];
 </head>
 <body bgcolor="pink">
 <form method="post" action="">
-<p>Enter your name:</p>
-Student Name:<input type="text" name="studentName" value="<?php echo $studentName; ?>" />
-<br/>
-<p>Enter your Department:</p>
-Department:<select name="department">
+<table>
+<tr>
+<td><label>Enter the Student Name:</label></td>
+<td><input type="text" name="studentName" value="<?php echo $studentName; ?>" />
+<?php  
+if (empty($studentName)) {
+   echo $studentNameError;
+}  
+?>
+</td>
+</tr>
+<tr>
+<td><label>Enter the Department:</label></td>
+<td><select name="department">
 <option value="0">select</option>
 <option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
 <option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
@@ -66,23 +96,65 @@ Department:<select name="department">
 <option <?php if ($department == 'Metallurgy') { ?> selected <?php } ?> value="Metallurgy">Metallurgy</option>
 <option <?php if ($department == 'Medical electronics') { ?> selected <?php } ?> value="Medical electronics">Medical electronics</option>
 </select>
-<br/>
-<p>Enter your gender:</p>
-Gender:<input type="radio" <?php if($gender == "male") echo "checked" ?> name="gender" value="male" />Male
+<?php 
+if (empty($department)) {
+    echo $departmentError;
+}  
+?>
+</td>
+</tr>
+<tr>
+<td><label>Enter the Gender:</label></td>
+<td><input type="radio" <?php if($gender == "male") echo "checked" ?> name="gender" value="male" />Male
 <input type="radio" <?php if($gender == "female") echo "checked" ?> name="gender" value="female" />Female
-<br/>
-<p>Enter your Roll_no:</p>
-Roll_no:<input type="text" name="Roll_no" value="<?php echo $Roll_no; ?>" />
-<br/>
-<p>Enter marks of Subject1:</p>
-Subject1:<input type="text" name="subject1" value="<?php echo $subject1; ?>" />
-<br/>
-<p>Enter marks of Subject2:</p>
-Subject2:<input type="text" name="subject2" value="<?php echo $subject2; ?>" />
-<br/>
-<p>Enter marks of Subject3:</p>
-Subject3:<input type="text" name="subject3" value="<?php echo $subject3; ?>" />
-<br/>
+<?php 
+if (empty($gender)) {
+    echo $genderError;
+}  
+?>
+</td>
+</tr>
+<tr>
+<td><label>Enter the Roll_no:</label></td>
+<td><input type="text" name="Roll_no" value="<?php echo $Roll_no; ?>" />
+<?php 
+if (empty($Roll_no)) {
+    echo $Roll_noError;
+}  
+?>
+</td>
+</tr>
+<tr>
+<td><label>Enter the marks of Subject1:</label></td>
+<td><input type="text" name="subject1" value="<?php echo $subject1; ?>" />
+<?php 
+if (empty($subject1)) {
+    echo $subject1Error;
+}
+?>
+</td>
+</tr>
+<tr>
+<td><label>Enter the marks of Subject2:</label></td>
+<td><input type="text" name="subject2" value="<?php echo $subject2; ?>" />
+<?php 
+if (empty($subject2)) {
+    echo $subject1Error;
+}
+?>
+</td>
+</tr>
+<tr>
+<td><label>Enter the marks of Subject3:</label></td>
+<td><input type="text" name="subject3" value="<?php echo $subject3; ?>" />
+<?php 
+if (empty($subject3)) {
+    echo $subject1Error;
+}
+?>
+</td>
+</tr>
+</table>
 <input type="submit" name="update" value="update" class="error">
 </form>
 </body>

@@ -1,7 +1,7 @@
 <?php
 require 'db_connect.php';
 $id = $_GET['id'];
-$read_query = "SELECT * FROM Student1 where id=$id";
+$read_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($read_query);
 $row = $result->fetch_assoc();
 $studentName = $row['studentName'];
@@ -18,7 +18,7 @@ $percentage = $row['Percentage'];
 <head>
 <h1 align="center">Reading the record</h1>
 </head>
-<body bgcolor="pink">
+<body bgcolor="orange">
 <table width="8%" border="3">
 <tr>
 <th>Student Name</th>
@@ -39,6 +39,7 @@ $percentage = $row['Percentage'];
 <td><?php echo $subject3 ?></td>
 </tr>
 </table>
+<a href="index.php">Click here to move back to index page</a>
 </body>
 
 
