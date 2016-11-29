@@ -1,3 +1,6 @@
+<?php
+require 'config.php';
+?>
 <html>
 <head>
 <h1 align="center">Student Information</h1>
@@ -18,12 +21,16 @@
 </style>
 </head>
 <?php
-error_reporting(1);
-require 'db_connect.php';
+$gender = "";
+$department = "";
 if (isset($_POST['submit'])) {
     $studentName = $_POST['studentName'];
     $department = $_POST['department'];
-    $gender = $_POST['gender'];
+    if (!isset($_POST['gender'])) {
+        $genderError = "*****please enter gender";
+    } else {
+        $gender = $_POST['gender'];
+    }
     $Roll_no = $_POST['Roll_no'];
     $subject1 = $_POST['subject1'];
     $subject2 = $_POST['subject2'];
@@ -31,37 +38,29 @@ if (isset($_POST['submit'])) {
     $studentName = $_POST['studentName'];
     $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
     $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
-    $value = true;
-    if(empty($studentName)) {
-       $studentNameError = "plz enter name";
-       $value = false; 
+    if (empty($studentName)) {
+       $studentNameError = "*****please enter the name";
     } 
-    if(empty($department)) {
-        $departmentError = "plz enter dept";
-        $value = false; 
+    if (empty($department)) {
+        $departmentError = "*****please enter dept";
     } 
-    if(empty($gender)) {
-        $genderError = "plz enter gender";
-       $value = false; 
+    if (empty($gender)) {
+        $genderError = "*****please enter gender";
     } 
-     if(empty( $Roll_no)) {
-        $Roll_noError = "plz enter roll_no";
-        $value = false; 
+    if (empty($Roll_no)) {
+        $Roll_noError = "*****please enter roll_no";
     } 
-     if(empty($subject1)) {
-        $subject1Error = "plz enter subject1";
-        $value = false; 
+    if (empty($subject1)) {
+        $subject1Error = "*****please enter subject1";
     } 
-     if(empty( $subject2)) {
-        $subject2Error = "plz enter subject2";
-       $value = false; 
+    if (empty($subject2)) {
+        $subject2Error = "*****please enter subject2";
     } 
-     if(empty( $subject3)) {
-        $subject3Error = "plz enter subject3";
-        $value = false; 
+    if (empty($subject3)) {
+        $subject3Error = "*****please enter subject3";
     } 
-    if($value) {
-        $insert_query = "INSERT INTO Student1( studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ( '$studentName', '$department', '$gender', '$Roll_no', '$subject1', '$subject2', '$subject3', '$total', '$percentage' )";
+    if (!empty($studentName) && !empty($department) && !empty($department) && !empty($gender) && !empty($Roll_no) && !empty($subject1) && !empty($subject1) && !empty($subject1)) {
+        $insert_query = "INSERT INTO Student( studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ( '$studentName', '$department', '$gender', '$Roll_no', '$subject1', '$subject2', '$subject3', '$total', '$percentage' )";
         if (mysqli_query($conn,$insert_query)) {
              echo "record inserted into database successfully";
         } else if (!mysqli_query($conn,$insert_query)) {
@@ -79,19 +78,17 @@ mysqli_close($conn);
 <form method="post" action="" >
 <table>
 <tr>
-<td><label>Student Name</label></td>
-<td><input type="text" name="studentName"  value="<?php if(!empty($_POST['studentName'])) echo $_POST['studentName'] ?> "/>
+<td><label>Enter the Student Name:</label></td>
+<td><input type="text" name="studentName"  value="<?php if(!empty($_POST['studentName'])) echo $_POST['studentName'] ?>" />
 <?php  
-if (empty($studentName)) {
+if (!empty($studentNameError)) {
    echo $studentNameError;
-   $value = false;
 }  
 ?>
 </td>
 </tr>
-<br/>
 <tr>
-<td><label>Enter your Department</label></td>
+<td><label>Enter the Department:</label></td>
 <td><select name="department" >
 <option value="0">select</option>
 <option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science ">Computer Science</option>
@@ -105,75 +102,63 @@ if (empty($studentName)) {
 <option <?php if ($department == 'Medical electronics') { ?> selected <?php } ?> value="Medical electronics">Medical electronics</option>
 </select>
 <?php 
-if (empty($department)) {
+if (!empty($departmentError)) {
     echo $departmentError;
-    $value = false;
 }  
 ?>
 </td>
 </tr>
-<br/>
 <tr>
-<td><label>Gender</label></td>
+<td><label>Enter the Gender:</label></td>
 <td><input type="radio" <?php if($gender == "male") { echo "checked"; } ?>  name="gender" value="male" />Male<br />
 <input type="radio" <?php if($gender == "female") echo "checked" ?> name="gender" value="female" />Female<br />
 <?php 
-if (empty($gender)) {
+if (!empty($genderError)) {
     echo $genderError;
-    $value = false;
 }  
 ?>
 </td>
 </tr>
-<br/>
 <tr>
-<td><label>Enter your Roll_no</label></td>
+<td><label>Enter the Roll_no:</label></td>
 <td><input type="text" name="Roll_no" value="<?php if(!empty($_POST['Roll_no'])) echo $_POST['Roll_no'] ?>" />
 <?php 
-if (empty($Roll_no)) {
+if (!empty($Roll_noError)) {
     echo $Roll_noError;
-    $value = false;
 }  
 ?>
 </td>
 </tr>
-<br/>
 <tr>
-<td><label>Enter marks of Subject1</label></td>
+<td><label>Enter marks of Subject1:</label></td>
 <td><input type="text" name="subject1" value="<?php if(!empty($_POST['subject1'])) echo $_POST['subject1'] ?>" />
 <?php 
-if (empty($subject1)) {
+if (!empty($subject1Error)) {
     echo $subject1Error;
-    $value = false;
-}
+}   
 ?>
 </td>
 </tr>
-<br/>
 <tr>
-<td><label>Enter marks of Subject2</label></td>
+<td><label>Enter marks of Subject2:</label></td>
 <td><input type="text" name="subject2" value="<?php if(!empty($_POST['subject2'])) echo $_POST['subject2'] ?>"  />
 <?php 
-if (empty($subject2)) {
+if (!empty($subject2Error)) {
     echo $subject2Error;
-    $value = false;
 }  
 ?>
 </td>
 </tr>
-<br/>
 <tr>
-<td><label>Enter marks of Subject3</label></td>
+<td><label>Enter marks of Subject3:</label></td>
 <td><input type="text" name="subject3" value="<?php if(!empty($_POST['subject3'])) echo $_POST['subject3'] ?>"  />
 <?php 
-if (empty($subject3)) {
+if (!empty($subject3Error)) {
     echo $subject3Error;
-    $value = false;
 }
 ?>
 </td>
 </tr>
-<br/>
 </table>
 <input type="submit" name="submit" value="submit" class="button">
 </form>
