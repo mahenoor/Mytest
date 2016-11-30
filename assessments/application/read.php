@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require 'config.php';
 $id = $_GET['id'];
 $read_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($read_query);
@@ -18,7 +18,7 @@ $percentage = $row['Percentage'];
 <head>
 <h1 align="center">Reading the record</h1>
 </head>
-<body bgcolor="orange">
+<body bgcolor="#DDA0DD">
 <table width="8%" border="3">
 <tr>
 <th>Student Name</th>
@@ -39,8 +39,10 @@ $percentage = $row['Percentage'];
 <td><?php echo $subject3 ?></td>
 </tr>
 </table>
-<a href="index.php">Click here to move back to index page</a>
+<br />
+<a href="index.php">Back to index page</a>
 </body>
+</html>
 
 
 

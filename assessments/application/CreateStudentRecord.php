@@ -162,6 +162,7 @@ if (!empty($subject3Error)) {
 </table>
 <input type="submit" name="submit" value="submit" class="button">
 </form>
+<a href="index.php">Go to index page</a>
 </body>
 </html>
 

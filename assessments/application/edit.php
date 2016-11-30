@@ -46,16 +46,16 @@ if (isset($_POST['update'])) {
 <?php
 $view_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($view_query);
-$percentage  = $result->fetch_assoc();
-$studentName = $percentage['studentName'];
-$department = $percentage['Department'];
-$gender = $percentage['Gender'];
-$Roll_no = $percentage['Roll_no'];
-$subject1 = $percentage['Subject1'];
-$subject2 = $percentage['Subject2'];
-$subject3 = $percentage['Subject3'];
-$total = $percentage['Total'];
-$percentage = $percentage ['Percentage'];
+$row  = $result->fetch_assoc();
+$studentName = $row['studentName'];
+$department = $row['Department'];
+$gender = $row['Gender'];
+$Roll_no = $row['Roll_no'];
+$subject1 = $row['Subject1'];
+$subject2 = $row['Subject2'];
+$subject3 = $row['Subject3'];
+$total = $row['Total'];
+$percentage = $row['Percentage'];
 ?>
 <html>
 <head>

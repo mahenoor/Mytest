@@ -3,14 +3,12 @@ require 'config.php';
 ?>
 <html>
 <h1 align="center">Student Information</h1>
-<a href="InsertStudentRecord.php">Insert a new student record</a>
-<br />
 <?php
 $view_query = "SELECT * FROM Student";
 $result = $conn->query($view_query);
 if ($result->num_rows > 0) {
 ?>  
-    <body bgcolor="sky blue">
+    <body bgcolor="#7FFFD4">
     <table align="center" width="8%" border="3">
     <tr>
     <th>id</th>
@@ -25,23 +23,24 @@ if ($result->num_rows > 0) {
     <th>Percentage</th>
     </tr>
     <?php
-    while ($percentage = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
 ?>
         <tr>
-        <td><?php echo $percentage["id"] ?></td>
-        <td><?php echo $percentage["studentName"] ?></td>
-        <td><?php echo $percentage["Department"] ?></td>
-        <td><?php echo $percentage["Gender"] ?></td>
-        <td><?php echo $percentage["Roll_no"] ?></td>
-        <td><?php echo $percentage["Subject1"] ?></td>
-        <td><?php echo $percentage["Subject2"] ?></td>
-        <td><?php echo $percentage["Subject3"] ?></td>
-        <td><?php echo $percentage["Total"] ?></td>
-        <td><?php echo $percentage["Percentage"] ?></td>
+        <td><?php echo $row["id"] ?></td>
+        <td><?php echo $row["studentName"] ?></td>
+        <td><?php echo $row["Department"] ?></td>
+        <td><?php echo $row["Gender"] ?></td>
+        <td><?php echo $row["Roll_no"] ?></td>
+        <td><?php echo $row["Subject1"] ?></td>
+        <td><?php echo $row["Subject2"] ?></td>
+        <td><?php echo $row["Subject3"] ?></td>
+        <td><?php echo $row["Total"] ?></td>
+        <td><?php echo $row["Percentage"] ?></td>
         <td width=250>
         <a href="read.php?id=<?php echo $row['id'] ?>">Read</a>
         <a href="delete.php?id=<?php echo $row['id'] ?>">Delete</a>
         <a href="edit.php?id=<?php echo $row['id'] ?>">Edit</a>
+        </td>
         </tr>
         <?php
     }
@@ -53,3 +52,7 @@ if ($result->num_rows > 0) {
 }
 mysqli_close($conn);
 ?>
+<br />
+<a href="CreateStudentRecord.php">Insert a new student record</a>
+</body>
+</html>
