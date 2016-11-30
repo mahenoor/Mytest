@@ -3,16 +3,16 @@ require 'config.php';
 $id = $_GET['id'];
 $read_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($read_query);
-$row = $result->fetch_assoc();
-$studentName = $row['studentName'];
-$department = $row['Department'];
-$gender = $row['Gender'];
-$Roll_no = $row['Roll_no'];
-$subject1 = $row['Subject1'];
-$subject2 = $row['Subject2'];
-$subject3 = $row['Subject3'];
-$total = $row['Total'];
-$percentage = $row['Percentage'];
+$data = $result->fetch_assoc();
+$studentName = $data['studentName'];
+$department = $data['Department'];
+$gender = $data['Gender'];
+$Roll_no = $data['Roll_no'];
+$subject1 = $data['Subject1'];
+$subject2 = $data['Subject2'];
+$subject3 = $data['Subject3'];
+$total = $data['Total'];
+$percentage = $data['Percentage'];
 ?>
 <html>
 <head>

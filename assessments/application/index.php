@@ -23,23 +23,24 @@ if ($result->num_rows > 0) {
     <th>Percentage</th>
     </tr>
     <?php
-    while ($row = $result->fetch_assoc()) {
+    while ($data = $result->fetch_assoc()) {
 ?>
         <tr>
-        <td><?php echo $row["id"] ?></td>
-        <td><?php echo $row["studentName"] ?></td>
-        <td><?php echo $row["Department"] ?></td>
-        <td><?php echo $row["Gender"] ?></td>
-        <td><?php echo $row["Roll_no"] ?></td>
-        <td><?php echo $row["Subject1"] ?></td>
-        <td><?php echo $row["Subject2"] ?></td>
-        <td><?php echo $row["Subject3"] ?></td>
-        <td><?php echo $row["Total"] ?></td>
-        <td><?php echo $row["Percentage"] ?></td>
+        <td><?php echo $data["id"] ?></td>
+        <td><?php echo $data["studentName"] ?></td>
+        <td><?php echo $data["studentName"] ?></td>
+        <td><?php echo $data["Department"] ?></td>
+        <td><?php echo $data["Gender"] ?></td>
+        <td><?php echo $data["Roll_no"] ?></td>
+        <td><?php echo $data["Subject1"] ?></td>
+        <td><?php echo $data["Subject2"] ?></td>
+        <td><?php echo $data["Subject3"] ?></td>
+        <td><?php echo $data["Total"] ?></td>
+        <td><?php echo $data["Percentage"] ?></td>
         <td width=250>
-        <a href="read.php?id=<?php echo $row['id'] ?>">Read</a>
-        <a href="delete.php?id=<?php echo $row['id'] ?>">Delete</a>
-        <a href="edit.php?id=<?php echo $row['id'] ?>">Edit</a>
+        <a href="read.php?id=<?php echo $data['id'] ?>">Read</a>
+        <a href="delete.php?id=<?php echo $data['id'] ?>">Delete</a>
+        <a href="edit.php?id=<?php echo $data['id'] ?>">Edit</a>
         </td>
         </tr>
         <?php

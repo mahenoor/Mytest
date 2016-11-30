@@ -2,36 +2,7 @@
 require 'config.php';
 $id = $_GET['id'];
 if (isset($_POST['update'])) {
-	$studentName = $_POST['studentName'];
-    $department = $_POST['department'];
-	$gender = $_POST['gender'];
-    $Roll_no = $_POST['Roll_no'];
-    $subject1 = $_POST['subject1'];
-    $subject2 = $_POST['subject2'];
-    $subject3 = $_POST['subject3'];
-    $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
-    $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
-    if (empty($studentName)) {
-       $studentNameError = "*****please enter the name";
-    } 
-    if (empty($department)) {
-        $departmentError = "*****please enter dept";
-    } 
-    if (empty($gender)) {
-        $genderError = "*****please enter gender";
-    } 
-    if (empty($Roll_no)) {
-        $Roll_noError = "*****please enter roll_no";
-    } 
-    if (empty($subject1)) {
-        $subject1Error = "*****please enter subject1";
-    } 
-    if (empty($subject2)) {
-        $subject2Error = "*****please enter subject2";
-    } 
-    if (empty($subject3)) {
-        $subject3Error = "*****please enter subject3";
-    } 
+	require 'validation.php';
     $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
      gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
     $result = $conn->query($update_query);
@@ -46,16 +17,16 @@ if (isset($_POST['update'])) {
 <?php
 $view_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($view_query);
-$row  = $result->fetch_assoc();
-$studentName = $row['studentName'];
-$department = $row['Department'];
-$gender = $row['Gender'];
-$Roll_no = $row['Roll_no'];
-$subject1 = $row['Subject1'];
-$subject2 = $row['Subject2'];
-$subject3 = $row['Subject3'];
-$total = $row['Total'];
-$percentage = $row['Percentage'];
+$data = $result->fetch_assoc();
+$studentName = $data['studentName'];
+$department = $data['Department'];
+$gender = $data['Gender'];
+$Roll_no = $data['Roll_no'];
+$subject1 = $data['Subject1'];
+$subject2 = $data['Subject2'];
+$subject3 = $data['Subject3'];
+$total = $data['Total'];
+$percentage = $data['Percentage'];
 ?>
 <html>
 <head>

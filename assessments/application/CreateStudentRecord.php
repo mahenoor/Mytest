@@ -24,51 +24,20 @@ require 'config.php';
 $gender = "";
 $department = "";
 if (isset($_POST['submit'])) {
-    $studentName = $_POST['studentName'];
-    $department = $_POST['department'];
-    if (!isset($_POST['gender'])) {
-        $genderError = "*****please enter gender";
-    } else {
-        $gender = $_POST['gender'];
-    }
-    $Roll_no = $_POST['Roll_no'];
-    $subject1 = $_POST['subject1'];
-    $subject2 = $_POST['subject2'];
-    $subject3 = $_POST['subject3'];
-    $studentName = $_POST['studentName'];
-    $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
-    $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
-    if (empty($studentName)) {
-       $studentNameError = "*****please enter the name";
-    } 
-    if (empty($department)) {
-        $departmentError = "*****please enter dept";
-    } 
-    if (empty($gender)) {
-        $genderError = "*****please enter gender";
-    } 
-    if (empty($Roll_no)) {
-        $Roll_noError = "*****please enter roll_no";
-    } 
-    if (empty($subject1)) {
-        $subject1Error = "*****please enter subject1";
-    } 
-    if (empty($subject2)) {
-        $subject2Error = "*****please enter subject2";
-    } 
-    if (empty($subject3)) {
-        $subject3Error = "*****please enter subject3";
-    } 
-    if (!empty($studentName) && !empty($department) && !empty($department) && !empty($gender) && !empty($Roll_no) && !empty($subject1) && !empty($subject1) && !empty($subject1)) {
-        $insert_query = "INSERT INTO Student( studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ( '$studentName', '$department', '$gender', '$Roll_no', '$subject1', '$subject2', '$subject3', '$total', '$percentage' )";
-        if (mysqli_query($conn,$insert_query)) {
-             echo "record inserted into database successfully";
-        } else if (!mysqli_query($conn,$insert_query)) {
+    require 'validation.php';
+    if (!empty($studentName) && (!preg_match("/^[a-zA-Z]*$/", $studentName)) && !empty($department) && !empty($department) && !empty($gender) 		&& !empty($Roll_no) && (!preg_match("/^[a-z0-9]*$/", $Roll_no))&& 
+        !empty($subject1) && (!preg_match("/^[0-9]*$/", $subject1)) && !empty($subject2) && 
+        (!preg_match("/^[0-9]*$/", $subject2)) && !empty($subject3) && (!preg_match("/^[0-9]*$/", $subject3))) {
+        $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) 		VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
+            '$subject2', '$subject3', '$total', '$percentage' )";
+        if (mysqli_query($conn, $insert_query)) {
+            echo "record inserted into database successfully";
+        } else {
             echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
         }
     } else {
 ?>
-        <span class="error"><?php echo "Error:please enter the required fields"; ?></span>
+        <span class="error"><?php echo "Error:please enter the required fields in proper specified format"; ?></span>
 <?php
     }
 } 
@@ -90,7 +59,7 @@ if (!empty($studentNameError)) {
 <tr>
 <td><label>Enter the Department:</label></td>
 <td><select name="department" >
-<option value="0">select</option>
+<option value=""></option>
 <option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science ">Computer Science</option>
 <option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
 <option <?php if ($department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
@@ -160,9 +129,8 @@ if (!empty($subject3Error)) {
 </td>
 </tr>
 </table>
-<input type="submit" name="submit" value="submit" class="button">
-</form>
-<a href="index.php">Go to index page</a>
+<input type="submit" name="submit" value="submit" class="button" />
+<a href="index.php">Go to index page</a></form>
 </body>
 </html>
 
