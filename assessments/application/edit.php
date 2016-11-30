@@ -13,20 +13,22 @@ if (isset($_POST['update'])) {
     }
 }
 ?>
+<br />
+<br />
 <a href = "index.php">back to index page</a>
 <?php
 $view_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($view_query);
-$data = $result->fetch_assoc();
-$studentName = $data['studentName'];
-$department = $data['Department'];
-$gender = $data['Gender'];
-$Roll_no = $data['Roll_no'];
-$subject1 = $data['Subject1'];
-$subject2 = $data['Subject2'];
-$subject3 = $data['Subject3'];
-$total = $data['Total'];
-$percentage = $data['Percentage'];
+$studentData = $result->fetch_assoc();
+$studentName = $studentData['studentName'];
+$department = $studentData['Department'];
+$gender = $studentData['Gender'];
+$Roll_no = $studentData['Roll_no'];
+$subject1 = $studentData['Subject1'];
+$subject2 = $studentData['Subject2'];
+$subject3 = $studentData['Subject3'];
+$total = $studentData['Total'];
+$percentage = $studentData['Percentage'];
 ?>
 <html>
 <head>
