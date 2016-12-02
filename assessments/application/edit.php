@@ -1,15 +1,30 @@
 <?php
 require 'config.php';
 $id = $_GET['id'];
+$studentNameError = "";
+$departmentError = "";  
+$genderError = "";
+$Roll_noError = "";
+$subject1Error = "";
+$subject2Error = "";
+$subject3Error = "";
 if (isset($_POST['update'])) {
-	require 'validation.php';
-    $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
-     gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
-    $result = $conn->query($update_query);
-    if($result) {
-    	echo "updated successfully";
+    require 'validation.php';
+    if (!empty($studentName)  && !empty($department) && !empty($gender) && !empty($Roll_no) &&  
+    !empty($subject1)  && !empty($subject2) && !empty($subject3) && preg_match("/^['a-zA-Z']*$/", $studentName)
+    && preg_match("/^[a-z0-9]*$/", $Roll_no) && preg_match("/^[0-9]*$/", $subject1) && 
+    preg_match("/^[0-9]*$/", $subject2) && preg_match("/^[0-9]*$/", $subject3)) {
+        $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
+        gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
+        if (mysqli_query($conn, $update_query)) {
+            echo "record updated into database successfully";
+        } else if (!mysqli_query($conn, $update_query)) {
+            echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
+        }
     } else {
-    	echo "error in updating records " .mysqli_error($conn);
+    ?>
+        <span class="error"><?php echo "Error:please enter the required fields in proper specified format"; ?></span>
+<?php
     }
 }
 ?>
@@ -20,7 +35,7 @@ if (isset($_POST['update'])) {
 $view_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($view_query);
 $studentData = $result->fetch_assoc();
-$studentName = $studentData['studentName'];
+$studentName = $studentData['studentName']; 
 $department = $studentData['Department'];
 $gender = $studentData['Gender'];
 $Roll_no = $studentData['Roll_no'];
@@ -48,10 +63,8 @@ $percentage = $studentData['Percentage'];
 <tr>
 <td><label>Enter the Student Name:</label></td>
 <td><input type="text" name="studentName" value="<?php echo $studentName; ?>" />
-<?php  
-if (empty($studentName)) {
-   echo $studentNameError;
-}  
+<?php 
+//echo $studentNameError; 
 ?>
 </td>
 </tr>
@@ -70,9 +83,7 @@ if (empty($studentName)) {
 <option <?php if ($department == 'Medical electronics') { ?> selected <?php } ?> value="Medical electronics">Medical electronics</option>
 </select>
 <?php 
-if (empty($department)) {
-    echo $departmentError;
-}  
+//echo $departmentError;
 ?>
 </td>
 </tr>
@@ -81,9 +92,7 @@ if (empty($department)) {
 <td><input type="radio" <?php if($gender == "male") echo "checked" ?> name="gender" value="male" />Male
 <input type="radio" <?php if($gender == "female") echo "checked" ?> name="gender" value="female" />Female
 <?php 
-if (empty($gender)) {
-    echo $genderError;
-}  
+//echo $genderError;
 ?>
 </td>
 </tr>
@@ -91,9 +100,7 @@ if (empty($gender)) {
 <td><label>Enter the Roll_no:</label></td>
 <td><input type="text" name="Roll_no" value="<?php echo $Roll_no; ?>" />
 <?php 
-if (empty($Roll_no)) {
-    echo $Roll_noError;
-}  
+//echo $Roll_noError;
 ?>
 </td>
 </tr>
@@ -101,9 +108,7 @@ if (empty($Roll_no)) {
 <td><label>Enter the marks of Subject1:</label></td>
 <td><input type="text" name="subject1" value="<?php echo $subject1; ?>" />
 <?php 
-if (empty($subject1)) {
-    echo $subject1Error;
-}
+//echo $subject1Error;
 ?>
 </td>
 </tr>
@@ -111,9 +116,7 @@ if (empty($subject1)) {
 <td><label>Enter the marks of Subject2:</label></td>
 <td><input type="text" name="subject2" value="<?php echo $subject2; ?>" />
 <?php 
-if (empty($subject2)) {
-    echo $subject1Error;
-}
+//echo $subject2Error;
 ?>
 </td>
 </tr>
@@ -121,9 +124,7 @@ if (empty($subject2)) {
 <td><label>Enter the marks of Subject3:</label></td>
 <td><input type="text" name="subject3" value="<?php echo $subject3; ?>" />
 <?php 
-if (empty($subject3)) {
-    echo $subject1Error;
-}
+//echo $subject3Error;
 ?>
 </td>
 </tr>
