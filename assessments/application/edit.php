@@ -1,5 +1,6 @@
 <?php
 require 'config.php';
+require 'validation.php';
 $id = $_GET['id'];
 $studentNameError = "";
 $departmentError = "";  
@@ -8,8 +9,28 @@ $Roll_noError = "";
 $subject1Error = "";
 $subject2Error = "";
 $subject3Error = "";
+$errorMessage = "";
+$displaysErrorMsg = validate($_POST);
 if (isset($_POST['update'])) {
-    require 'validation.php';
+    $studentName = $_POST['studentName'];
+    if (!isset($_POST['department'])) {
+        $departmentError = "***please enter department";
+    } else {
+        $department = $_POST['department'];
+    }
+    if (!isset($_POST['gender'])) {
+        $genderError = "***please enter gender";
+    } else {
+        $gender = $_POST['gender'];
+    }
+    $Roll_no = $_POST['Roll_no'];
+    $subject1 = $_POST['subject1'];
+    $subject2 = $_POST['subject2'];
+    $subject3 = $_POST['subject3'];
+    $total = $subject1 + $subject2 + $subject3;
+    $percentage = (($total) / 3);
+    
+
     if (!empty($studentName)  && !empty($department) && !empty($gender) && !empty($Roll_no) &&  
     !empty($subject1)  && !empty($subject2) && !empty($subject3) && preg_match("/^['a-zA-Z']*$/", $studentName)
     && preg_match("/^[a-z0-9]*$/", $Roll_no) && preg_match("/^[0-9]*$/", $subject1) && 
@@ -22,9 +43,9 @@ if (isset($_POST['update'])) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
         }
     } else {
-    ?>
-        <span class="error"><?php echo "Error:please enter the required fields in proper specified format"; ?></span>
-<?php
+   
+       $errorMessage = $displaysErrorMsg['message'];
+
     }
 }
 ?>
@@ -64,8 +85,12 @@ $percentage = $studentData['Percentage'];
 <td><label>Enter the Student Name:</label></td>
 <td><input type="text" name="studentName" value="<?php echo $studentName; ?>" />
 <?php 
-//echo $studentNameError; 
-?>
+if(!empty($errorMessage['studentName'])) {
+    echo $errorMessage['studentName'];
+} else {
+    '';
+}
+?> 
 </td>
 </tr>
 <tr>
@@ -82,8 +107,12 @@ $percentage = $studentData['Percentage'];
 <option <?php if ($department == 'Metallurgy') { ?> selected <?php } ?> value="Metallurgy">Metallurgy</option>
 <option <?php if ($department == 'Medical electronics') { ?> selected <?php } ?> value="Medical electronics">Medical electronics</option>
 </select>
-<?php 
-//echo $departmentError;
+<?php
+if (!empty($errorMessage['department'])) {
+    echo $errorMessage['department']; 
+} else {
+    '';
+}
 ?>
 </td>
 </tr>
@@ -92,7 +121,11 @@ $percentage = $studentData['Percentage'];
 <td><input type="radio" <?php if($gender == "male") echo "checked" ?> name="gender" value="male" />Male
 <input type="radio" <?php if($gender == "female") echo "checked" ?> name="gender" value="female" />Female
 <?php 
-//echo $genderError;
+if (!empty($errorMessage['gender'])) {
+    echo $errorMessage['gender'];
+} else {
+    '';
+}
 ?>
 </td>
 </tr>
@@ -100,15 +133,23 @@ $percentage = $studentData['Percentage'];
 <td><label>Enter the Roll_no:</label></td>
 <td><input type="text" name="Roll_no" value="<?php echo $Roll_no; ?>" />
 <?php 
-//echo $Roll_noError;
-?>
+if (!empty($errorMessage['Roll_no'])) {
+    echo $errorMessage['Roll_no'];
+} else {
+    '';
+}
+?> 
 </td>
 </tr>
 <tr>
 <td><label>Enter the marks of Subject1:</label></td>
 <td><input type="text" name="subject1" value="<?php echo $subject1; ?>" />
 <?php 
-//echo $subject1Error;
+if (!empty($errorMessage['subject1'])) {
+    echo $errorMessage['subject1'];
+} else {
+    '';
+}
 ?>
 </td>
 </tr>
@@ -116,7 +157,11 @@ $percentage = $studentData['Percentage'];
 <td><label>Enter the marks of Subject2:</label></td>
 <td><input type="text" name="subject2" value="<?php echo $subject2; ?>" />
 <?php 
-//echo $subject2Error;
+if (!empty($errorMessage['subject2'])) {
+    echo $errorMessage['subject2'];
+} else {
+    '';
+}
 ?>
 </td>
 </tr>
@@ -124,7 +169,11 @@ $percentage = $studentData['Percentage'];
 <td><label>Enter the marks of Subject3:</label></td>
 <td><input type="text" name="subject3" value="<?php echo $subject3; ?>" />
 <?php 
-//echo $subject3Error;
+if (!empty($errorMessage['subject3'])) {
+    echo $errorMessage['subject3'];
+} else {
+    '';
+}
 ?>
 </td>
 </tr>

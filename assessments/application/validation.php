@@ -22,22 +22,20 @@ function validate($studentRecordValidataion)
         $Roll_no = $studentRecordValidataion['Roll_no'];
     }
     if(!isset($_POST['subject1'])) {
-        $Roll_noError = "***please enter marks of subject1";
+        $subject1Error = "***please enter marks of subject1";
     } else {
-        $Roll_no = $studentRecordValidataion['subject1'];
+        $subject1 = $studentRecordValidataion['subject1'];
     }
     if(!isset($_POST['subject2'])) {
-        $Roll_noError = "***please enter marks of subject2";
+        $subject2Error = "***please enter marks of subject2";
     } else {
-        $Roll_no = $studentRecordValidataion['subject2'];
+        $subject2 = $studentRecordValidataion['subject2'];
     }
     if(!isset($_POST['subject3'])) {
-        $Roll_noError = "***please enter marks of subject3";
+        $subject3Error = "***please enter marks of subject3";
     } else {
-        $Roll_no = $studentRecordValidataion['subject3'];
+        $subject3 = $studentRecordValidataion['subject3'];
     }
-    $total = $_POST['subject1'] + $_POST['subject2'] + $_POST['subject3'];
-    $percentage = (($_POST['subject1'] + $_POST['subject2'] + $_POST['subject3']) / 3);
     $errorMessageArray = array();
     if (empty($studentName) || !preg_match("/^['a-zA-Z']*$/",$studentName)) {
     $studentNameError = "***please enter name";

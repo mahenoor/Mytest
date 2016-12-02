@@ -28,6 +28,8 @@ $percentage = $studentData['Percentage'];
 <th>Subject1</th>
 <th>Subject2</th>
 <th>Subject3</th>
+<th>Total</th>
+<th>Percentage</th>
 </tr>
 <tr>
 <td><?php echo $studentName ?></td>
@@ -37,6 +39,8 @@ $percentage = $studentData['Percentage'];
 <td><?php echo $subject1 ?></td>
 <td><?php echo $subject2 ?></td>
 <td><?php echo $subject3 ?></td>
+<td><?php echo $total ?></td>
+<td><?php echo $percentage ?></td>
 </tr>
 </table>
 <br />
