@@ -31,6 +31,8 @@ $subject2Error = "";
 $subject3Error = "";
 $gender = "";
 $department = "";
+$errorMessage = "";
+$response = validate($_POST);
 if (isset($_POST['submit'])) {
     $studentName = $_POST['studentName'];
     if (!isset($_POST['department'])) {
@@ -49,9 +51,7 @@ if (isset($_POST['submit'])) {
     $subject3 = $_POST['subject3'];
     $total = $subject1 + $subject2 + $subject3;
     $percentage = (($total) / 3);
-    $errorMessage = " ";
-    $functionCall = validate($_POST);
-       if ($functionCall['status'] === true) {
+       if ($response['status']) {
         $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
             '$subject2', '$subject3', '$total', '$percentage' )";
         if (mysqli_query($conn, $insert_query)) {
@@ -60,7 +60,8 @@ if (isset($_POST['submit'])) {
             echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
         }
     } else {
-        $errorMessage = $functionCall['message'];
+        $errorMessage = $response['message'];
+       // print_r($errorMessage);
     }
 } 
 mysqli_close($conn);
@@ -75,7 +76,7 @@ mysqli_close($conn);
 if(!empty($errorMessage['studentName'])) {
     echo $errorMessage['studentName'];
 } else {
-    echo '';
+    '';
 }
 ?>
 </td>
@@ -98,7 +99,7 @@ if(!empty($errorMessage['studentName'])) {
 if (!empty($errorMessage['department'])) {
     echo $errorMessage['department']; 
 } else {
-    echo '';
+    '';
 }
 ?>
 </td>
@@ -111,7 +112,7 @@ if (!empty($errorMessage['department'])) {
 if (!empty($errorMessage['gender'])) {
     echo $errorMessage['gender'];
 } else {
-    echo '';
+    '';
 }
 ?> 
 </td>
@@ -123,7 +124,7 @@ if (!empty($errorMessage['gender'])) {
 if (!empty($errorMessage['Roll_no'])) {
     echo $errorMessage['Roll_no'];
 } else {
-    echo '';
+    '';
 }
 ?> 
 </td>
@@ -135,7 +136,7 @@ if (!empty($errorMessage['Roll_no'])) {
 if (!empty($errorMessage['subject1'])) {
     echo $errorMessage['subject1'];
 } else {
-    echo '';
+    '';
 }
 ?>
 </td>
@@ -147,7 +148,7 @@ if (!empty($errorMessage['subject1'])) {
 if (!empty($errorMessage['subject2'])) {
     echo $errorMessage['subject2'];
 } else {
-    echo '';
+    '';
 }
 ?>
 </td>
@@ -159,7 +160,7 @@ if (!empty($errorMessage['subject2'])) {
 if (!empty($errorMessage['subject3'])) {
     echo $errorMessage['subject3'];
 } else {
-    echo '';
+    '';
 }
 ?>
 </td>
