@@ -10,7 +10,7 @@ $subject1Error = "";
 $subject2Error = "";
 $subject3Error = "";
 $errorMessage = "";
-$displaysErrorMsg = validate($_POST);
+$functionCall = validate($_POST);
 if (isset($_POST['update'])) {
     $studentName = $_POST['studentName'];
     if (!isset($_POST['department'])) {
@@ -29,12 +29,7 @@ if (isset($_POST['update'])) {
     $subject3 = $_POST['subject3'];
     $total = $subject1 + $subject2 + $subject3;
     $percentage = (($total) / 3);
-    
-
-    if (!empty($studentName)  && !empty($department) && !empty($gender) && !empty($Roll_no) &&  
-    !empty($subject1)  && !empty($subject2) && !empty($subject3) && preg_match("/^['a-zA-Z']*$/", $studentName)
-    && preg_match("/^[a-z0-9]*$/", $Roll_no) && preg_match("/^[0-9]*$/", $subject1) && 
-    preg_match("/^[0-9]*$/", $subject2) && preg_match("/^[0-9]*$/", $subject3)) {
+    if ($functionCall['status'] === true) {
         $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
         gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
         if (mysqli_query($conn, $update_query)) {
@@ -43,9 +38,7 @@ if (isset($_POST['update'])) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
         }
     } else {
-   
-       $errorMessage = $displaysErrorMsg['message'];
-
+        $errorMessage = $functionCall['message'];
     }
 }
 ?>
@@ -88,7 +81,7 @@ $percentage = $studentData['Percentage'];
 if(!empty($errorMessage['studentName'])) {
     echo $errorMessage['studentName'];
 } else {
-    '';
+    echo '';
 }
 ?> 
 </td>
@@ -111,7 +104,7 @@ if(!empty($errorMessage['studentName'])) {
 if (!empty($errorMessage['department'])) {
     echo $errorMessage['department']; 
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -124,7 +117,7 @@ if (!empty($errorMessage['department'])) {
 if (!empty($errorMessage['gender'])) {
     echo $errorMessage['gender'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -136,7 +129,7 @@ if (!empty($errorMessage['gender'])) {
 if (!empty($errorMessage['Roll_no'])) {
     echo $errorMessage['Roll_no'];
 } else {
-    '';
+    echo '';
 }
 ?> 
 </td>
@@ -148,7 +141,7 @@ if (!empty($errorMessage['Roll_no'])) {
 if (!empty($errorMessage['subject1'])) {
     echo $errorMessage['subject1'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -160,7 +153,7 @@ if (!empty($errorMessage['subject1'])) {
 if (!empty($errorMessage['subject2'])) {
     echo $errorMessage['subject2'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -172,7 +165,7 @@ if (!empty($errorMessage['subject2'])) {
 if (!empty($errorMessage['subject3'])) {
     echo $errorMessage['subject3'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>

@@ -8,17 +8,13 @@ if(!empty($_GET['id'])) {
     $id = $_GET['id'];
     $delete_query = "DELETE FROM Student WHERE id=$id"; 
     $result = $conn->query($delete_query);
-    echo "Record Deleted Successfully";
-} else {
-  echo "ERROR!" . mysqli_error($conn);
-}
-?>
-<br />
-<br />
-<a href='index.php'>Back to index page </a>
-<?php    
+    if ($result === true) {
+    	header('location:index.php');
+    	} else {
+  	echo "ERROR!" . mysqli_error($conn);
+	}	
+} 
 mysqli_close($conn);
 ?>
 </body>
 </html>
-

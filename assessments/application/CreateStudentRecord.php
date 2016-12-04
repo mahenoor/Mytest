@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-require 'validation1.php';
+require 'validation.php';
 ?>
 <html>
 <head>
@@ -31,8 +31,6 @@ $subject2Error = "";
 $subject3Error = "";
 $gender = "";
 $department = "";
-$errorMessage = "";
-$displaysErrorMsg = validate($_POST);
 if (isset($_POST['submit'])) {
     $studentName = $_POST['studentName'];
     if (!isset($_POST['department'])) {
@@ -51,10 +49,9 @@ if (isset($_POST['submit'])) {
     $subject3 = $_POST['subject3'];
     $total = $subject1 + $subject2 + $subject3;
     $percentage = (($total) / 3);
-    if (!empty($studentName)  && !empty($department) && !empty($gender) && !empty($Roll_no) &&  
-        !empty($subject1)  && !empty($subject2) && !empty($subject3) && preg_match("/^['a-zA-Z']*$/", $studentName)
-        && preg_match("/^[a-z0-9]*$/", $Roll_no) && preg_match("/^[0-9]*$/", $subject1) && 
-        preg_match("/^[0-9]*$/", $subject2) && preg_match("/^[0-9]*$/", $subject3)) {
+    $errorMessage = " ";
+    $functionCall = validate($_POST);
+       if ($functionCall['status'] === true) {
         $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
             '$subject2', '$subject3', '$total', '$percentage' )";
         if (mysqli_query($conn, $insert_query)) {
@@ -63,8 +60,7 @@ if (isset($_POST['submit'])) {
             echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
         }
     } else {
-        $errorMessage = $$displaysErrorMsg['message'];
-       // print_r($errorMessage);
+        $errorMessage = $functionCall['message'];
     }
 } 
 mysqli_close($conn);
@@ -79,7 +75,7 @@ mysqli_close($conn);
 if(!empty($errorMessage['studentName'])) {
     echo $errorMessage['studentName'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -102,7 +98,7 @@ if(!empty($errorMessage['studentName'])) {
 if (!empty($errorMessage['department'])) {
     echo $errorMessage['department']; 
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -115,7 +111,7 @@ if (!empty($errorMessage['department'])) {
 if (!empty($errorMessage['gender'])) {
     echo $errorMessage['gender'];
 } else {
-    '';
+    echo '';
 }
 ?> 
 </td>
@@ -127,7 +123,7 @@ if (!empty($errorMessage['gender'])) {
 if (!empty($errorMessage['Roll_no'])) {
     echo $errorMessage['Roll_no'];
 } else {
-    '';
+    echo '';
 }
 ?> 
 </td>
@@ -139,7 +135,7 @@ if (!empty($errorMessage['Roll_no'])) {
 if (!empty($errorMessage['subject1'])) {
     echo $errorMessage['subject1'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -151,7 +147,7 @@ if (!empty($errorMessage['subject1'])) {
 if (!empty($errorMessage['subject2'])) {
     echo $errorMessage['subject2'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -163,7 +159,7 @@ if (!empty($errorMessage['subject2'])) {
 if (!empty($errorMessage['subject3'])) {
     echo $errorMessage['subject3'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
