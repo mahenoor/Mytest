@@ -33,7 +33,7 @@ if (isset($_POST['update'])) {
         $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
         gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
         if (mysqli_query($conn, $update_query)) {
-            echo "record updated into database successfully";
+            header("Location:index.php");
         } else if (!mysqli_query($conn, $update_query)) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
         }
@@ -42,9 +42,6 @@ if (isset($_POST['update'])) {
     }
 }
 ?>
-<br />
-<br />
-<a href = "index.php">back to index page</a>
 <?php
 $view_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($view_query);
@@ -78,7 +75,7 @@ $percentage = $studentData['Percentage'];
 <td><label>Enter the Student Name:</label></td>
 <td><input type="text" name="studentName" value="<?php echo $studentName; ?>" />
 <?php 
-if(!empty($errorMessage['studentName'])) {
+if (!empty($errorMessage['studentName'])) {
     echo $errorMessage['studentName'];
 } else {
     echo '';
@@ -89,7 +86,7 @@ if(!empty($errorMessage['studentName'])) {
 <tr>
 <td><label>Enter the Department:</label></td>
 <td><select name="department">
-<option value="0">select</option>
+<option disable selected value>select</option>
 <option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
 <option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
 <option <?php if ($department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
