@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 require 'validation.php';
+require 'calculation.php';
 ?>
 <html>
 <head>
@@ -31,8 +32,8 @@ $subject2Error = "";
 $subject3Error = "";
 $gender = "";
 $department = "";
-$errorMessage = "";
-$response = validate($_POST);
+$total = "";
+$percentage = "";
 if (isset($_POST['submit'])) {
     $studentName = $_POST['studentName'];
     if (!isset($_POST['department'])) {
@@ -49,9 +50,11 @@ if (isset($_POST['submit'])) {
     $subject1 = $_POST['subject1'];
     $subject2 = $_POST['subject2'];
     $subject3 = $_POST['subject3'];
-    $total = $subject1 + $subject2 + $subject3;
-    $percentage = (($total) / 3);
-       if ($response['status']) {
+    $total = total($subject1, $subject2, $subject3);
+    $percentage = percentage($subject1, $subject2, $subject3);
+    $errorMessage = "";
+    $validationFunctionCall = validate($_POST);
+       if ($validationFunctionCall['status'] === true) {
         $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
             '$subject2', '$subject3', '$total', '$percentage' )";
         if (mysqli_query($conn, $insert_query)) {
@@ -60,8 +63,7 @@ if (isset($_POST['submit'])) {
             echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
         }
     } else {
-        $errorMessage = $response['message'];
-       // print_r($errorMessage);
+        $errorMessage = $validationFunctionCall['message'];
     }
 } 
 mysqli_close($conn);
@@ -73,10 +75,10 @@ mysqli_close($conn);
 <td><label>Enter the Student Name:</label></td>
 <td><input type="text" name="studentName"  value="<?php if (!empty($_POST['studentName'])) echo $_POST['studentName'] ?>" />
 <?php 
-if(!empty($errorMessage['studentName'])) {
+if (!empty($errorMessage['studentName'])) {
     echo $errorMessage['studentName'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -84,7 +86,7 @@ if(!empty($errorMessage['studentName'])) {
 <tr>
 <td><label>Enter the Department:</label></td>
 <td><select name="department">
-<option disabled selected value></option>
+<option disable selected value>select</option>
 <option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science ">Computer Science</option>
 <option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
 <option <?php if ($department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
@@ -99,7 +101,7 @@ if(!empty($errorMessage['studentName'])) {
 if (!empty($errorMessage['department'])) {
     echo $errorMessage['department']; 
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -112,7 +114,7 @@ if (!empty($errorMessage['department'])) {
 if (!empty($errorMessage['gender'])) {
     echo $errorMessage['gender'];
 } else {
-    '';
+    echo '';
 }
 ?> 
 </td>
@@ -124,7 +126,7 @@ if (!empty($errorMessage['gender'])) {
 if (!empty($errorMessage['Roll_no'])) {
     echo $errorMessage['Roll_no'];
 } else {
-    '';
+    echo '';
 }
 ?> 
 </td>
@@ -136,7 +138,7 @@ if (!empty($errorMessage['Roll_no'])) {
 if (!empty($errorMessage['subject1'])) {
     echo $errorMessage['subject1'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -148,7 +150,7 @@ if (!empty($errorMessage['subject1'])) {
 if (!empty($errorMessage['subject2'])) {
     echo $errorMessage['subject2'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>
@@ -160,7 +162,7 @@ if (!empty($errorMessage['subject2'])) {
 if (!empty($errorMessage['subject3'])) {
     echo $errorMessage['subject3'];
 } else {
-    '';
+    echo '';
 }
 ?>
 </td>

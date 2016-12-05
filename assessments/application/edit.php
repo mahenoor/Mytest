@@ -1,6 +1,7 @@
 <?php
 require 'config.php';
 require 'validation.php';
+require 'calculation.php';
 $id = $_GET['id'];
 $studentNameError = "";
 $departmentError = "";  
@@ -10,7 +11,7 @@ $subject1Error = "";
 $subject2Error = "";
 $subject3Error = "";
 $errorMessage = "";
-$functionCall = validate($_POST);
+$validationFunctionCall = validate($_POST);
 if (isset($_POST['update'])) {
     $studentName = $_POST['studentName'];
     if (!isset($_POST['department'])) {
@@ -27,9 +28,9 @@ if (isset($_POST['update'])) {
     $subject1 = $_POST['subject1'];
     $subject2 = $_POST['subject2'];
     $subject3 = $_POST['subject3'];
-    $total = $subject1 + $subject2 + $subject3;
-    $percentage = (($total) / 3);
-    if ($functionCall['status'] === true) {
+    $total = total($subject1, $subject2, $subject3);
+    $percentage = percentage($subject1, $subject2, $subject3);
+    if ($validationFunctionCall['status'] === true) {
         $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
         gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
         session_start();
@@ -41,7 +42,7 @@ if (isset($_POST['update'])) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
         }
     } else {
-        $errorMessage = $functionCall['message'];
+        $errorMessage = $validationFunctionCall['message'];
     }
 }
 ?>
