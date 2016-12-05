@@ -4,6 +4,11 @@ require 'config.php';
 <html>
 <h1 align="center">Student Information</h1>
 <?php
+session_start();
+if(isset($_SESSION['success'])){
+   echo "record inserted into database successfully!";
+   unset($_SESSION['success']);
+}
 $view_query = "SELECT * FROM Student";
 $result = $conn->query($view_query);
 if ($result->num_rows > 0) {

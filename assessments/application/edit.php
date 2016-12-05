@@ -32,8 +32,11 @@ if (isset($_POST['update'])) {
     if ($functionCall['status'] === true) {
         $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
         gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
+        session_start();
         if (mysqli_query($conn, $update_query)) {
-            header("Location:index.php");
+        $_SESSION['success'] = 1;
+        header("Location:index.php"); 
+        session_end();
         } else if (!mysqli_query($conn, $update_query)) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
         }
