@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
     $errorMessage = "";
     $validationFunctionCall = validate($_POST);
        if ($validationFunctionCall['status'] === true) {
-        $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
+        $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
             '$subject2', '$subject3', '$total', '$percentage' )";
         if (mysqli_query($conn, $insert_query)) {
             echo "Record Inserted into database successfully";
