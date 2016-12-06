@@ -87,7 +87,7 @@ class StudentRecord
            $subject3Error = "***subject3 can't be empty,must include only digits and with maximum marks being 100";
         }
     }
-    public function connectdb()
+    public function connect_db()
     {
         require 'config.php';
     }
@@ -108,7 +108,7 @@ class StudentRecord
     }
 }
 $studentRecord = new StudentRecord();
-echo $studentRecord->connectdb();
+echo $studentRecord->connect_db();
 echo $studentRecord->display();
 echo $studentRecord->studentName($_POST['studentName']);
 echo $studentRecord->department($_POST['department']);
