@@ -1,7 +1,7 @@
 <?php
 require 'config.php';
 require 'validation.php';
-//require 'calculation.php';
+require 'calculation.php';
 ?>
 <html>
 <head>
@@ -35,6 +35,12 @@ $department = "";
 $total = "";
 $percentage = "";
 if (isset($_POST['submit'])) {
+
+    $validation = new Validation();
+    $ValidationResult = $validation->validate($_POST);
+    $calculation = new Calculation();
+    $total = $calculation->total($_POST['subject1'],$_POST['subject2'],$_POST['subject3']);
+    $percentage = $calculation->percentage($_POST['subject1'],$_POST['subject2'],$_POST['subject3']);
     $studentName = $_POST['studentName'];
     if (!isset($_POST['department'])) {
         $departmentError = "***please enter department";
@@ -50,29 +56,8 @@ if (isset($_POST['submit'])) {
     $subject1 = $_POST['subject1'];
     $subject2 = $_POST['subject2'];
     $subject3 = $_POST['subject3'];
-    class Calculation{
-        public $subject1;
-        public $subject2;
-        public $subject3;
-        public function total($subject1, $subject2, $subject3) 
-        {
-        $values = array($subject1, $subject2, $subject3);
-        $total = array_sum($values);
-        return $total;
-        }
-        public function percentage($subject1, $subject2, $subject3)
-        {
-        $values = array($subject1, $subject2, $subject3);
-        $percent = array_sum($values) / count($values);
-        return $percent;
-        }
-    }
-    $calculation = new Calculation();
-    $calculation->total($_POST['subject1'],$_POST['subject2'],$_POST['subject3']);
-    $calculation->percentage($_POST['subject1'],$_POST['subject2'],$_POST['subject3']);
     $errorMessage = "";
-  //  $validationFunctionCall = validate($_POST);
-       if ($ValidationResult['status'] === true) {
+    if ($ValidationResult['status'] === true) {
         $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
             '$subject2', '$subject3', '$total', '$percentage' )";
         if (mysqli_query($conn, $insert_query)) {
