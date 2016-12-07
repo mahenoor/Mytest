@@ -1,6 +1,6 @@
 <?php
 require 'config.php';
-if(!empty($_GET['id'])) {
+if (!empty($_GET['id'])) {
 	$id = $_GET['id'];
 	$read_query = "SELECT * FROM Student where id=$id";
 	$result = $conn->query($read_query);
