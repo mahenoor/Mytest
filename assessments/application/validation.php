@@ -3,6 +3,8 @@ class Validation
 {
     public function validate($studentRecord) 
     {
+        $resultOfValidation = true;
+        $errorMessageArray = array();
         if (!isset($_POST['studentName'])) {
             $studentNameError = "***please enter student name"; 
         } else {
@@ -39,8 +41,6 @@ class Validation
         } else {
             $subject3 = $studentRecord['subject3'];
         }
-        $resultOfValidation = true;
-        $errorMessageArray = array();
         if (empty($studentName) || !preg_match("/^['a-z']{3,9}$/",$studentName)) {
             $studentNameError = "***please enter name";
             $errorMessageArray['studentName'] = $studentNameError; 
@@ -79,7 +79,7 @@ class Validation
             $errorMessageArray['subject3'] = $subject3Error;
             $resultOfValidation = false;
         }
-        $ValidationArray = array("status"=> $resultOfValidation, "message"=> $errorMessageArray);
+        $ValidationArray = array("status" => $resultOfValidation, "message" => $errorMessageArray);
         return $ValidationArray;
     }
 }
