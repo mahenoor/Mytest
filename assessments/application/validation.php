@@ -1,5 +1,7 @@
 <?php
-function validate($studentRecord) 
+class Validation 
+{
+public function validate($studentRecord) 
 {
     if (!isset($_POST['studentName'])) {
         $studentNameError = "***please enter student name"; 
@@ -73,9 +75,12 @@ function validate($studentRecord)
     $errorMessageArray['subject3'] = $subject3Error;
     $resultOfValidation = false;
     }
-    $response = array("status"=> $resultOfValidation, "message"=> $errorMessageArray);
-    return $response;
+    $ValidationArray = array("status"=> $resultOfValidation, "message"=> $errorMessageArray);
+    return $ValidationArray;
 }
+}
+$validation = new Validation();
+$ValidationResult = $validation->validate($_POST);
 ?>
 
 
