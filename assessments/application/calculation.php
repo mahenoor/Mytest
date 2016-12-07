@@ -1,4 +1,5 @@
 <?php
+//a class that calculates total and percentage secured by the students.
 class Calculation{
 	public function total($subject1, $subject2, $subject3) 
 	{

@@ -5,12 +5,13 @@ require 'config.php';
 <h1 align="center">Student Information</h1>
 <?php
 session_start();
-if(isset($_SESSION['success'])){
+if (isset($_SESSION['success'])){
    echo "record inserted into database successfully!";
    unset($_SESSION['success']);
 }
 $view_query = "SELECT * FROM Student";
 $result = $conn->query($view_query);
+//if the record is not empty then displays all the records in db
 if ($result->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">

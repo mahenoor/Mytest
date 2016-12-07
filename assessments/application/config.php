@@ -2,7 +2,8 @@
 $db_hostname = 'localhost';        
 $db_username = 'root';              
 $db_password = 'compass';                  
-$db_name = 'studentInformation';                
+$db_name = 'studentInformation'; 
+//if the hostname,username,password,name is appropriate then connection is established              
 $conn = mysqli_connect($db_hostname, $db_username, $db_password, $db_name);
 if (!$conn) {
     die("Unable to connect database" .mysqli_error($conn));

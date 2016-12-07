@@ -1,18 +1,22 @@
 <?php
 require 'config.php';
-$id = $_GET['id'];
-$read_query = "SELECT * FROM Student where id=$id";
-$result = $conn->query($read_query);
-$studentData = $result->fetch_assoc();
-$studentName = $studentData['studentName'];
-$department = $studentData['Department'];
-$gender = $studentData['Gender'];
-$Roll_no = $studentData['Roll_no'];
-$subject1 = $studentData['Subject1'];
-$subject2 = $studentData['Subject2'];
-$subject3 = $studentData['Subject3'];
-$total = $studentData['Total'];
-$percentage = $studentData['Percentage'];
+if(!empty($_GET['id'])) {
+	$id = $_GET['id'];
+	$read_query = "SELECT * FROM Student where id=$id";
+	$result = $conn->query($read_query);
+	$studentData = $result->fetch_assoc();
+	$studentName = $studentData['studentName'];
+	$department = $studentData['Department'];
+	$gender = $studentData['Gender'];
+	$Roll_no = $studentData['Roll_no'];
+	$subject1 = $studentData['Subject1'];
+	$subject2 = $studentData['Subject2'];
+	$subject3 = $studentData['Subject3'];
+	$total = $studentData['Total'];
+	$percentage = $studentData['Percentage'];
+} else {
+	echo "Error:please obtain the id by linking this file with index.php file";
+}
 ?>
 <html>
 <head>

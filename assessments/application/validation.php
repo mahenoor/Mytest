@@ -1,4 +1,5 @@
 <?php
+//a class that validates whether the data entered by the user is in proper specified format
 class Validation 
 {
     public function validate($studentRecord) 
