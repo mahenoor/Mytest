@@ -11,8 +11,12 @@ $subject1Error = "";
 $subject2Error = "";
 $subject3Error = "";
 $errorMessage = "";
-$validationFunctionCall = validate($_POST);
 if (isset($_POST['update'])) {
+    $validation = new Validation();
+    $ValidationResult = $validation->validate($_POST);
+    $calculation = new Calculation();
+    $total = $calculation->total($_POST['subject1'],$_POST['subject2'],$_POST['subject3']);
+    $percentage = $calculation->percentage($_POST['subject1'],$_POST['subject2'],$_POST['subject3']);
     $studentName = $_POST['studentName'];
     if (!isset($_POST['department'])) {
         $departmentError = "***please enter department";
@@ -28,9 +32,7 @@ if (isset($_POST['update'])) {
     $subject1 = $_POST['subject1'];
     $subject2 = $_POST['subject2'];
     $subject3 = $_POST['subject3'];
-    $total = total($subject1, $subject2, $subject3);
-    $percentage = percentage($subject1, $subject2, $subject3);
-    if ($validationFunctionCall['status'] === true) {
+    if ($ValidationResult['status'] === true) {
         $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
         gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
         session_start();
@@ -42,7 +44,7 @@ if (isset($_POST['update'])) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
         }
     } else {
-        $errorMessage = $validationFunctionCall['message'];
+        $errorMessage = $$ValidationResult['message'];
     }
 }
 ?>
