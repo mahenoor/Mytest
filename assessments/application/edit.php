@@ -2,7 +2,7 @@
 require 'config.php';
 require 'validation.php';
 require 'calculation.php';
-if(!empty($_GET['id'])) {
+if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $studentNameError = "";
     $departmentError = "";  
