@@ -1,7 +1,20 @@
 <?php
-require 'config.php';
+require 'dboperations.php';
 require 'validation.php';
-require 'calculation.php';
+if (isset($_POST['submit'])) {
+    $crudobj = new CRUDOperations();
+    $validationobject = new Validation();
+    $responseOfValidation = $validationobject->validate($_POST);
+    $errorMessage = $responseOfValidation['message'];
+    if($responseOfValidation['status']) {
+        $responseOfValidation = $crudobj->CreateStudentRecord($_POST);
+        if($responseOfValidation)
+            header('Location:index.php');
+    }    
+
+}
+$department = '';
+$gender = '';
 ?>
 <html>
 <head>
@@ -22,56 +35,6 @@ require 'calculation.php';
 }
 </style>
 </head>
-<?php
-$studentNameError = "";
-$departmentError = "";  
-$genderError = "";
-$Roll_noError = "";
-$subject1Error = "";
-$subject2Error = "";
-$subject3Error = "";
-$gender = "";
-$department = "";
-if (isset($_POST['submit'])) {
-    //on the click of submit button if the data entered is valid it will be stored in respective variables
-    $studentName = $_POST['studentName'];
-    if (!isset($_POST['department'])) {
-        $departmentError = "***please enter department";
-    } else {
-        $department = $_POST['department'];
-    }
-    if (!isset($_POST['gender'])) {
-        $genderError = "***please enter gender";
-    } else {
-        $gender = $_POST['gender'];
-    }
-    $Roll_no = $_POST['Roll_no'];
-    $subject1 = $_POST['subject1'];
-    $subject2 = $_POST['subject2'];
-    $subject3 = $_POST['subject3'];
-    $errorMessage = "";
-    //object created for Validation class and then the result returned by the Validation() is stored in $ValidationResult 
-    $validation = new Validation();
-    $ValidationResult = $validation -> validate($_POST);
-    //object created for Calculation class and then total and percentage is stored in $total and $percentage variable
-    $calculation = new Calculation();
-    $total = $calculation->total($_POST['subject1'], $_POST['subject2'], $_POST['subject3']);
-    $percentage = $calculation->percentage($_POST['subject1'], $_POST['subject2'], $_POST['subject3']);
-    //if all the fields are entered in specified format then the record is stored in db
-    if ($ValidationResult['status'] === true) {
-        $insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Subject1, Subject2, Subject3, Total, Percentage ) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$subject1', 
-            '$subject2', '$subject3', '$total', '$percentage' )";
-        if (mysqli_query($conn, $insert_query)) {
-            echo "Record Inserted into database successfully";
-        } else if (!mysqli_query($conn, $insert_query)) {
-            echo "Error: " . $insert_query . "<br>" . mysqli_error($conn);
-        }
-    } else {
-        $errorMessage = $ValidationResult['message'];
-    }
-} 
-mysqli_close($conn);
-?>
 <body bgcolor="pink">
 <form method="post" action="" >
 <table>

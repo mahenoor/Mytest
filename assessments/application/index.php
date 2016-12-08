@@ -1,22 +1,25 @@
 <?php
-require 'config.php';
+//ob_start();
+session_start();
 require 'dboperations.php';
 ?>
 <html>
 <h1 align="center">Student Information</h1>
 <?php
-if ( !empty($_GET['id'])){
-    $deleteObj = new DBOps();
-    $responseOfDelete = $deleteObj->DeleteRecord($_GET['id']);
+$crudobj = new CRUDOperations();
+//$result = $crudobj->ListStudents();
+
+if (!empty($_GET['id'])) {
+    $responseOfDelete = $crudobj->DeleteRecord($_GET['id']);
 }
-session_start();
+
 if (isset($_SESSION['success'])) {
    echo "record inserted into database successfully!";
    unset($_SESSION['success']);
 }
-$view_query = "SELECT * FROM Student";
-$result = $conn->query($view_query);
-if ($result->num_rows > 0) {
+$result1 = $crudobj->ViewRecords();
+
+if ($result1->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
     <table align="center" width="8%" border="3">
@@ -33,7 +36,7 @@ if ($result->num_rows > 0) {
     <th>Percentage</th>
     </tr>
     <?php
-    while ($studentData = $result->fetch_assoc()) {
+    while ($studentData = $result1->fetch_assoc()) {
 ?>
         <tr>
         <td><?php echo $studentData["id"] ?></td>
@@ -47,7 +50,7 @@ if ($result->num_rows > 0) {
         <td><?php echo $studentData["Total"] ?></td>
         <td><?php echo $studentData["Percentage"] ?></td>
         <td width=250>
-        <a href="readObjectCreation.php?act=read&id=<?php echo $studentData['id'] ?>">Read</a>
+        <a href="readObjectCreation.php?id=<?php echo $studentData['id'] ?>">Read</a>
         <a href="index.php?id=<?php echo $studentData['id'] ?>">Delete</a>
         <a href="edit.php?id=<?php echo $studentData['id'] ?>">Edit</a>
         </td>
@@ -60,9 +63,8 @@ if ($result->num_rows > 0) {
     } else {
     echo "0 results";
 }
-mysqli_close($conn);
 ?>
 <br />
-<a href="CreateStudentRecord.php">Insert a new student record</a>
+<a href="CreateStudentRecordForm.php">Insert a new student record</a>
 </body>
 </html>
