@@ -1,17 +1,21 @@
 <?php
 require 'config.php';
+require 'dboperations.php';
 ?>
 <html>
 <h1 align="center">Student Information</h1>
 <?php
+if ( !empty($_GET['id'])){
+    $deleteObj = new DBOps();
+    $responseOfDelete = $deleteObj->DeleteRecord($_GET['id']);
+}
 session_start();
-if (isset($_SESSION['success'])){
+if (isset($_SESSION['success'])) {
    echo "record inserted into database successfully!";
    unset($_SESSION['success']);
 }
 $view_query = "SELECT * FROM Student";
 $result = $conn->query($view_query);
-//if the record is not empty then displays all the records in db
 if ($result->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
@@ -43,8 +47,8 @@ if ($result->num_rows > 0) {
         <td><?php echo $studentData["Total"] ?></td>
         <td><?php echo $studentData["Percentage"] ?></td>
         <td width=250>
-        <a href="read.php?id=<?php echo $studentData['id'] ?>">Read</a>
-        <a href="delete.php?id=<?php echo $studentData['id'] ?>">Delete</a>
+        <a href="readObjectCreation.php?act=read&id=<?php echo $studentData['id'] ?>">Read</a>
+        <a href="index.php?id=<?php echo $studentData['id'] ?>">Delete</a>
         <a href="edit.php?id=<?php echo $studentData['id'] ?>">Edit</a>
         </td>
         </tr>
