@@ -38,7 +38,6 @@ class CRUDOperations
 		$result = $this->conn->query($view_query);
 		return $result;
 	}
-
 	public function CreateStudentRecord($inputData)
 	{
 		$studentName = $inputData['studentName'];
@@ -69,6 +68,15 @@ class CRUDOperations
 	}  
 	public function EditStudentRecord($inputData) 
 	{
+		$studentName = $studentData['studentName']; 
+		$department = $studentData['Department'];
+		$gender = $studentData['Gender'];
+		$Roll_no = $studentData['Roll_no'];
+		$subject1 = $studentData['Subject1'];
+		$subject2 = $studentData['Subject2'];
+		$subject3 = $studentData['Subject3'];
+		$total = $studentData['Total'];
+		$percentage = $studentData['Percentage'];
 		$update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
             gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
         if (mysqli_query($this->conn, $update_query)) {
@@ -80,9 +88,6 @@ class CRUDOperations
         }
         $total = $calculation->total($inputData['subject1'], $inputData['subject2'], $inputData['subject3']);
 	}
-
 }
-
-
-
+}
 ?>

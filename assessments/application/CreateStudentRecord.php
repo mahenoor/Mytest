@@ -2,16 +2,15 @@
 require 'dboperations.php';
 require 'validation.php';
 if (isset($_POST['submit'])) {
-    $crudobj = new CRUDOperations();
-    $validationobject = new Validation();
-    $responseOfValidation = $validationobject->validate($_POST);
+    $crudObj = new CRUDOperations();
+    $validationObject = new Validation();
+    $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
     if($responseOfValidation['status']) {
-        $responseOfValidation = $crudobj->CreateStudentRecord($_POST);
+        $responseOfValidation = $crudObj->CreateStudentRecord($_POST);
         if($responseOfValidation)
             header('Location:index.php');
     }    
-
 }
 $department = '';
 $gender = '';

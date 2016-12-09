@@ -1,25 +1,20 @@
 <?php
-//ob_start();
 session_start();
 require 'dboperations.php';
 ?>
 <html>
 <h1 align="center">Student Information</h1>
 <?php
-$crudobj = new CRUDOperations();
-//$result = $crudobj->ListStudents();
-
+$crudObj = new CRUDOperations();
 if (!empty($_GET['id'])) {
-    $responseOfDelete = $crudobj->DeleteRecord($_GET['id']);
+    $responseOfDelete = $crudObj->DeleteRecord($_GET['id']);
 }
-
 if (isset($_SESSION['success'])) {
    echo "record inserted into database successfully!";
    unset($_SESSION['success']);
 }
-$result1 = $crudobj->ViewRecords();
-
-if ($result1->num_rows > 0) {
+$result = $crudObj->ViewRecords();
+if ($result ->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
     <table align="center" width="8%" border="3">
@@ -36,7 +31,7 @@ if ($result1->num_rows > 0) {
     <th>Percentage</th>
     </tr>
     <?php
-    while ($studentData = $result1->fetch_assoc()) {
+    while ($studentData = $result ->fetch_assoc()) {
 ?>
         <tr>
         <td><?php echo $studentData["id"] ?></td>
@@ -52,7 +47,7 @@ if ($result1->num_rows > 0) {
         <td width=250>
         <a href="readObjectCreation.php?id=<?php echo $studentData['id'] ?>">Read</a>
         <a href="index.php?id=<?php echo $studentData['id'] ?>">Delete</a>
-        <a href="edit.php?id=<?php echo $studentData['id'] ?>">Edit</a>
+        <a href="editRecord.php?id=<?php echo $studentData['id'] ?>">Edit</a>
         </td>
         </tr>
         <?php
