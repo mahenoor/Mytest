@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
     if($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->CreateStudentRecord($_POST);
+        $responseOfValidation = $crudObj->createStudentRecord($_POST);
         if($responseOfValidation)
             header('Location:index.php');
     }    

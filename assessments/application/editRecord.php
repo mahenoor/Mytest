@@ -20,7 +20,7 @@ if($_POST) {
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
     if($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->EditStudentRecord($_POST);
+        $responseOfValidation = $crudObj->editStudentRecord($_POST);
         if($responseOfValidation)
             header('Location:index.php');
     }    

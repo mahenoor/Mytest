@@ -1,12 +1,10 @@
 <?php
-//a class that validates whether the data entered by the user is in proper specified format
 class Validation 
 {
     public function validate($studentRecord) 
     {
         $resultOfValidation = true;
         $errorMessageArray = array();
-        
         if (empty($studentRecord['studentName']) || !preg_match("/^['a-z']{3,9}$/",$studentRecord['studentName'])) {
             $studentNameError = "***please enter name";
             $errorMessageArray['studentName'] = $studentNameError; 
@@ -17,9 +15,6 @@ class Validation
             $errorMessageArray['department'] = $departmentError;
             $resultOfValidation = false;
         } 
-
-        
-
         if (empty($studentRecord['gender'])) {
             $genderError = "***please enter gender";
             $errorMessageArray['gender'] = $genderError;
@@ -48,10 +43,8 @@ class Validation
             $errorMessageArray['subject3'] = $subject3Error;
             $resultOfValidation = false;
         }
-
-        
-        $ValidationArray = array("status" => $resultOfValidation, "message" => $errorMessageArray);
-        return $ValidationArray;
+        $validationArray = array("status" => $resultOfValidation, "message" => $errorMessageArray);
+        return $validationArray;
     }
 }
 ?>

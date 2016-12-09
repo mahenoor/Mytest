@@ -15,7 +15,7 @@ class CRUDOperations
 		}
 		
 	}
-	public function DeleteRecord($id)
+	public function deleteRecord($id)
 	{
 		$delete_query = "DELETE FROM Student WHERE id=$id"; 
 	    $result = $this->conn->query($delete_query);
@@ -25,20 +25,20 @@ class CRUDOperations
 	  		return mysqli_error($this->conn);
 	    }
 	}
-	public function ReadRecord($id)
+	public function readRecord($id)
 	{
 		$read_query = "SELECT * FROM Student where id=$id";
 		$result = $this->conn->query($read_query);
 		$studentData = $result->fetch_assoc();
 		return $studentData;
 	}
-	public function ViewRecords()
+	public function viewRecords()
 	{
 		$view_query = "SELECT * FROM Student";
 		$result = $this->conn->query($view_query);
 		return $result;
 	}
-	public function CreateStudentRecord($inputData)
+	public function createStudentRecord($inputData)
 	{
 		$studentName = $inputData['studentName'];
 		$department = $inputData['department'];
@@ -66,7 +66,7 @@ class CRUDOperations
 		$studentData = $this->conn->query($read_query);
 		return $studentData;
 	}  
-	public function EditStudentRecord($inputData) 
+	public function editStudentRecord($inputData) 
 	{
 		$studentName = $studentData['studentName']; 
 		$department = $studentData['Department'];
@@ -89,5 +89,5 @@ class CRUDOperations
         $total = $calculation->total($inputData['subject1'], $inputData['subject2'], $inputData['subject3']);
 	}
 }
-}
+
 ?>

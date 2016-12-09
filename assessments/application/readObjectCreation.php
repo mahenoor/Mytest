@@ -2,7 +2,7 @@
 require "dboperations.php";
 if (!empty($_GET['id'])) {
     $crudObj = new CRUDOperations();
-    $studentData = $crudObj->ReadRecord($_GET['id']);
+    $studentData = $crudObj->readRecord($_GET['id']);
     $studentName = $studentData['studentName'];
 	$department = $studentData['Department'];
 	$gender = $studentData['Gender'];
@@ -15,7 +15,7 @@ if (!empty($_GET['id'])) {
 }
 ?>
 <html>
-<body bgcolor = "blue">
+<body bgcolor = "light blue">
 <table>
 <tr>
 <th>Student Name</th>

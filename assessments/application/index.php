@@ -7,13 +7,13 @@ require 'dboperations.php';
 <?php
 $crudObj = new CRUDOperations();
 if (!empty($_GET['id'])) {
-    $responseOfDelete = $crudObj->DeleteRecord($_GET['id']);
+    $responseOfDelete = $crudObj->deleteRecord($_GET['id']);
 }
 if (isset($_SESSION['success'])) {
    echo "record inserted into database successfully!";
    unset($_SESSION['success']);
 }
-$result = $crudObj->ViewRecords();
+$result = $crudObj->viewRecords();
 if ($result ->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
