@@ -1,38 +1,42 @@
 <?php
 require 'dboperations.php';
 require 'validation.php';
-$id='';
-$crudObj = new CRUDOperations();
 if (!empty($_GET['id'])) {
-	$studentData = $crudObj -> getId($id);
-    $studentName = $studentData['studentName']; 
-	$department = $studentData['Department'];
-	$gender = $studentData['Gender'];
-	$Roll_no = $studentData['Roll_no'];
-	$subject1 = $studentData['Subject1'];
-	$subject2 = $studentData['Subject2'];
-	$subject3 = $studentData['Subject3'];
-	$total = $studentData['Total'];
-	$percentage = $studentData['Percentage'];
+   // $id = $_GET['id'];
+
+    $crudObj = new CRUDOperations();
+    $studentData = $crudObj->readRecord($_GET['id']);
+
+    $input['studentName'] = $studentData['studentName'];
+    $input['Department'] = $studentData['Department'];
+    $input['Gender'] = $studentData['Gender'];
+    $input['Roll_no'] = $studentData['Roll_no'];
+    $input['Subject1'] = $studentData['Subject1'];
+    $input['Subject2'] = $studentData['Subject2'];
+    $input['Subject3'] = $studentData['Subject3'];
+    $input['Total'] = $studentData['Total'];
+    $input['Percentage'] = $studentData['Percentage'];
 }
-if($_POST) {
-	$validationObject = new Validation();
-    $responseOfValidation = $validationObject->validate($_POST);
-    $errorMessage = $responseOfValidation['message'];
-    if($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->editStudentRecord($_POST);
-        if($responseOfValidation)
-            header('Location:index.php');
-    }    
-}  
 $studentName = '';
 $department = '';
 $gender = '';
 $Roll_no = '';
 $subject1 = '';
 $subject2 = '';
-$subject3 = '';
+$subject3 = '';  
+if ($_POST) {
 
+    $crudObj = new CRUDOperations();
+    $validationObject = new Validation();
+    $responseOfValidation = $validationObject->validate($_POST);
+    $errorMessage = $responseOfValidation['message'];
+    if($responseOfValidation['status']) {
+        $responseOfValidation = $crudObj->editStudentRecord($studentData);
+        }
+        if ($responseOfValidation === true) {
+            header('Location:index.php');
+        }
+} 
 ?>
 <html>
 <head>
@@ -51,7 +55,7 @@ $subject3 = '';
 <table>
 <tr>
 <td><label>Enter the Student Name:</label></td>
-<td><input type="text" name="studentName" value="<?php echo $studentName; ?>" />
+<td><input type="text" name="studentName" value="<?php echo $input['studentName']; ?>" />
 <?php 
 if (!empty($errorMessage['studentName'])) {
     echo $errorMessage['studentName'];
@@ -65,7 +69,7 @@ if (!empty($errorMessage['studentName'])) {
 <td><label>Enter the Department:</label></td>
 <td><select name="department">
 <option disable selected value>select</option>
-<option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
+<option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="<?php echo $input['Computer Science']; ?>">Computer Science</option>
 <option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
 <option <?php if ($department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
 <option <?php if ($department == 'Civil') { ?> selected <?php } ?> value="Civil">Civil</option>
@@ -99,7 +103,7 @@ if (!empty($errorMessage['gender'])) {
 </tr>
 <tr>
 <td><label>Enter the Roll_no:</label></td>
-<td><input type="text" name="Roll_no" value="<?php echo $Roll_no; ?>" />
+<td><input type="text" name="Roll_no" value="<?php echo $input['Roll_no']; ?>" />
 <?php 
 if (!empty($errorMessage['Roll_no'])) {
     echo $errorMessage['Roll_no'];
@@ -111,7 +115,7 @@ if (!empty($errorMessage['Roll_no'])) {
 </tr>
 <tr>
 <td><label>Enter the marks of Subject1:</label></td>
-<td><input type="text" name="subject1" value="<?php echo $subject1; ?>" />
+<td><input type="text" name="subject1" value="<?php echo $input['Subject1']; ?>" />
 <?php 
 if (!empty($errorMessage['subject1'])) {
     echo $errorMessage['subject1'];
@@ -123,7 +127,7 @@ if (!empty($errorMessage['subject1'])) {
 </tr>
 <tr>
 <td><label>Enter the marks of Subject2:</label></td>
-<td><input type="text" name="subject2" value="<?php echo $subject2; ?>" />
+<td><input type="text" name="subject2" value="<?php echo $input['Subject2']; ?>" />
 <?php 
 if (!empty($errorMessage['subject2'])) {
     echo $errorMessage['subject2'];
@@ -135,7 +139,7 @@ if (!empty($errorMessage['subject2'])) {
 </tr>
 <tr>
 <td><label>Enter the marks of Subject3:</label></td>
-<td><input type="text" name="subject3" value="<?php echo $subject3; ?>" />
+<td><input type="text" name="subject3" value="<?php echo $input['Subject3']; ?>" />
 <?php 
 if (!empty($errorMessage['subject3'])) {
     echo $errorMessage['subject3'];
@@ -150,3 +154,4 @@ if (!empty($errorMessage['subject3'])) {
 </form>
 </body>
 </html>
+  

@@ -60,6 +60,6 @@ if ($result ->num_rows > 0) {
 }
 ?>
 <br />
-<a href="CreateStudentRecordForm.php">Insert a new student record</a>
+<a href="CreateStudentRecord.php">Insert a new student record</a>
 </body>
 </html>

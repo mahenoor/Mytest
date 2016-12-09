@@ -27,10 +27,13 @@ class CRUDOperations
 	}
 	public function readRecord($id)
 	{
+
 		$read_query = "SELECT * FROM Student where id=$id";
 		$result = $this->conn->query($read_query);
 		$studentData = $result->fetch_assoc();
+		
 		return $studentData;
+
 	}
 	public function viewRecords()
 	{
@@ -60,25 +63,30 @@ class CRUDOperations
             return false;
         }
 	}
-	public function getId($id)
-	{
-		$read_query = "SELECT * FROM Student where id=$id";
-		$studentData = $this->conn->query($read_query);
-		return $studentData;
-	}  
 	public function editStudentRecord($inputData) 
 	{
-		$studentName = $studentData['studentName']; 
-		$department = $studentData['Department'];
-		$gender = $studentData['Gender'];
-		$Roll_no = $studentData['Roll_no'];
-		$subject1 = $studentData['Subject1'];
-		$subject2 = $studentData['Subject2'];
-		$subject3 = $studentData['Subject3'];
-		$total = $studentData['Total'];
-		$percentage = $studentData['Percentage'];
+
+ 		$studentName = $inputData['studentName']; 
+		$department = $inputData['Department'];
+		$gender = $inputData['Gender'];
+		$Roll_no = $inputData['Roll_no'];
+		$subject1 = $inputData['Subject1'];
+		$subject2 = $inputData['Subject2'];
+		$subject3 = $inputData['Subject3'];
+		$total = $inputData['Total'];
+		$percentage = $inputData['Percentage']; 
+	    $errorMessage = ""; 
+	    $calculation = new Calculation();
+		$total = $calculation->total($inputData['subject1'], $inputData['subject2'], $inputData['subject3']);
+		$percentage = $calculation->percentage($inputData['subject1'], $inputData['subject2'], 
+						$inputData['subject3']);
+		print($percentage);
+
+
 		$update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
             gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
+            print($update_query);
+
         if (mysqli_query($this->conn, $update_query)) {
             $_SESSION['success'] = 1;
             header("Location:index.php"); 
@@ -86,8 +94,6 @@ class CRUDOperations
         } else if (!mysqli_query($this->conn, $update_query)) {
                 echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
         }
-        $total = $calculation->total($inputData['subject1'], $inputData['subject2'], $inputData['subject3']);
-	}
+   	}
 }
-
 ?>

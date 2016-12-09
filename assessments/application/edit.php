@@ -57,7 +57,7 @@ if (!empty($_GET['id'])) {
 }
 ?>
 <?php
-/*
+
 $view_query = "SELECT * FROM Student where id=$id";
 $result = $conn->query($view_query);
 $studentData = $result->fetch_assoc();
@@ -69,7 +69,7 @@ $subject1 = $studentData['Subject1'];
 $subject2 = $studentData['Subject2'];
 $subject3 = $studentData['Subject3'];
 $total = $studentData['Total'];
-$percentage = $studentData['Percentage']; */
+$percentage = $studentData['Percentage']; 
 ?>
 <html>
 <head>
