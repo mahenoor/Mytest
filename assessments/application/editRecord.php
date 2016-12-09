@@ -1,74 +1,37 @@
 <?php
-require 'config.php';
+require 'dboperations.php';
 require 'validation.php';
-require 'calculation.php';
+$id='';
+$crudobj = new CRUDOperations();
 if (!empty($_GET['id'])) {
-    $id = $_GET['id'];
-    $studentNameError = "";
-    $departmentError = "";  
-    $genderError = "";
-    $Roll_noError = "";
-    $subject1Error = "";
-    $subject2Error = "";
-    $subject3Error = "";
-    $errorMessage = "";
-    if (isset($_POST['update'])) {
-        //on the click of update button if the data entered is valid it will be stored in respective variables
-        $studentName = $_POST['studentName'];
-        if (!isset($_POST['department'])) {
-            $departmentError = "***please enter department";
-        } else {
-            $department = $_POST['department'];
-        }
-        if (!isset($_POST['gender'])) {
-            $genderError = "***please enter gender";
-        } else {
-            $gender = $_POST['gender'];
-        }
-        $Roll_no = $_POST['Roll_no'];
-        $subject1 = $_POST['subject1'];
-        $subject2 = $_POST['subject2'];
-        $subject3 = $_POST['subject3'];
-        //object created for Validation class and then the result returned by the Validation() is stored in $ValidationResult 
-        $validation = new Validation();
-        $ValidationResult = $validation -> validate($_POST);
-        //object created for Calculation class and then total and percentage is stored in $total and $percentage variable
-        $calculation = new Calculation();
-        $total = $calculation->total($_POST['subject1'], $_POST['subject2'], $_POST['subject3']);
-        $percentage = $calculation->percentage($_POST['subject1'], $_POST['subject2'], $_POST['subject3']);
-        //if all the fields are entered in specified format then the record is stored in db
-        if ($ValidationResult['status'] === true) {
-            $update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
-            gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
-            session_start();
-            if (mysqli_query($conn, $update_query)) {
-                $_SESSION['success'] = 1;
-                header("Location:index.php"); 
-                session_end();
-            } else if (!mysqli_query($conn, $update_query)) {
-                echo "Error: " . $update_query . "<br>" . mysqli_error($conn);
-            }
-        } else {
-            $errorMessage = $ValidationResult['message'];
-        }
-    } 
-} else {
-    echo "Error:please obtain the id by linking this file with index.php file";
+	//$crudobj = new CRUDOperations();
+    $studentData = $crudobj->getId($id);
+    $previousStudentData['studentName'] = $studentData['studentName'];
+    $previousStudentData['Department'] = $studentData['Department'];
+    $previousStudentData['Gender'] = $studentData['Gender'];
+    $previousStudentData['Roll_no'] = $studentData['Roll_no'];
+    $previousStudentData['Subject1'] = $studentData['Subject1'];
+    $previousStudentData['Subject2'] = $studentData['Subject2'];
+	$previousStudentData['Subject3'] = $studentData['Subject3'];
 }
-?>
-<?php
-$view_query = "SELECT * FROM Student where id=$id";
-$result = $conn->query($view_query);
-$studentData = $result->fetch_assoc();
-$studentName = $studentData['studentName']; 
-$department = $studentData['Department'];
-$gender = $studentData['Gender'];
-$Roll_no = $studentData['Roll_no'];
-$subject1 = $studentData['Subject1'];
-$subject2 = $studentData['Subject2'];
-$subject3 = $studentData['Subject3'];
-$total = $studentData['Total'];
-$percentage = $studentData['Percentage'];
+if($_POST) {
+	$validationobject = new Validation();
+    $responseOfValidation = $validationobject->validate($_POST);
+    $errorMessage = $responseOfValidation['message'];
+    if($responseOfValidation['status']) {
+        $responseOfValidation = $crudobj->EditStudentRecord($_POST);
+        if($responseOfValidation)
+            header('Location:index.php');
+    }    
+}
+$studentName = '';
+$department = '';
+$gender = '';
+$Roll_no = '';
+$subject1 = '';
+$subject2 = '';
+$subject3 = '';
+
 ?>
 <html>
 <head>

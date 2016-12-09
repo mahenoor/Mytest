@@ -38,6 +38,7 @@ class CRUDOperations
 		$result = $this->conn->query($view_query);
 		return $result;
 	}
+
 	public function CreateStudentRecord($inputData)
 	{
 		$studentName = $inputData['studentName'];
@@ -59,7 +60,25 @@ class CRUDOperations
         } else if (!mysqli_query($this->conn, $insert_query)) {
             return false;
         }
-		
+	}
+	public function getId($id)
+	{
+		$read_query = "SELECT * FROM Student where id=$id";
+		$studentData = $this->conn->query($read_query);
+		return $studentData;
+	}  
+	public function EditStudentRecord($inputData) 
+	{
+		$update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
+            gender = '$gender', Roll_no = '$Roll_no', subject1 = '$subject1', subject2 = '$subject2', subject3 = '$subject3', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
+        if (mysqli_query($this->conn, $update_query)) {
+            $_SESSION['success'] = 1;
+            header("Location:index.php"); 
+            session_end();
+        } else if (!mysqli_query($this->conn, $update_query)) {
+                echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
+        }
+        $total = $calculation->total($inputData['subject1'], $inputData['subject2'], $inputData['subject3']);
 	}
 
 }
