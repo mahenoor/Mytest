@@ -99,11 +99,11 @@ if (!empty($errorMessage['Roll_no'])) {
 </td>
 </tr>
 <tr>
-<td><label>Enter marks of Subject1:</label></td>
-<td><input type="text" name="subject1" value="<?php if (!empty($_POST['subject1'])) echo $_POST['subject1'] ?>" />
+<td><label>Enter marks of Physics:</label></td>
+<td><input type="text" name="Physics" value="<?php if (!empty($_POST['Physics'])) echo $_POST['Physics'] ?>" />
 <?php 
-if (!empty($errorMessage['subject1'])) {
-    echo $errorMessage['subject1'];
+if (!empty($errorMessage['Physics'])) {
+    echo $errorMessage['Physics'];
 } else {
     echo '';
 }
@@ -111,11 +111,11 @@ if (!empty($errorMessage['subject1'])) {
 </td>
 </tr>
 <tr>
-<td><label>Enter marks of Subject2:</label></td>
-<td><input type="text" name="subject2" value="<?php if (!empty($_POST['subject2'])) echo $_POST['subject2'] ?>"  />
+<td><label>Enter marks of Chemistry:</label></td>
+<td><input type="text" name="Chemistry" value="<?php if (!empty($_POST['Chemistry'])) echo $_POST['Chemistry'] ?>"  />
 <?php 
-if (!empty($errorMessage['subject2'])) {
-    echo $errorMessage['subject2'];
+if (!empty($errorMessage['Chemistry'])) {
+    echo $errorMessage['Chemistry'];
 } else {
     echo '';
 }
@@ -123,11 +123,11 @@ if (!empty($errorMessage['subject2'])) {
 </td>
 </tr>
 <tr>
-<td><label>Enter marks of Subject3:</label></td>
-<td><input type="text" name="subject3" value="<?php if (!empty($_POST['subject3'])) echo $_POST['subject3'] ?>"  />
+<td><label>Enter marks of Maths:</label></td>
+<td><input type="text" name="Maths" value="<?php if (!empty($_POST['Maths'])) echo $_POST['Maths'] ?>"  />
 <?php 
-if (!empty($errorMessage['subject3'])) {
-    echo $errorMessage['subject3'];
+if (!empty($errorMessage['Maths'])) {
+    echo $errorMessage['Maths'];
 } else {
     echo '';
 }

@@ -24,9 +24,9 @@ if ($result ->num_rows > 0) {
     <th>Department</th>
     <th>Gender</th>
     <th>Roll_no</th>
-    <th>Subject1</th>
-    <th>Subject2</th>
-    <th>Subject3</th>
+    <th>Physics</th>
+    <th>Chemistry</th>
+    <th>Maths</th>
     <th>Total</th>
     <th>Percentage</th>
     </tr>
@@ -39,9 +39,9 @@ if ($result ->num_rows > 0) {
         <td><?php echo $studentData["Department"] ?></td>
         <td><?php echo $studentData["Gender"] ?></td>
         <td><?php echo $studentData["Roll_no"] ?></td>
-        <td><?php echo $studentData["Subject1"] ?></td>
-        <td><?php echo $studentData["Subject2"] ?></td>
-        <td><?php echo $studentData["Subject3"] ?></td>
+        <td><?php echo $studentData["Physics"] ?></td>
+        <td><?php echo $studentData["Chemistry"] ?></td>
+        <td><?php echo $studentData["Maths"] ?></td>
         <td><?php echo $studentData["Total"] ?></td>
         <td><?php echo $studentData["Percentage"] ?></td>
         <td width=250>

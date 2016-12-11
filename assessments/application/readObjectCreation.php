@@ -7,9 +7,9 @@ if (!empty($_GET['id'])) {
 	$department = $studentData['Department'];
 	$gender = $studentData['Gender'];
 	$Roll_no = $studentData['Roll_no'];
-	$subject1 = $studentData['Subject1'];
-	$subject2 = $studentData['Subject2'];
-	$subject3 = $studentData['Subject3'];
+	$Physics = $studentData['Physics'];
+	$Chemistry= $studentData['Chemistry'];
+	$Maths = $studentData['Maths'];
 	$total = $studentData['Total'];
 	$percentage = $studentData['Percentage'];
 }
@@ -22,9 +22,9 @@ if (!empty($_GET['id'])) {
 <th>Department</th>
 <th>gender</th>
 <th>Roll_no</th>
-<th>Subject1</th>
-<th>Subject2</th>
-<th>Subject3</th>
+<th>Physics</th>
+<th>Chemistry</th>
+<th>Maths</th>
 <th>Total</th>
 <th>Percentage</th>
 </tr>
@@ -33,9 +33,9 @@ if (!empty($_GET['id'])) {
 <td><?php echo $department ?></td>
 <td><?php echo $gender ?></td>
 <td><?php echo $Roll_no ?></td>
-<td><?php echo $subject1 ?></td>
-<td><?php echo $subject2 ?></td>
-<td><?php echo $subject3 ?></td>
+<td><?php echo $Physics ?></td>
+<td><?php echo $Chemistry ?></td>
+<td><?php echo $Maths ?></td>
 <td><?php echo $total ?></td>
 <td><?php echo $percentage ?></td>
 </tr>

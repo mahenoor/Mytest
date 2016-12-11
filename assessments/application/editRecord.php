@@ -11,9 +11,9 @@ if (!empty($_GET['id'])) {
     $input['Department'] = $studentData['Department'];
     $input['Gender'] = $studentData['Gender'];
     $input['Roll_no'] = $studentData['Roll_no'];
-    $input['Subject1'] = $studentData['Subject1'];
-    $input['Subject2'] = $studentData['Subject2'];
-    $input['Subject3'] = $studentData['Subject3'];
+    $input['Physics'] = $studentData['Physics'];
+    $input['Chemistry'] = $studentData['Chemistry'];
+    $input['Maths'] = $studentData['Maths'];
     $input['Total'] = $studentData['Total'];
     $input['Percentage'] = $studentData['Percentage'];
 }
@@ -31,7 +31,7 @@ if ($_POST) {
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
     if($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->editStudentRecord($studentData);
+        $responseOfValidation = $crudObj->editStudentRecord($_POST);
         }
         if ($responseOfValidation === true) {
             header('Location:index.php');
@@ -62,14 +62,15 @@ if (!empty($errorMessage['studentName'])) {
 } else {
     echo '';
 }
-?> 
+?>
+ 
 </td>
 </tr>
 <tr>
 <td><label>Enter the Department:</label></td>
-<td><select name="department">
+<td><select name="department" value="<?php echo !empty($input['Department']) ? ($input['Department']) : '';?> ">
 <option disable selected value>select</option>
-<option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="<?php echo $input['Computer Science']; ?>">Computer Science</option>
+<option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
 <option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
 <option <?php if ($department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
 <option <?php if ($department == 'Civil') { ?> selected <?php } ?> value="Civil">Civil</option>
@@ -114,11 +115,11 @@ if (!empty($errorMessage['Roll_no'])) {
 </td>
 </tr>
 <tr>
-<td><label>Enter the marks of Subject1:</label></td>
-<td><input type="text" name="subject1" value="<?php echo $input['Subject1']; ?>" />
+<td><label>Enter the marks of Physics:</label></td>
+<td><input type="text" name="Physics" value="<?php echo $input['Physics']; ?>" />
 <?php 
-if (!empty($errorMessage['subject1'])) {
-    echo $errorMessage['subject1'];
+if (!empty($errorMessage['Physics'])) {
+    echo $errorMessage['Physics'];
 } else {
     echo '';
 }
@@ -126,11 +127,11 @@ if (!empty($errorMessage['subject1'])) {
 </td>
 </tr>
 <tr>
-<td><label>Enter the marks of Subject2:</label></td>
-<td><input type="text" name="subject2" value="<?php echo $input['Subject2']; ?>" />
+<td><label>Enter the marks of Chemistry:</label></td>
+<td><input type="text" name="Chemistry" value="<?php echo $input['Chemistry']; ?>" />
 <?php 
-if (!empty($errorMessage['subject2'])) {
-    echo $errorMessage['subject2'];
+if (!empty($errorMessage['Chemistry'])) {
+    echo $errorMessage['Chemistry'];
 } else {
     echo '';
 }
@@ -138,11 +139,11 @@ if (!empty($errorMessage['subject2'])) {
 </td>
 </tr>
 <tr>
-<td><label>Enter the marks of Subject3:</label></td>
-<td><input type="text" name="subject3" value="<?php echo $input['Subject3']; ?>" />
+<td><label>Enter the marks of Maths:</label></td>
+<td><input type="text" name="Maths" value="<?php echo $input['Maths']; ?>" />
 <?php 
-if (!empty($errorMessage['subject3'])) {
-    echo $errorMessage['subject3'];
+if (!empty($errorMessage['Maths'])) {
+    echo $errorMessage['Maths'];
 } else {
     echo '';
 }
