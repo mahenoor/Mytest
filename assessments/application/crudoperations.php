@@ -13,30 +13,33 @@ class CrudOperations
 		if (!$this->conn) {
 		    die("Unable to connect database" .mysqli_error($this->conn));
 		}
-		
 	}
 	public function deleteRecord($id)
 	{
 		$delete_query = "DELETE FROM Student WHERE id=$id"; 
 	    $result = $this->conn->query($delete_query);
-	    if ($result) {
-	    	return true;
-	    } else {
-	  		return mysqli_error($this->conn);
-	    }
+	    return $result;
 	}
 	public function readRecord($id)
 	{
 		$read_query = "SELECT * FROM Student where id=$id";
 		$result = $this->conn->query($read_query);
 		$studentData = $result->fetch_assoc();
-		return $studentData;
+		if ($studentData) {
+			return  $studentData;
+		} else {
+			echo "Error: " . $studentData . "<br>" . mysqli_error($this->conn);
+		}
 	}
 	public function viewRecords()
 	{
 		$view_query = "SELECT * FROM Student";
 		$result = $this->conn->query($view_query);
-		return $result;
+		if ($result) {
+			return $result;
+		} else {
+			echo "Error: " . $result . "<br>" . mysqli_error($this->conn);
+		}
 	}
 	public function createStudentRecord($inputData)
 	{
@@ -57,7 +60,7 @@ class CrudOperations
 		if (mysqli_query($this->conn, $insert_query)) {
             return true;
         } else if (!mysqli_query($this->conn, $insert_query)) {
-            return false;
+           echo "Error: " . $insert_query . "<br>" . mysqli_error($this->conn);
         }
 	}
 	public function editStudentRecord($inputData,$id) 
@@ -80,7 +83,7 @@ class CrudOperations
         if (mysqli_query($this->conn, $update_query)) {
         	return true;
         } else if (!mysqli_query($this->conn, $update_query)) {
-           return false;
+            echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
         }
    	}
 }
