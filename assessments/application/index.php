@@ -1,22 +1,13 @@
 <?php
-session_start();
-if (isset($_SESSION['success'])) {
-   echo "record updated into database successfully!";
-   unset($_SESSION['success']);
-}
-require 'dboperations.php';
+require 'crudoperations.php';
 ?>
 <html>
 <h1 align="center">Student Information</h1>
 <?php
-$crudObj = new CRUDOperations();
+$crudObj = new CrudOperations();
 if (!empty($_GET['id'])) {
     $responseOfDelete = $crudObj->deleteRecord($_GET['id']);
 }
-/*if (isset($_SESSION['success'])) {
-   echo "record updated into database successfully!";
-   unset($_SESSION['success']);
-}*/
 $result = $crudObj->viewRecords();
 if ($result ->num_rows > 0) {
 ?>  

@@ -1,7 +1,7 @@
 <?php
-require "dboperations.php";
+require "crudoperations.php";
 if (!empty($_GET['id'])) {
-    $crudObj = new CRUDOperations();
+    $crudObj = new CrudOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
     $studentName = $studentData['studentName'];
 	$Department = $studentData['Department'];

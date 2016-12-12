@@ -55,7 +55,7 @@ class CrudOperations
 		$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES ('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
 		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
 		if (mysqli_query($this->conn, $insert_query)) {
-            echo "record inserted into database successfully";
+            return true;
         } else if (!mysqli_query($this->conn, $insert_query)) {
             return false;
         }
@@ -78,10 +78,9 @@ class CrudOperations
             Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
             '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = '$id'"; 
         if (mysqli_query($this->conn, $update_query)) {
-        	header("Location:index.php");
-        	echo "record updated successfully";
-		} else if (!mysqli_query($this->conn, $update_query)) {
-            echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
+        	return true;
+        } else if (!mysqli_query($this->conn, $update_query)) {
+           return false;
         }
    	}
 }

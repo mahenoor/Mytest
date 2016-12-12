@@ -1,8 +1,8 @@
 <?php
-require 'dboperations.php';
+require 'crudoperations.php';
 require 'validation.php';
 if (!empty($_GET['id'])) {
-    $crudObj = new CRUDOperations();
+    $crudObj = new CrudOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
     $input['studentName'] = $studentData['studentName'];
     $input['Department'] = $studentData['Department'];
@@ -15,7 +15,7 @@ if (!empty($_GET['id'])) {
     $input['Percentage'] = $studentData['Percentage'];
 }
 if ($_POST) {
-    $crudObj = new CRUDOperations();
+    $crudObj = new CrudOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
