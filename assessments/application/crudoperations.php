@@ -14,14 +14,26 @@ class CrudOperations
 		    die("Unable to connect database" .mysqli_error($this->conn));
 		}
 	}
+	public function errorMessage()
+	{
+		$errorMsg = 'error on line' .$this->$getMessage();
+		return $errorMsg;
+	}
 	public function deleteRecord($id)
 	{
-		$delete_query = "DELETE FROM Student WHERE id=$id"; 
-	    $result = $this->conn->query($delete_query);
-	    return $result;
+		try {
+			$delete_query = "DELETE FROM Studentcvg WHERE id=$id"; 
+	    	$result = $this->conn->query($delete_query);
+	    	if (!$result) {
+	    		throw new Exception('Problem with tablename');
+	    	}
+		} catch(Exception $e) {
+	        $e->$getMessage();
+	    }
 	}
 	public function readRecord($id)
 	{
+
 		$read_query = "SELECT * FROM Student where id=$id";
 		$result = $this->conn->query($read_query);
 		$studentData = $result->fetch_assoc();
@@ -35,12 +47,8 @@ class CrudOperations
 	{
 		$view_query = "SELECT * FROM Student";
 		$result = $this->conn->query($view_query);
-		if ($result) {
-			return $result;
-		} else {
-			echo "Error: " . $result . "<br>" . mysqli_error($this->conn);
-		}
-	}
+		return $result;
+	} 
 	public function createStudentRecord($inputData)
 	{
 		$studentName = $inputData['studentName'];
@@ -57,12 +65,12 @@ class CrudOperations
 						$inputData['Maths']);
 		$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES ('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
 		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
-		if (mysqli_query($this->conn, $insert_query)) {
-            return true;
-        } else if (!mysqli_query($this->conn, $insert_query)) {
-           echo "Error: " . $insert_query . "<br>" . mysqli_error($this->conn);
-        }
-	}
+			if (mysqli_query($this->conn, $insert_query)) {
+            	return true;
+        	} else {
+        		return false;
+        	}
+    }
 	public function editStudentRecord($inputData,$id) 
 	{
 		$studentName = $inputData['studentName']; 
