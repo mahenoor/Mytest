@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     }    
 }
 $Department = '';
-$gender = '';
+$Gender = '';
 ?>
 <html>
 <head>

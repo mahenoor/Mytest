@@ -31,7 +31,7 @@ if (!empty($_GET['id'])) {
 <tr>
 <td><?php echo $studentName ?></td>
 <td><?php echo $Department ?></td>
-<td><?php echo $gender ?></td>
+<td><?php echo $Gender ?></td>
 <td><?php echo $Roll_no ?></td>
 <td><?php echo $Physics ?></td>
 <td><?php echo $Chemistry ?></td>

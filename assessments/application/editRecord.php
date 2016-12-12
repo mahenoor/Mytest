@@ -2,7 +2,6 @@
 require 'dboperations.php';
 require 'validation.php';
 if (!empty($_GET['id'])) {
-   // $id = $_GET['id'];
     $crudObj = new CRUDOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
     $input['studentName'] = $studentData['studentName'];
@@ -19,19 +18,16 @@ if ($_POST) {
     $crudObj = new CRUDOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
-    //print_r( $responseOfValidation);exit;
     $errorMessage = $responseOfValidation['message'];
-    //print_r( $errorMessage);exit;
     if($responseOfValidation['status']) {
-
         $responseOfValidation = $crudObj->editStudentRecord($_POST,$_GET['id']);
     }
     if ($responseOfValidation === true) {
         header('Location:index.php');
     }
 } 
-$Department=$input['Department'];
-$Gender=$input['Gender'];
+$Department = $input['Department'];
+$Gender = $input['Gender'];
 ?>
 <html>
 <head>
@@ -63,7 +59,7 @@ if (!empty($errorMessage['studentName'])) {
 </tr>
 <tr>
 <td><label>Enter the Department:</label></td>
-<td><select name="Department" value="<?php echo !empty($input['Department']) ? ($input['Department']) : '';?> ">
+<td><select name="Department">
 <option disable selected value>select</option>
 <option <?php if ($Department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
 <option <?php if ($Department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
