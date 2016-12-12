@@ -10,14 +10,14 @@ class Validation
             $errorMessageArray['studentName'] = $studentNameError; 
             $resultOfValidation = false;
         }
-        if (empty($studentRecord['department'])) {
+        if (empty($studentRecord['Department'])) {
             $departmentError = "***please enter department";
-            $errorMessageArray['department'] = $departmentError;
+            $errorMessageArray['Department'] = $departmentError;
             $resultOfValidation = false;
         } 
-        if (empty($studentRecord['gender'])) {
-            $genderError = "***please enter gender";
-            $errorMessageArray['gender'] = $genderError;
+        if (empty($studentRecord['Gender'])) {
+            $genderError = "***please enter Gender";
+            $errorMessageArray['Gender'] = $genderError;
             $resultOfValidation = false;
         }  
         if (empty($studentRecord['Roll_no']) || !preg_match("/^[a-z0-9]{10}$/", $studentRecord['Roll_no'])) {

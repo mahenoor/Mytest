@@ -27,7 +27,6 @@ class CRUDOperations
 	}
 	public function readRecord($id)
 	{
-
 		$read_query = "SELECT * FROM Student where id=$id";
 		$result = $this->conn->query($read_query);
 		$studentData = $result->fetch_assoc();
@@ -42,50 +41,45 @@ class CRUDOperations
 	public function createStudentRecord($inputData)
 	{
 		$studentName = $inputData['studentName'];
-		$department = $inputData['department'];
-		$gender = $inputData['gender'];
+		$Department = $inputData['Department'];
+		$Gender = $inputData['Gender'];
 	    $Roll_no = $inputData['Roll_no'];
 	    $Physics = $inputData['Physics'];
 	    $Chemistry = $inputData['Chemistry'];
 	    $Maths = $inputData['Maths'];
 	    $errorMessage = "";
 	    $calculation = new Calculation();
-		$total = $calculation->total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
-		$percentage = $calculation->percentage($inputData['Physics'], $inputData['Chemistry'], 
+		$Total = $calculation->Total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
+		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
-		$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Subject3, Total, Percentage ) VALUES ('$studentName', '$department', '$gender', '$Roll_no', '$Physics', 
-		            '$Chemistry', '$Maths', '$total', '$percentage')";
+		$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES ('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
+		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
+
+		            echo $insert_query;
+
         if (mysqli_query($this->conn, $insert_query)) {
             return true;
         } else if (!mysqli_query($this->conn, $insert_query)) {
             return false;
         }
 	}
-	public function editStudentRecord($inputData) 
+	public function editStudentRecord($inputData,$id) 
 	{
-		echo "hi";
- 		$studentName = $inputData['studentName']; 
-		$department = $inputData['Department'];
-		$gender = $inputData['Gender'];
+		$studentName = $inputData['studentName']; 
+		$Department = $inputData['Department'];
+		$Gender = $inputData['Gender'];
 		$Roll_no = $inputData['Roll_no'];
 		$Physics = $inputData['Physics'];
 		$Chemistry = $inputData['Chemistry'];
 		$Maths = $inputData['Maths'];
-		$total = $inputData['Total'];
-		$percentage = $inputData['Percentage']; 
-	    $errorMessage = ""; 
+		$errorMessage = ""; 
 	    $calculation = new Calculation();
-		$total = $calculation->total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
-		$percentage = $calculation->percentage($inputData['Physics'], $inputData['Chemistry'], 
+		$Total = $calculation->Total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
+		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
-		print($percentage);
-
-
-		$update_query = "UPDATE Student SET studentName = '$studentName', department = '$department', 
-            gender = '$gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
-            '$Maths', total = '$total',  percentage = '$percentage' WHERE id = '$id'"; 
-            print($update_query);
-
+		$update_query = "UPDATE Student SET studentName = '$studentName', Department = '$Department', 
+            Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
+            '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = '$id'"; 
         if (mysqli_query($this->conn, $update_query)) {
             $_SESSION['success'] = 1;
             header("Location:index.php"); 

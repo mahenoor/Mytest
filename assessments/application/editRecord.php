@@ -3,10 +3,8 @@ require 'dboperations.php';
 require 'validation.php';
 if (!empty($_GET['id'])) {
    // $id = $_GET['id'];
-
     $crudObj = new CRUDOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
-
     $input['studentName'] = $studentData['studentName'];
     $input['Department'] = $studentData['Department'];
     $input['Gender'] = $studentData['Gender'];
@@ -17,26 +15,23 @@ if (!empty($_GET['id'])) {
     $input['Total'] = $studentData['Total'];
     $input['Percentage'] = $studentData['Percentage'];
 }
-$studentName = '';
-$department = '';
-$gender = '';
-$Roll_no = '';
-$subject1 = '';
-$subject2 = '';
-$subject3 = '';  
 if ($_POST) {
-
     $crudObj = new CRUDOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
+    //print_r( $responseOfValidation);exit;
     $errorMessage = $responseOfValidation['message'];
+    //print_r( $errorMessage);exit;
     if($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->editStudentRecord($_POST);
-        }
-        if ($responseOfValidation === true) {
-            header('Location:index.php');
-        }
+
+        $responseOfValidation = $crudObj->editStudentRecord($_POST,$_GET['id']);
+    }
+    if ($responseOfValidation === true) {
+        header('Location:index.php');
+    }
 } 
+$Department=$input['Department'];
+$Gender=$input['Gender'];
 ?>
 <html>
 <head>
@@ -68,21 +63,21 @@ if (!empty($errorMessage['studentName'])) {
 </tr>
 <tr>
 <td><label>Enter the Department:</label></td>
-<td><select name="department" value="<?php echo !empty($input['Department']) ? ($input['Department']) : '';?> ">
+<td><select name="Department" value="<?php echo !empty($input['Department']) ? ($input['Department']) : '';?> ">
 <option disable selected value>select</option>
-<option <?php if ($department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
-<option <?php if ($department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
-<option <?php if ($department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
-<option <?php if ($department == 'Civil') { ?> selected <?php } ?> value="Civil">Civil</option>
-<option <?php if ($department == 'Electrical') { ?> selected <?php } ?> value="Electrical">Electrical</option>
-<option <?php if ($department == 'Aeronatics') { ?> selected <?php } ?> value="Aeronatics">Aeronatics</option>
-<option <?php if ($department == 'Chemical') { ?> selected <?php } ?> value="Chemical">Chemical</option>
-<option <?php if ($department == 'Metallurgy') { ?> selected <?php } ?> value="Metallurgy">Metallurgy</option>
-<option <?php if ($department == 'Medical electronics') { ?> selected <?php } ?> value="Medical electronics">Medical electronics</option>
+<option <?php if ($Department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
+<option <?php if ($Department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
+<option <?php if ($Department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
+<option <?php if ($Department == 'Civil') { ?> selected <?php } ?> value="Civil">Civil</option>
+<option <?php if ($Department == 'Electrical') { ?> selected <?php } ?> value="Electrical">Electrical</option>
+<option <?php if ($Department == 'Aeronatics') { ?> selected <?php } ?> value="Aeronatics">Aeronatics</option>
+<option <?php if ($Department == 'Chemical') { ?> selected <?php } ?> value="Chemical">Chemical</option>
+<option <?php if ($Department == 'Metallurgy') { ?> selected <?php } ?> value="Metallurgy">Metallurgy</option>
+<option <?php if ($Department == 'Medical electronics') { ?> selected <?php } ?> value="Medical electronics">Medical electronics</option>
 </select>
 <?php
-if (!empty($errorMessage['department'])) {
-    echo $errorMessage['department']; 
+if (!empty($errorMessage['Department'])) {
+    echo $errorMessage['Department']; 
 } else {
     echo '';
 }
@@ -91,11 +86,11 @@ if (!empty($errorMessage['department'])) {
 </tr>
 <tr>
 <td><label>Enter the Gender:</label></td>
-<td><input type="radio" <?php if($gender == "male") echo "checked" ?> name="gender" value="male" />Male
-<input type="radio" <?php if($gender == "female") echo "checked" ?> name="gender" value="female" />Female
+<td><input type="radio" <?php if($Gender == "male") echo "checked" ?> name="Gender" value="male" />Male
+<input type="radio" <?php if($Gender == "female") echo "checked" ?> name="Gender" value="female" />Female
 <?php 
-if (!empty($errorMessage['gender'])) {
-    echo $errorMessage['gender'];
+if (!empty($errorMessage['Gender'])) {
+    echo $errorMessage['Gender'];
 } else {
     echo '';
 }
@@ -156,3 +151,5 @@ if (!empty($errorMessage['Maths'])) {
 </body>
 </html>
   
+
+    

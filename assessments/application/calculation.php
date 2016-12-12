@@ -1,17 +1,17 @@
 <?php
 //a class that calculates total and percentage secured by the students.
 class Calculation{
-	public function total($Physics, $Chemistry, $Maths) 
+	public function Total($Physics, $Chemistry, $Maths) 
 	{
 		$values = array($Physics, $Chemistry, $Maths);
-		$total = array_sum($values);
-		return $total;
+		$Total = array_sum($values);
+		return $Total;
 	}
-	public function percentage($Physics, $Chemistry, $Maths)
+	public function Percentage($Physics, $Chemistry, $Maths)
 	{
 		$values = array($Physics, $Chemistry, $Maths);
-		$percentage = array_sum($values) / count($values);
-		return $percentage;
+		$Percentage = array_sum($values) / count($values);
+		return $Percentage;
 	}
 }
 ?>

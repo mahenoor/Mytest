@@ -4,18 +4,18 @@ if (!empty($_GET['id'])) {
     $crudObj = new CRUDOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
     $studentName = $studentData['studentName'];
-	$department = $studentData['Department'];
-	$gender = $studentData['Gender'];
+	$Department = $studentData['Department'];
+	$Gender = $studentData['Gender'];
 	$Roll_no = $studentData['Roll_no'];
 	$Physics = $studentData['Physics'];
 	$Chemistry= $studentData['Chemistry'];
 	$Maths = $studentData['Maths'];
-	$total = $studentData['Total'];
-	$percentage = $studentData['Percentage'];
+	$Total = $studentData['Total'];
+	$Percentage = $studentData['Percentage'];
 }
 ?>
 <html>
-<body bgcolor = "light blue">
+<body bgcolor = "sky blue">
 <table>
 <tr>
 <th>Student Name</th>
@@ -30,14 +30,14 @@ if (!empty($_GET['id'])) {
 </tr>
 <tr>
 <td><?php echo $studentName ?></td>
-<td><?php echo $department ?></td>
+<td><?php echo $Department ?></td>
 <td><?php echo $gender ?></td>
 <td><?php echo $Roll_no ?></td>
 <td><?php echo $Physics ?></td>
 <td><?php echo $Chemistry ?></td>
 <td><?php echo $Maths ?></td>
-<td><?php echo $total ?></td>
-<td><?php echo $percentage ?></td>
+<td><?php echo $Total ?></td>
+<td><?php echo $Percentage ?></td>
 </tr>
 </table>
 </body>
