@@ -1,6 +1,7 @@
 <?php
 require 'crudoperations.php';
 require 'validation.php';
+//mysqli_report(MYSQLI_REPORT_STRICT);
 if (!empty($_GET['id'])) {
     $crudObj = new CrudOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
@@ -19,15 +20,17 @@ if ($_POST) {
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
+    
     if ($responseOfValidation['status']) {
         $responseOfValidation = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }
     if ($responseOfValidation) {
         header('Location:index.php');
+    
     }
 } 
-$Gender = $input['Gender'];
 $Department = $input['Department'];
+$Gender = $input['Gender'];
 ?>
 <html>
 <head>
@@ -82,8 +85,8 @@ if (!empty($errorMessage['Department'])) {
 </tr>
 <tr>
 <td><label>Enter the Gender:</label></td>
-<td><input type="radio" <?php if($Gender == "male") echo "checked" ?> name="Gender" value="male <?php echo $input['Gender']; ?>" />Male
-<input type="radio" <?php if($Gender == "female") echo "checked" ?> name="Gender" value="female <?php echo $input['Gender']; ?>" />Female
+<td><input type="radio" <?php if($Gender == "male") echo "checked" ?> name="Gender" value="male" />Male
+<input type="radio" <?php if($Gender == "female") echo "checked" ?> name="Gender" value="female" />Female
 <?php 
 if (!empty($errorMessage['Gender'])) {
     echo $errorMessage['Gender'];
