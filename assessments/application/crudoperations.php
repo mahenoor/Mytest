@@ -22,7 +22,7 @@ class CrudOperations
 	    	if (!$result) {
 	    		throw new Exception();
 	    	}
-	    } catch(Exception $e){
+	    } catch(Exception $e) {
 	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn);
 	    }
 	}
@@ -48,7 +48,7 @@ class CrudOperations
             } if (!mysqli_query($this->conn, $insert_query)) {
 	    		throw new Exception();
 	    	}
-	    } catch(Exception $e){
+	    } catch(Exception $e) {
 	    	echo "Error: " . $insert_query . "<br>" . mysqli_error($this->conn);
 	    }
     }
@@ -76,7 +76,7 @@ class CrudOperations
         	if (!mysqli_query($this->conn, $update_query)) {
 	    		throw new Exception();
 	    	}
-	    } catch(Exception $e){
+	    } catch(Exception $e) {
 	    	echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
 	    }
 	}
@@ -101,7 +101,7 @@ class CrudOperations
 			if (!$result) {
 			 	throw new Exception();
 		    }
-	    } catch(Exception $e){
+	    } catch(Exception $e) {
 	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
