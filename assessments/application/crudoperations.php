@@ -56,8 +56,7 @@ class CrudOperations
 		try {
 		$insert_query = "INSERT INTO Studentfygy(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES ('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
 		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
-
-			if (!$insert_query) {
+		if (!$insert_query) {
 	    		throw new Exception();
 	    	}
 	    } catch(Exception $e){
@@ -66,6 +65,7 @@ class CrudOperations
     }
 	public function editStudentRecord($inputData,$id) 
 	{
+		try{
 		$studentName = $inputData['studentName']; 
 		$Department = $inputData['Department'];
 		$Gender = $inputData['Gender'];
@@ -78,7 +78,7 @@ class CrudOperations
 		$Total = $calculation->Total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
 		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
-		try{
+		
 		$update_query = "UPDATE Studentgvhh SET studentName = '$studentName', Department = '$Department', 
             Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
             '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = '$id'"; 
@@ -87,14 +87,15 @@ class CrudOperations
 	    	}
 	    } catch(Exception $e){
 	    	echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
-	    }
+	    } 
+	}}
 
             
-      /*  if (mysqli_query($this->conn, $update_query)) {
+     /*  if (mysqli_query($this->conn, $update_query)) {
         	return true;
         } else if (!mysqli_query($this->conn, $update_query)) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
-        } */
+        } 
    	}
-}
+}*/
 ?>
