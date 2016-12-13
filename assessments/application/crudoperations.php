@@ -17,7 +17,7 @@ class CrudOperations
 	public function deleteRecord($id)
 	{
 		try {
-			$delete_query = "DELETE FROM Studentvhcf   WHERE id=$id"; 
+			$delete_query = "DELETE FROM Student WHERE id=$id"; 
 	   		$result = $this->conn->query($delete_query);
 	    	if (!$result) {
 	    		throw new Exception();
@@ -41,7 +41,7 @@ class CrudOperations
 		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
 		try{
-			$insert_query = "INSERT INTO Studentvb(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
+			$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
 		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
 			if (mysqli_query($this->conn, $insert_query)) {
                 return true;
@@ -67,7 +67,7 @@ class CrudOperations
 		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
 		try {
-			$update_query = "UPDATE Studentdcfgyu SET studentName = '$studentName', Department = '$Department', 
+			$update_query = "UPDATE Student SET studentName = '$studentName', Department = '$Department', 
             Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
             '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = '$id'"; 
           	if (mysqli_query($this->conn, $update_query)) {
