@@ -14,34 +14,24 @@ class CrudOperations
 		    die("Unable to connect database" .mysqli_error($this->conn));
 		}
 	}
-	public function errorMessage()
-	{
-		$errorMsg = 'error on line' .$this->$getMessage();
-		return $errorMsg;
-	}
 	public function deleteRecord($id)
 	{
 		try {
-			$delete_query = "DELETE FROM Studentcvg WHERE id=$id"; 
-	    	$result = $this->conn->query($delete_query);
+			$delete_query = "DELETE FROM Studentvhcf   WHERE id=$id"; 
+	   		$result = $this->conn->query($delete_query);
 	    	if (!$result) {
-	    		throw new Exception('Problem with tablename');
+	    		throw new Exception();
 	    	}
-		} catch(Exception $e) {
-	        $e->$getMessage();
+	    } catch(Exception $e){
+	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn);
 	    }
 	}
 	public function readRecord($id)
 	{
-
 		$read_query = "SELECT * FROM Student where id=$id";
 		$result = $this->conn->query($read_query);
 		$studentData = $result->fetch_assoc();
-		if ($studentData) {
-			return  $studentData;
-		} else {
-			echo "Error: " . $studentData . "<br>" . mysqli_error($this->conn);
-		}
+		return $studentData;
 	}
 	public function viewRecords()
 	{
@@ -63,13 +53,16 @@ class CrudOperations
 		$Total = $calculation->Total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
 		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
-		$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES ('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
+		try {
+		$insert_query = "INSERT INTO Studentfygy(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES ('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
 		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
-			if (mysqli_query($this->conn, $insert_query)) {
-            	return true;
-        	} else {
-        		return false;
-        	}
+
+			if (!$insert_query) {
+	    		throw new Exception();
+	    	}
+	    } catch(Exception $e){
+	    	echo "Error: " . $insert_query . "<br>" . mysqli_error($this->conn);
+	    }
     }
 	public function editStudentRecord($inputData,$id) 
 	{
@@ -85,14 +78,23 @@ class CrudOperations
 		$Total = $calculation->Total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
 		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
-		$update_query = "UPDATE Student SET studentName = '$studentName', Department = '$Department', 
+		try{
+		$update_query = "UPDATE Studentgvhh SET studentName = '$studentName', Department = '$Department', 
             Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
             '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = '$id'"; 
-        if (mysqli_query($this->conn, $update_query)) {
+            if (!$update_query) {
+            	throw new Exception();
+	    	}
+	    } catch(Exception $e){
+	    	echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
+	    }
+
+            
+      /*  if (mysqli_query($this->conn, $update_query)) {
         	return true;
         } else if (!mysqli_query($this->conn, $update_query)) {
             echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
-        }
+        } */
    	}
 }
 ?>

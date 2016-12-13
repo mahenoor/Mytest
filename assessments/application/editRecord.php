@@ -19,15 +19,15 @@ if ($_POST) {
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
-    if($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->editStudentRecord($_POST,$_GET['id']);
+    if ($responseOfValidation['status']) {
+        $responseOfValidation = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }
-    if ($responseOfValidation === true) {
+    if ($responseOfValidation) {
         header('Location:index.php');
     }
 } 
-$Department = $input['Department'];
 $Gender = $input['Gender'];
+$Department = $input['Department'];
 ?>
 <html>
 <head>
@@ -82,8 +82,8 @@ if (!empty($errorMessage['Department'])) {
 </tr>
 <tr>
 <td><label>Enter the Gender:</label></td>
-<td><input type="radio" <?php if($Gender == "male") echo "checked" ?> name="Gender" value="male" />Male
-<input type="radio" <?php if($Gender == "female") echo "checked" ?> name="Gender" value="female" />Female
+<td><input type="radio" <?php if($Gender == "male") echo "checked" ?> name="Gender" value="male <?php echo $input['Gender']; ?>" />Male
+<input type="radio" <?php if($Gender == "female") echo "checked" ?> name="Gender" value="female <?php echo $input['Gender']; ?>" />Female
 <?php 
 if (!empty($errorMessage['Gender'])) {
     echo $errorMessage['Gender'];

@@ -6,12 +6,16 @@ if (isset($_POST['submit'])) {
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
-    if ($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->createStudentRecord($_POST);
+    try{
+        if ($responseOfValidation['status']) {
+            $responseOfValidation = $crudObj->createStudentRecord($_POST);
+        }
         if ($responseOfValidation) {
             header('Location:index.php');
         }
-    }    
+    } catch(Exxception $e) {
+        echo $e->errorMessage();
+    }   
 }
 $Department = !empty($Department) ? $Department : '' ;
 $Gender = !empty($Gender) ? $Gender : '' ;
