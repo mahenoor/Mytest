@@ -12,7 +12,7 @@ $result = $crudObj->viewRecords();
 if ($result ->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
-    <table align="center" width="8%" border="3">
+    <table align="center" width="79%" border="3">
     <tr>
     <th>id</th>
     <th>studentName</th>
