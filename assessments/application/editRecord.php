@@ -16,15 +16,16 @@ if (!empty($_GET['id'])) {
     $input['Percentage'] = $studentData['Percentage'];
 }
 if ($_POST) {
+    $responseOfEdit = "";
     $crudObj = new CrudOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
     
     if ($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->editStudentRecord($_POST, $_GET['id']);
+        $responseOfEdit = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }
-    if ($responseOfValidation) {
+    if ($responseOfEdit === true ) {
         header('Location:index.php');
     
     }

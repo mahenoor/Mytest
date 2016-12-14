@@ -35,12 +35,12 @@ class CrudOperations
 	    $Physics = $inputData['Physics'];
 	    $Chemistry = $inputData['Chemistry'];
 	    $Maths = $inputData['Maths'];
-	    $errorMessage = "";
+		$errorMessage = "";
 	    $calculation = new Calculation();
 		$Total = $calculation->Total($inputData['Physics'], $inputData['Chemistry'], $inputData['Maths']);
 		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
-		try{
+		try {
 			$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
 		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
 			if (mysqli_query($this->conn, $insert_query)) {
@@ -103,6 +103,24 @@ class CrudOperations
 		    }
 	    } catch(Exception $e) {
 	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
+	    }
+	}
+	public function studentLeave($inputData)
+	{
+		$startDate = $inputData['startDate'];
+		$endDate = $inputData['endDate'];
+
+		$errorMessage = "";
+		try {
+			$insert_query1 = "INSERT INTO studentLeave(student_id, startDate, endDate) 
+			VALUES('$student_id', '$startDate', '$endDate')";
+			if (mysqli_query($this->conn, $insert_query1)) {
+                return true;
+            } if (!mysqli_query($this->conn, $insert_query1)) {
+	    		throw new Exception();
+	    	}
+	    } catch(Exception $e) {
+	    	echo "Error: " . $insert_query1. "<br>" . mysqli_error($this->conn);
 	    }
 	}
 }    

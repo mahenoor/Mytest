@@ -1,4 +1,18 @@
 <?php
+require 'crudoperations.php';
+require 'validatingeligibility.php';
+if (isset($_POST['submit'])) {
+    $crudObj = new CrudOperations();
+    $validationObject = new ValidatingEligibility();
+    $responseOfValidation = $validationObject->validate($_POST);
+    $errorMessage = $responseOfValidation['message'];
+    if ($responseOfValidation['status']) {
+            $responseOfValidation = $crudObj->studentLeave($_POST);
+    }
+    if ($responseOfValidation) {
+        header('Location:index.php');
+    }
+}
 ?>
 <html>
 <head>
@@ -24,17 +38,12 @@
 <table>
 <tr>
 <td><label>Enter the start date:</label></td>
-<td><input type="date" name="startDate" value="" min="2016-07-01">
+<td><input type="date" name="startDate" value="">
 </td>
 </tr>
 <tr>
 <td><label>Enter the end date:</label></td>
-<td><input type="date" name="endDate" value="" max="2016-11-30">
-</td>
-</tr>
-<tr>
-<td><label>Enter the number of days the student was on leave:</label></td>
-<td><input type="number" name="studentLeave" value="" min="0" max="153">
+<td><input type="date" name="endDate" value="">
 </td>
 </tr>
 </table>
