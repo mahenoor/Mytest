@@ -9,10 +9,10 @@ if (!empty($_GET['id'])) {
     $responseOfDelete = $crudObj->deleteRecord($_GET['id']);
 }
 $result = $crudObj->viewRecords();
-if ($result ->num_rows > 0) {
+if ($result->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
-    <table align="center" width="79%" border="3">
+    <table align="center" width="79%" border="5">
     <tr>
     <th>id</th>
     <th>studentName</th>
@@ -43,6 +43,7 @@ if ($result ->num_rows > 0) {
         <a href="readObjectCreation.php?id=<?php echo $studentData['id'] ?>">Read</a>
         <a href="index.php?id=<?php echo $studentData['id'] ?>">Delete</a>
         <a href="editRecord.php?id=<?php echo $studentData['id'] ?>">Edit</a>
+        <a href="studentLeave.php?id=<?php echo $studentData['id'] ?>">Eligibilty</a>
         </td>
         </tr>
         <?php
