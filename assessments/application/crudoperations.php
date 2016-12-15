@@ -41,7 +41,7 @@ class CrudOperations
 		$Percentage = $calculation->Percentage($inputData['Physics'], $inputData['Chemistry'], 
 						$inputData['Maths']);
 		try {
-			$insert_query = "INSERT INTO Student(studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES('$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
+			$insert_query = "INSERT INTO Student(id,studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage ) VALUES('$id','$studentName', '$Department', '$Gender', '$Roll_no', '$Physics', 
 		            '$Chemistry', '$Maths', '$Total', '$Percentage')";
 			if (mysqli_query($this->conn, $insert_query)) {
                 return true;
@@ -105,22 +105,23 @@ class CrudOperations
 	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
-	public function studentLeave($inputData)
+	public function studentLeave($inputData, $studentId)
 	{
 		$startDate = $inputData['startDate'];
 		$endDate = $inputData['endDate'];
-
+		$calculation = new Calculation();
+		$leave = $calculation->studentLeave($startDate, $endDate);
 		$errorMessage = "";
 		try {
-			$insert_query1 = "INSERT INTO studentLeave(student_id, startDate, endDate) 
-			VALUES('$student_id', '$startDate', '$endDate')";
-			if (mysqli_query($this->conn, $insert_query1)) {
+			$insert_query = "INSERT INTO studentLeave(id, startDate, endDate, Studentleave) 
+			VALUES('$studentId', '$startDate', '$endDate',' Studentleave')";
+			if (mysqli_query($this->conn, $insert_query)) {
                 return true;
-            } if (!mysqli_query($this->conn, $insert_query1)) {
+            } if (!mysqli_query($this->conn, $insert_query)) {
 	    		throw new Exception();
 	    	}
 	    } catch(Exception $e) {
-	    	echo "Error: " . $insert_query1. "<br>" . mysqli_error($this->conn);
+	    	echo "Error: " . $insert_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
 }    

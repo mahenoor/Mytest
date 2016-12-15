@@ -42,3 +42,4 @@ if (!empty($_GET['id'])) {
 </table>
 </body>
 </html>
+<a href="index.php">Go to index page</a>

@@ -8,8 +8,8 @@ $crudObj = new CrudOperations();
 if (!empty($_GET['id'])) {
     $responseOfDelete = $crudObj->deleteRecord($_GET['id']);
 }
-$result = $crudObj->viewRecords();
-if ($result->num_rows > 0) {
+$crudObj= $crudObj->viewRecords();
+if ($crudObj->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
     <table align="center" width="79%" border="5">
@@ -24,9 +24,10 @@ if ($result->num_rows > 0) {
     <th>Maths</th>
     <th>Total</th>
     <th>Percentage</th>
+   
     </tr>
     <?php
-    while ($studentData = $result ->fetch_assoc()) {
+    while ($studentData = $crudObj ->fetch_assoc()) {
 ?>
         <tr>
         <td><?php echo $studentData["id"] ?></td>
@@ -39,11 +40,12 @@ if ($result->num_rows > 0) {
         <td><?php echo $studentData["Maths"] ?></td>
         <td><?php echo $studentData["Total"] ?></td>
         <td><?php echo $studentData["Percentage"] ?></td>
+       
         <td width=250>
         <a href="readObjectCreation.php?id=<?php echo $studentData['id'] ?>">Read</a>
         <a href="index.php?id=<?php echo $studentData['id'] ?>">Delete</a>
         <a href="editRecord.php?id=<?php echo $studentData['id'] ?>">Edit</a>
-        <a href="studentLeave.php?id=<?php echo $studentData['id'] ?>">Eligibilty</a>
+        <a href="studentLeave.php?id=<?php echo $studentData['id'] ?>">Leave</a>
         </td>
         </tr>
         <?php

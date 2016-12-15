@@ -150,6 +150,7 @@ if (!empty($errorMessage['Maths'])) {
 </form>
 </body>
 </html>
+<a href="index.php">Go to index page</a>
   
 
     

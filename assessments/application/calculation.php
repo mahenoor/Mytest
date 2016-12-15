@@ -12,11 +12,10 @@ class Calculation{
 		$Percentage = array_sum($values) / count($values);
 		return $Percentage;
 	}
-	public function studentAttended($startDate, $endDate, $studentLeave)
+	public function studentLeave($startDate, $endDate)
 	{
-		$values = array($startDate, $endDate, $studentLeave);
-		$studentAttended = array_sum($values);
-		return $studentAttended;
+		$studentLeave = $startDate-$endDate;
+		return $studentLeave;
 	}
 }
 ?>

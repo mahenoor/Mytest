@@ -1,16 +1,18 @@
 <?php
 require 'crudoperations.php';
-require 'validatingeligibility.php';
+require 'validatingLeave.php';
+$studentId = $_GET['id'];
 if (isset($_POST['submit'])) {
     $crudObj = new CrudOperations();
-    $validationObject = new ValidatingEligibility();
+    $validationObject = new ValidatingLeave();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
+
     if ($responseOfValidation['status']) {
-            $responseOfValidation = $crudObj->studentLeave($_POST);
+        $responseOfValidation = $crudObj->studentLeave($_POST, $studentId);
     }
-    if ($responseOfValidation) {
-        header('Location:index.php');
+    if ($responseOfValidation === true) {
+        header("Location:index.php");
     }
 }
 ?>
@@ -38,12 +40,26 @@ if (isset($_POST['submit'])) {
 <table>
 <tr>
 <td><label>Enter the start date:</label></td>
-<td><input type="date" name="startDate" value="">
+<td><input type="date" name="startDate" value="<?php if (!empty($_POST['startDate'])) echo $_POST['startDate'] ?>" >
+<?php 
+if (!empty($errorMessage['startDate'])) {
+    echo $errorMessage['startDate'];
+} else {
+    echo '';
+}
+?>
 </td>
 </tr>
 <tr>
 <td><label>Enter the end date:</label></td>
-<td><input type="date" name="endDate" value="">
+<td><input type="date" name="endDate" value="<?php if (!empty($_POST['endDate'])) echo $_POST['endDate'] ?>" >
+<?php 
+if (!empty($errorMessage['endDate'])) {
+    echo $errorMessage['endDate'];
+} else {
+    echo '';
+}
+?>
 </td>
 </tr>
 </table>
