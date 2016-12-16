@@ -7,7 +7,6 @@ if (isset($_POST['submit'])) {
     $validationObject = new ValidatingLeave();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
-
     if ($responseOfValidation['status']) {
         $responseOfValidation = $crudObj->studentLeave($_POST, $_GET['id']);
     }

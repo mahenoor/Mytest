@@ -8,7 +8,7 @@ $crudObj = new CrudOperations();
 if (!empty($_GET['id'])) {
     $responseOfDelete = $crudObj->deleteRecord($_GET['id']);
 }
-$crudObj= $crudObj->viewRecords();
+$crudObj = $crudObj->viewRecords();
 if ($crudObj->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
@@ -24,7 +24,9 @@ if ($crudObj->num_rows > 0) {
     <th>Maths</th>
     <th>Total</th>
     <th>Percentage</th>
-   
+    <th>startDate</th>
+    <th>endDate</th>
+    <th>studentLeave</th>
     </tr>
     <?php
     while ($studentData = $crudObj ->fetch_assoc()) {
@@ -40,7 +42,9 @@ if ($crudObj->num_rows > 0) {
         <td><?php echo $studentData["Maths"] ?></td>
         <td><?php echo $studentData["Total"] ?></td>
         <td><?php echo $studentData["Percentage"] ?></td>
-       
+        <td><?php echo $studentData["startDate"] ?></td>
+        <td><?php echo $studentData["endDate"] ?></td>
+        <td><?php echo $studentData["studentLeave"] ?></td>
         <td width=250>
         <a href="readObjectCreation.php?id=<?php echo $studentData['id'] ?>">Read</a>
         <a href="index.php?id=<?php echo $studentData['id'] ?>">Delete</a>
@@ -61,3 +65,4 @@ if ($crudObj->num_rows > 0) {
 <a href="CreateStudentRecord.php">Insert a new student record</a>
 </body>
 </html>
+/(60*60*24)

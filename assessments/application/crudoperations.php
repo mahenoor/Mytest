@@ -17,7 +17,7 @@ class CrudOperations
 	public function deleteRecord($id)
 	{
 		try {
-			$delete_query = "DELETE FROM Student WHERE id=$id"; 
+			$delete_query = "DELETE FROM Student WHERE id='$id'"; 
 	   		$result = $this->conn->query($delete_query);
 	    	if (!$result) {
 	    		throw new Exception();
@@ -96,13 +96,15 @@ class CrudOperations
 	public function viewRecords()
 	{
 		try {
-			$view_query = "SELECT * FROM Student";
-			return $result = $this->conn->query($view_query);
+			//$view_query = "SELECT * FROM Student";
+			$join_query = "SELECT studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage FROM [Student] JOIN studentLeave ON [Student].id = student_id";
+			
+			return $result = $this->conn->query($join_query);
 			if (!$result) {
 			 	throw new Exception();
 		    }
 	    } catch(Exception $e) {
-	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
+	    	echo "Error: " . $join_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
 	public function studentLeave($inputData,$student_id)
