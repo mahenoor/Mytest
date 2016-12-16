@@ -18,7 +18,8 @@ class CrudOperations
 	{
 		try {
 			
-			$delete_query = "DELETE * FROM Student s,studentLeave sl WHERE s.id=sl.student_id"; 
+			$delete_query = "DELETE FROM studentLeave where id={$id}"; 
+			//echo $delete_query;exit;
 	   		$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
 	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();;
@@ -129,9 +130,9 @@ class CrudOperations
 	public function join()
 	{
 		try {
-			$join_query = "SELECT s.id, s.studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage, student_id, startDate, endDate, studentLeave 
-			from Student s
-			JOIN studentLeave sl 
+			$join_query = "SELECT DISTINCT s.id,sl.id as std_leave_id, studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage, student_id, startDate, endDate, studentLeave 
+			from Student s 
+			LEFT JOIN studentLeave sl 
 			ON s.id = sl.student_id";
 			return $result = $this->conn->query($join_query);
 	    } catch(Exception $e) {
