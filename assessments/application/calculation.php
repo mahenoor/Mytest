@@ -12,10 +12,14 @@ class Calculation{
 		$Percentage = array_sum($values) / count($values);
 		return $Percentage;
 	}
-	public function studentLeave($startDate, $endDate)
+	
+	public function studentLeave($startDate, $endDate) 
 	{
-		$studentLeave = $startDate-$endDate;
-		return $studentLeave;
+   		$startDate = strtotime($startDate);
+		$endDate = strtotime($endDate);
+		$dateDiff = $endDate - $startDate;
+		$numDays = floor($dateDiff/(60*60*24)) + 1;
+		return $numDays; 
 	}
 }
 ?>

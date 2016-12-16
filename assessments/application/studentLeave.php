@@ -1,7 +1,7 @@
 <?php
 require 'crudoperations.php';
 require 'validatingLeave.php';
-$studentId = $_GET['id'];
+//$studentId = $_GET['id'];
 if (isset($_POST['submit'])) {
     $crudObj = new CrudOperations();
     $validationObject = new ValidatingLeave();
@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     $errorMessage = $responseOfValidation['message'];
 
     if ($responseOfValidation['status']) {
-        $responseOfValidation = $crudObj->studentLeave($_POST, $studentId);
+        $responseOfValidation = $crudObj->studentLeave($_POST, $_GET['id']);
     }
     if ($responseOfValidation === true) {
         header("Location:index.php");
@@ -65,3 +65,6 @@ if (!empty($errorMessage['endDate'])) {
 </table>
 <input type="submit" name="submit" value="submit" class="button">
 </form></body></html>
+<a href="indexOfLeave.php">view the studentLeave db</a>
+
+
