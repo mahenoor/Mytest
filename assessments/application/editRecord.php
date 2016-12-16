@@ -27,7 +27,6 @@ if ($_POST) {
     }
     if ($responseOfEdit === true ) {
         header('Location:index.php');
-    
     }
 } 
 $Department = $input['Department'];

@@ -8,11 +8,14 @@ $crudObj = new CrudOperations();
 if (!empty($_GET['id'])) {
     $responseOfDelete = $crudObj->deleteRecord($_GET['id']);
 }
-$crudObj = $crudObj->viewRecords();
-if ($crudObj->num_rows > 0) {
+$resultOfView = $crudObj->viewRecords();
+$resultOfJoin = $crudObj->join();
+//echo "<pre>";print_r($resultOfJoin); exit;
+
+if ($resultOfJoin->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
-    <table align="center" width="79%" border="5">
+    <table align="center" width="90%" border="5">
     <tr>
     <th>id</th>
     <th>studentName</th>
@@ -27,9 +30,11 @@ if ($crudObj->num_rows > 0) {
     <th>startDate</th>
     <th>endDate</th>
     <th>studentLeave</th>
+    <th>CRUD</th>
     </tr>
     <?php
-    while ($studentData = $crudObj ->fetch_assoc()) {
+    while ($studentData = $resultOfJoin->fetch_assoc()) {
+        //echo "<pre>";print_r($resultOfJoin); exit;
 ?>
         <tr>
         <td><?php echo $studentData["id"] ?></td>
@@ -56,7 +61,7 @@ if ($crudObj->num_rows > 0) {
     }
 ?>
     </table>
-    <?php
+   <?php
     } else {
     echo "0 results";
 }
@@ -65,4 +70,3 @@ if ($crudObj->num_rows > 0) {
 <a href="CreateStudentRecord.php">Insert a new student record</a>
 </body>
 </html>
-/(60*60*24)

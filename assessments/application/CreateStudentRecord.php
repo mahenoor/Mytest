@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     if ($responseOfValidation) {
         header('Location:index.php');
     }
-}
+}   
 $Department = !empty($Department) ? $Department : '' ;
 $Gender = !empty($Gender) ? $Gender : '' ;
 ?>

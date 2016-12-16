@@ -1,7 +1,6 @@
 <?php
 require 'crudoperations.php';
 require 'validatingLeave.php';
-//$studentId = $_GET['id'];
 if (isset($_POST['submit'])) {
     $crudObj = new CrudOperations();
     $validationObject = new ValidatingLeave();

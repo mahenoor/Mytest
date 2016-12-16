@@ -96,15 +96,15 @@ class CrudOperations
 	public function viewRecords()
 	{
 		try {
-			//$view_query = "SELECT * FROM Student";
-			$join_query = "SELECT studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage FROM [Student] JOIN studentLeave ON [Student].id = student_id";
-			
-			return $result = $this->conn->query($join_query);
+			$view_query = "SELECT * from Student";
+			$join_query = "SELECT studentName,Department,Gender, Roll_no,Physics,Chemistry, Maths,Total, Percentage,student_id,startDate,endDate,studentLeave from Student JOIN studentLeave ON 
+				id = student_id";
+			return $result = $this->conn->query($view_query);
 			if (!$result) {
 			 	throw new Exception();
 		    }
 	    } catch(Exception $e) {
-	    	echo "Error: " . $join_query. "<br>" . mysqli_error($this->conn);
+	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
 	public function studentLeave($inputData,$student_id)
@@ -116,7 +116,7 @@ class CrudOperations
 		$errorMessage = "";
 		try {
 			$insert_query = "INSERT INTO studentLeave(student_id,startDate, endDate, studentLeave) 
-			VALUES($student_id,'$startDate', '$endDate', $studentLeave)";
+			VALUES($student_id, '$startDate', '$endDate', $studentLeave)";
 			if (mysqli_query($this->conn, $insert_query)) {
                 return true;
             } if (!mysqli_query($this->conn, $insert_query)) {
@@ -124,6 +124,18 @@ class CrudOperations
 	    	}
 	    } catch(Exception $e) {
 	    	echo "Error: " . $insert_query. "<br>" . mysqli_error($this->conn);
+	    }
+	}
+	public function join()
+	{
+		try {
+			$join_query = "SELECT s.id, s.studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage, student_id, startDate, endDate, studentLeave 
+			from Student s
+			JOIN studentLeave sl 
+			ON s.id = sl.student_id";
+			return $result = $this->conn->query($join_query);
+	    } catch(Exception $e) {
+	    	echo "Error 1: " . $join_query. "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
 	    }
 	}
 }    
