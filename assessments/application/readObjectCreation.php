@@ -12,6 +12,9 @@ if (!empty($_GET['id'])) {
 	$Maths = $studentData['Maths'];
 	$Total = $studentData['Total'];
 	$Percentage = $studentData['Percentage'];
+	$startDate = $studentData['startDate'];
+	$endDate = $studentData['endDate'];
+	$studentLeave = $studentData['studentLeave'];
 }
 ?>
 <html>
@@ -27,6 +30,9 @@ if (!empty($_GET['id'])) {
 <th>Maths</th>
 <th>Total</th>
 <th>Percentage</th>
+<th>startDate</th>
+<th>endDate</th>
+<th>studentLeave</th>
 </tr>
 <tr>
 <td><?php echo $studentName ?></td>
@@ -38,6 +44,9 @@ if (!empty($_GET['id'])) {
 <td><?php echo $Maths ?></td>
 <td><?php echo $Total ?></td>
 <td><?php echo $Percentage ?></td>
+<td><?php echo $startDate ?></td>
+<td><?php echo $endDate ?></td>
+<td><?php echo $studentLeave ?></td>
 </tr>
 </table>
 </body>

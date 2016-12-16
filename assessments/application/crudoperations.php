@@ -17,13 +17,11 @@ class CrudOperations
 	public function deleteRecord($id)
 	{
 		try {
-			$delete_query = "DELETE FROM Student WHERE id='$id'"; 
+			
+			$delete_query = "DELETE * FROM Student s,studentLeave sl WHERE s.id=sl.student_id"; 
 	   		$result = $this->conn->query($delete_query);
-	    	if (!$result) {
-	    		throw new Exception();
-	    	}
-	    } catch(Exception $e) {
-	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn);
+		} catch(Exception $e) {
+	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();;
 	    }
 	}
 	public function createStudentRecord($inputData)
@@ -83,9 +81,11 @@ class CrudOperations
 	public function readRecord($id)
 	{
 		try {
-			$read_query = "SELECT * FROM Student where id=$id";
+			$read_query = "SELECT * FROM Student s,studentLeave sl where s.id=sl.student_id";
 			$result = $this->conn->query($read_query);
+			//print_r($result);exit();
 			return $studentData = $result->fetch_assoc();
+
 			if (!$studentData) {
 				throw new Exception();
 	    	}
