@@ -1,5 +1,4 @@
 <?php
-
 ?>
 <html>
 <h1 align="center">Student Information</h1>
@@ -62,3 +61,4 @@ if ($index->num_rows > 0) {
     echo "0 results";
 }
 ?>
+<a href="index.php">Back to index page</a>

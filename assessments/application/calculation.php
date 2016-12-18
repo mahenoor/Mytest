@@ -17,8 +17,8 @@ class Calculation{
    		$startDate = strtotime($startDate);
 		$endDate = strtotime($endDate);
 		$dateDiff = $endDate - $startDate;
-		$numDays = floor($dateDiff / (60*60*24)) + 1;
-		return $numDays; 
+		$numOfDays = floor($dateDiff / (60*60*24)) + 1;
+		return $numOfDays; 
 	}
 }
 ?>

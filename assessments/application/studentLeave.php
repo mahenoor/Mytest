@@ -62,7 +62,8 @@ if (!empty($errorMessage['endDate'])) {
 </tr>
 </table>
 <input type="submit" name="submit" value="submit" class="button">
-</form></body></html>
-<a href="indexOfLeave.php">view the studentLeave db</a>
+</form></body>
+<a href="index.php">Go to index page</a>
+</html>
 
 

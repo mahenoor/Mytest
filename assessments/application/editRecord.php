@@ -1,7 +1,6 @@
 <?php
 require 'crudoperations.php';
 require 'validation.php';
-//mysqli_report(MYSQLI_REPORT_STRICT);
 if (!empty($_GET['id'])) {
     $crudObj = new CrudOperations();
     $studentData = $crudObj->readRecord($_GET['id']);

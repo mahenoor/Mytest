@@ -17,8 +17,7 @@ class CrudOperations
 	public function deleteRecord($id)
 	{
 		try {
-			
-			$delete_query = "DELETE FROM studentLeave where id={$id}"; 
+			$delete_query = "DELETE FROM Student where id={$id}"; 
 			//echo $delete_query;exit;
 	   		$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
@@ -82,15 +81,10 @@ class CrudOperations
 	public function readRecord($id)
 	{
 		try {
-			$read_query = "SELECT * FROM Student s,studentLeave sl where s.id=sl.student_id";
+			$read_query = "SELECT * from Student s join studentLeave sl on s.id=sl.student_id";
 			$result = $this->conn->query($read_query);
-			//print_r($result);exit();
 			return $studentData = $result->fetch_assoc();
-
-			if (!$studentData) {
-				throw new Exception();
-	    	}
-	    } catch(Exception $e) {
+		} catch(Exception $e) {
 	    	echo "Error: " . $read_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
@@ -98,13 +92,8 @@ class CrudOperations
 	{
 		try {
 			$view_query = "SELECT * from Student";
-			$join_query = "SELECT studentName,Department,Gender, Roll_no,Physics,Chemistry, Maths,Total, Percentage,student_id,startDate,endDate,studentLeave from Student JOIN studentLeave ON 
-				id = student_id";
 			return $result = $this->conn->query($view_query);
-			if (!$result) {
-			 	throw new Exception();
-		    }
-	    } catch(Exception $e) {
+		} catch(Exception $e) {
 	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
@@ -116,7 +105,7 @@ class CrudOperations
 		$studentLeave = $calculation->studentLeave($inputData['startDate'], $inputData['endDate']);
 		$errorMessage = "";
 		try {
-			$insert_query = "INSERT INTO studentLeave(student_id,startDate, endDate, studentLeave) 
+			$insert_query = "INSERT INTO studentLeave(student_id, startDate, endDate, studentLeave) 
 			VALUES($student_id, '$startDate', '$endDate', $studentLeave)";
 			if (mysqli_query($this->conn, $insert_query)) {
                 return true;
