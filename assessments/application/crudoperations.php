@@ -17,9 +17,8 @@ class CrudOperations
 	public function deleteRecord($id)
 	{
 		try {
-			$delete_query = "DELETE FROM Student where id={$id}"; 
-			//echo $delete_query;exit;
-	   		$result = $this->conn->query($delete_query);
+			$delete_query = "DELETE from Student where id = {$id}"; 
+			$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
 	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
 	    }

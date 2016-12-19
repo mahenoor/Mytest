@@ -143,6 +143,30 @@ if (!empty($errorMessage['Maths'])) {
 ?>
 </td>
 </tr>
+<tr>
+<td><label>Enter the start date:</label></td>
+<td><input type="date" name="startDate" value="<?php if (!empty($_POST['startDate'])) echo $_POST['startDate'] ?>" >
+<?php 
+if (!empty($errorMessage['startDate'])) {
+    echo $errorMessage['startDate'];
+} else {
+    echo '';
+}
+?>
+</td>
+</tr>
+<tr>
+<td><label>Enter the end date:</label></td>
+<td><input type="date" name="endDate" value="<?php if (!empty($_POST['endDate'])) echo $_POST['endDate'] ?>" >
+<?php 
+if (!empty($errorMessage['endDate'])) {
+    echo $errorMessage['endDate'];
+} else {
+    echo '';
+}
+?>
+</td>
+</tr>
 </table>
 <input type="submit" name="update" value="update" class="error">
 </form>
