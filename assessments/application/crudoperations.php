@@ -80,12 +80,24 @@ class CrudOperations
 	public function readRecord($id)
 	{
 		try {
-			$read_query = "SELECT * from Student s  JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
+			$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
+			$result = $this->conn->query($read_query); 
+			$studentData = $result->fetch_assoc();
+        	return $studentData;
+        } catch(Exception $e) {
+	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
+	    }
+	}
+	public function readRecordByRow($id)
+	{
+		try {
+			$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
 			$result = $this->conn->query($read_query); 
 			foreach($result as $value) {
 ?>
 				<table>
 				<tr>
+				<td><?php echo $value['id']; ?></td>
 				<td><?php echo $value['studentName']; ?></td>
 				<td><?php echo $value['Department']; ?></td>
 				<td><?php echo $value['Gender']; ?></td> 
@@ -97,12 +109,9 @@ class CrudOperations
 				<td><?php echo $value['Percentage']; ?></td>
 				<td><?php echo $value['startDate']; ?></td>
 				<td><?php echo $value['endDate']; ?></td>
-				<td><?php echo $value['studentLeave']; ?></td>
-				</tr>
-				</table>
-				<?php
+				<td><?php echo $value['studentLeave']; ?></td></tr></table><?php
 			}
-					} catch(Exception $e) {
+				} catch(Exception $e) {
 	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
 	    }
 	}

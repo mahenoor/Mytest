@@ -2,7 +2,7 @@
 require "crudoperations.php";
 if (!empty($_GET['id'])) {
     $crudObj = new CrudOperations();
-    $studentData = $crudObj->readRecord($_GET['id']);
+    $studentData = $crudObj->readRecordByRow($_GET['id']);
 	$studentName = $studentData['studentName'];
 	$Department = $studentData['Department'];
 	$Gender = $studentData['Gender'];

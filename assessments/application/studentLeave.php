@@ -13,9 +13,27 @@ if (isset($_POST['submit'])) {
         header("Location:index.php");
     }
 }
+/*if(isset($_POST['noOfDays'])) {
+    $crudObj = new CrudOperations();
+    $calculation = new Calculation();
+    $studentLeave = $calculation->studentLeave($inputData['startDate'], $inputData['endDate']);
+}*/
 ?>
 <html>
 <head>
+<script>
+function myFunction(){
+  var dat1 = document.getElementById('form').value;
+                var date1 = new Date(dat1)//converts string to date object
+                alert(date1);
+                var dat2 = document.getElementById('inputFinishDate').value;
+                var date2 = new Date(dat2)
+                alert(date2);
+
+                var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                var diffDays = Math.abs((date1.getTime() - date2.getTime()) / (oneDay));
+                alert(diffDays);</script>
+}
 <h1 align="center">Attendance eligibility to appear for the exam</h1>
 <title>Attendance eligibility to appear for the exam</title>
 <style type = "text/css">
@@ -34,7 +52,7 @@ if (isset($_POST['submit'])) {
 </style>
 </head>
 <body bgcolor="pink">
-<form method="post" action="" >
+<form id="form" method="post" action="" >
 <table>
 <tr>
 <td><label>Enter the start date:</label></td>
@@ -62,6 +80,8 @@ if (!empty($errorMessage['endDate'])) {
 </tr>
 </table>
 <input type="submit" name="submit" value="submit" class="button">
+<input type="submit" name="submit" value="noOfDays" class="button">
+
 </form></body>
 <a href="index.php">Go to index page</a>
 </html>
