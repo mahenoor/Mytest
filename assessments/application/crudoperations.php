@@ -21,7 +21,7 @@ class CrudOperations
 			//echo $delete_query;exit;
 	   		$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
-	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();;
+	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
 	    }
 	}
 	public function createStudentRecord($inputData)
@@ -81,11 +81,11 @@ class CrudOperations
 	public function readRecord($id)
 	{
 		try {
-			$read_query = "SELECT * from Student s join studentLeave sl on s.id=sl.student_id";
+			$read_query = "SELECT * from Student s LEFT OUTER JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
 			$result = $this->conn->query($read_query);
 			return $studentData = $result->fetch_assoc();
 		} catch(Exception $e) {
-	    	echo "Error: " . $read_query. "<br>" . mysqli_error($this->conn);
+	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
 	    }
 	}
 	public function viewRecords()
@@ -116,17 +116,17 @@ class CrudOperations
 	    	echo "Error: " . $insert_query. "<br>" . mysqli_error($this->conn);
 	    }
 	}
-	public function join()
+	public function viewRecordsOfLeaveTable()
 	{
 		try {
-			$join_query = "SELECT DISTINCT s.id,sl.id as std_leave_id, studentName, Department, Gender, Roll_no, Physics, Chemistry, Maths, Total, Percentage, student_id, startDate, endDate, studentLeave 
-			from Student s 
-			LEFT JOIN studentLeave sl 
-			ON s.id = sl.student_id";
-			return $result = $this->conn->query($join_query);
-	    } catch(Exception $e) {
-	    	echo "Error 1: " . $join_query. "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
-	    }
+				$view_query = "SELECT * FROM studentLeave";
+				return $result = $this->conn->query($view_query);
+				if (!$result) {
+				 	throw new Exception();
+			    }
+		} catch(Exception $e) {
+		    echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
+		}
 	}
 }    
 ?>

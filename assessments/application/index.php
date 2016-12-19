@@ -9,8 +9,6 @@ if (!empty($_GET['id'])) {
     $responseOfDelete = $crudObj->deleteRecord($_GET['id']);
 }
 $resultOfView = $crudObj->viewRecords();
-//$resultOfJoin = $crudObj->join();
-//echo "<pre>";print_r($resultOfJoin); exit;
 if ($resultOfView->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
@@ -30,7 +28,6 @@ if ($resultOfView->num_rows > 0) {
     </tr>
     <?php
     while ($studentData = $resultOfView->fetch_assoc()) {
-        //echo "<pre>";print_r($resultOfJoin); exit;
 ?>
         <tr>
         <td><?php echo $studentData["id"] ?></td>
