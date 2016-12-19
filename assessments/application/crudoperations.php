@@ -80,10 +80,29 @@ class CrudOperations
 	public function readRecord($id)
 	{
 		try {
-			$read_query = "SELECT * from Student s LEFT OUTER JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
-			$result = $this->conn->query($read_query);
-			return $studentData = $result->fetch_assoc();
-		} catch(Exception $e) {
+			$read_query = "SELECT * from Student s  JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
+			$result = $this->conn->query($read_query); 
+			foreach($result as $value) {
+?>
+				<table>
+				<tr>
+				<td><?php echo $value['studentName']; ?></td>
+				<td><?php echo $value['Department']; ?></td>
+				<td><?php echo $value['Gender']; ?></td> 
+				<td><?php echo $value['Roll_no']; ?></td>
+				<td><?php echo $value['Physics']; ?></td>
+				<td><?php echo $value['Chemistry']; ?></td>
+				<td><?php echo $value['Maths']; ?></td>
+				<td><?php echo $value['Total']; ?></td>
+				<td><?php echo $value['Percentage']; ?></td>
+				<td><?php echo $value['startDate']; ?></td>
+				<td><?php echo $value['endDate']; ?></td>
+				<td><?php echo $value['studentLeave']; ?></td>
+				</tr>
+				</table>
+				<?php
+			}
+					} catch(Exception $e) {
 	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
 	    }
 	}

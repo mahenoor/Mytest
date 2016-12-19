@@ -1,6 +1,7 @@
 <?php
 require 'crudoperations.php';
 require 'validation.php';
+require 'validatingLeave.php';
 if (!empty($_GET['id'])) {
     $crudObj = new CrudOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
@@ -13,15 +14,20 @@ if (!empty($_GET['id'])) {
     $input['Maths'] = $studentData['Maths'];
     $input['Total'] = $studentData['Total'];
     $input['Percentage'] = $studentData['Percentage'];
+    $input['startDate'] = $studentData['startDate'];
+    $input['endDate'] = $studentData['endDate'];
+    $input['studentLeave'] = $studentData['studentLeave'];
 }
 if ($_POST) {
     $responseOfEdit = "";
     $crudObj = new CrudOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
+    $validationObjectOfLeave = new ValidatingLeave();
+    $responseOfValidationOfLeave = $validationObjectOfLeave->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
-    
-    if ($responseOfValidation['status']) {
+    $errorMessage = $responseOfValidationOfLeave['message'];
+    if ($responseOfValidation['status'] && $responseOfValidationOfLeave['status']) {
         $responseOfEdit = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }
     if ($responseOfEdit === true ) {
@@ -145,7 +151,7 @@ if (!empty($errorMessage['Maths'])) {
 </tr>
 <tr>
 <td><label>Enter the start date:</label></td>
-<td><input type="date" name="startDate" value="<?php if (!empty($_POST['startDate'])) echo $_POST['startDate'] ?>" >
+<td><input type="date" name="startDate" value="<?php echo $input['startDate'] ?>" >
 <?php 
 if (!empty($errorMessage['startDate'])) {
     echo $errorMessage['startDate'];
@@ -157,7 +163,7 @@ if (!empty($errorMessage['startDate'])) {
 </tr>
 <tr>
 <td><label>Enter the end date:</label></td>
-<td><input type="date" name="endDate" value="<?php if (!empty($_POST['endDate'])) echo $_POST['endDate'] ?>" >
+<td><input type="date" name="endDate" value="<?php echo $input['endDate'] ?>" >
 <?php 
 if (!empty($errorMessage['endDate'])) {
     echo $errorMessage['endDate'];
