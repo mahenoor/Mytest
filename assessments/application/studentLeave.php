@@ -1,64 +1,38 @@
 <html>
 <head>
-<script>
-function startDate()
-{
-    if(startDate == "" || !isNaN(startDate) {
-        return false;
-    } else {
-        return true;
-    }
-}
-function endDate()
-{
-    if(endDate == "" || !isNaN(endDate) {
-        return false;
-    } else {
-        return true;
-    }
-}
-function validate()
+<script type="text/javascript">
+function days()
 {
     var form = document.forms['form'];
     var startDate = form.startDate.value;
     var endDate = form.endDate.value;
-    var value = true;
-    if(!startDate($startDate)) {
-        var startDateError = document.getElementById('startDateError').innerHTML = "plz enter the date in proper format";
-        value = false;
-    }
-    if(!endDate($startDate)) {
-        var endDateError = document.getElementById('endDateError').innerHTML = "plz enter the date in proper format";
-        value = false;
-    }
-    if (value === true) {
-        alert("Success..! You did it.");
-    } else {
-        alert("Error..! Enter the details again.");
-    }
+    var startDate = new Date(startDate);
+    var endDate = new Date(endDate);
+    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24) + 1);
+    document.getElementById('leave').value = diffDays; 
 }
 </script>
-<h1 align="center">Attendance eligibility to appear for the exam</h1>
-<title>Attendance eligibility to appear for the exam</title>
-<style type = "text/css">
-.button 
-{
-    text-align : center;
-    color : purple;
-    background : red;
-    padding : 2px;
-}
-.error
-{
-    color : red;
-    font : bold;
-}
-</style>
+<h2 align="center">Apply for leave</h2>
 </head>
 <body bgcolor="pink">
-<form name="form" id="form" method="post" action="" >
-Start Date: <input type="text" name="startDate" size="25"><span id="startDateError"></span><br/>
-End Date: <input type="text" name="endDate" size="25"><span id="endDateError"></span>
-<p align="center"><input type="submit" name="submit" value="Submit"></p>
-</form></body></html>
-
+<form method="post" name="form" id="form" action="">
+<table border=3 width=40%>
+<tr>
+<th>Enter the Start date of leave</th>
+<td><input type="text" name="startDate"/>
+</td>
+</tr>
+<tr>
+<th>Enter the End date of leave</th>
+<td><input type="text" name="endDate" onblur="days()" />
+</td>
+</tr>
+<th>Numbers of days the student will be on leave</th>
+<td><input type="text" id="leave"/>
+</td>
+</table>
+</form>
+</body>
+<a href="index.php">Go to index page</a>
+</html>

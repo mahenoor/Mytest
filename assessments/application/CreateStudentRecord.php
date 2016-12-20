@@ -138,6 +138,7 @@ if (!empty($errorMessage['Maths'])) {
 </tr>
 </table>
 <input type="submit" name="submit" value="submit" class="button" />
-<a href="index.php">Go to index page</a></form>
+<a href="index.php">Go to index page</a>
+</form>
 </body>
 </html>
