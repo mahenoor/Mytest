@@ -1,5 +1,6 @@
 <?php
-class Calculation{
+class Calculation
+{
 	public function Total($Physics, $Chemistry, $Maths) 
 	{
 		$values = array($Physics, $Chemistry, $Maths);

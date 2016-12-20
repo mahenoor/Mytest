@@ -93,11 +93,26 @@ class CrudOperations
 		try {
 			$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
 			$result = $this->conn->query($read_query); 
+?>	
+			<h3 align="center">Student Record Table</h3>
+			<table width=80% border=5>
+			<tr>
+			<th>id</th>
+			<th>StudentName</th>
+			<th>Department</th>
+			<th>Gender</th>
+			<th>Roll_no</th>
+			<th>Physics</th>
+			<th>Chemistry</th>
+			<th>Maths</th>
+			<th>Total</th>
+			<th>Percentage</th>
+			</tr>
+<?php
 			foreach($result as $value) {
 ?>
-				<table>
 				<tr>
-				<td><?php echo $value['id']; ?></td>
+				<td><?php echo $value['student_id']; ?></td>
 				<td><?php echo $value['studentName']; ?></td>
 				<td><?php echo $value['Department']; ?></td>
 				<td><?php echo $value['Gender']; ?></td> 
@@ -107,11 +122,35 @@ class CrudOperations
 				<td><?php echo $value['Maths']; ?></td>
 				<td><?php echo $value['Total']; ?></td>
 				<td><?php echo $value['Percentage']; ?></td>
-				<td><?php echo $value['startDate']; ?></td>
-				<td><?php echo $value['endDate']; ?></td>
-				<td><?php echo $value['studentLeave']; ?></td></tr></table><?php
-			}
-				} catch(Exception $e) {
+				</tr>
+<?php       
+			} 
+?>
+				</table>
+				<table width=80% border=5>
+				<h3 align="center" color="red">Student Leave Table </h3>
+				<tr>
+				<th>id</th>
+				<th>student_id</th>
+				<th>startDate</th>
+				<th>endDate</th>
+				<th>studentLeave</th>
+				</tr>
+<?php 
+				foreach($result as $value) {
+?>
+					<tr>
+					<td><?php echo $value['id']; ?></td>
+				 	<td><?php echo $value['student_id']; ?></td>
+					<td><?php echo $value['startDate']; ?></td>
+					<td><?php echo $value['endDate']; ?></td>
+					<td><?php echo $value['studentLeave']; ?></td>
+					</tr>
+<?php           } 
+?>   
+                </table>
+<?php
+			} catch(Exception $e) {
 	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
 	    }
 	}
