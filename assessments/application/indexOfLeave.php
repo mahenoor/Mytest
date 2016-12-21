@@ -20,7 +20,6 @@ if ($resultOfLeaveTable->num_rows > 0) {
     <?php
     while ($studentData = $resultOfLeaveTable ->fetch_assoc()) {
 ?>  
-
         <tr>
         <td><?php echo $studentData["id"] ?></td>
         <td><?php echo $studentData["student_id"] ?></td>
