@@ -31,7 +31,8 @@ if (!empty($_GET['id'])) {
 <th>Maths</th>
 <th>Total</th>
 <th>Percentage</th>
-</tr><tr>
+</tr>
+<tr>
 <td><?php echo $studentName ?></td>
 <td><?php echo $Department ?></td>
 <td><?php echo $Gender ?></td>
@@ -43,6 +44,25 @@ if (!empty($_GET['id'])) {
 <td><?php echo $Percentage ?></td>
 </tr>
 </table>
+<h3 align=center>Student Leave table</h3>
+<table width=80% border=3>
+<tr>
+<th>Start Date</th>
+<th>End Date</th>
+<th>Student Leave</th>
+</tr>
+<?php
+foreach ($studentLeaveData as $value) {
+?>
+	<tr>
+	<td><?php echo $value['startDate'] ?></td>
+	<td><?php echo $value['endDate'] ?></td>
+	<td><?php echo $value['studentLeave'] ?></td>
+	</tr>
+<?php
+}
+?>
+</table>
 </body>
-</html>
 <a href="index.php">Go to index page</a>
+</html>

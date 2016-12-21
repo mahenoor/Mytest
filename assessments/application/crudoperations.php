@@ -122,28 +122,8 @@ class CrudOperations
 		try {
 				$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
 				$resultOfReadRecordOfIndividualStudent = $this->conn->query($read_query); 
-?>	
-				<table width=80% border=5>
-				<h3 align="center" color="red">Student Leave Table </h3>
-				<tr>
-				<th>startDate</th>
-				<th>endDate</th>
-				<th>studentLeave</th>
-				</tr>
-<?php 
-				foreach($resultOfReadRecordOfIndividualStudent as $value) {
-?>
-					<tr>
-					<td><?php echo $value['startDate']; ?></td>
-					<td><?php echo $value['endDate']; ?></td>
-					<td><?php echo $value['studentLeave']; ?></td>
-					</tr>
-<?php          
-				} 
-?>   
-                </table>
-<?php
-			} catch(Exception $e) {
+				return $resultOfReadRecordOfIndividualStudent;
+		} catch(Exception $e) {
 	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
 	    }
 	}
