@@ -2,7 +2,7 @@
 require "crudoperations.php";
 if (!empty($_GET['id'])) {
     $crudObj = new CrudOperations();
-    $studentData = $crudObj->readRecordOfIndividualStudent($_GET['id']);
+    $studentData = $crudObj->readRecord($_GET['id']);
 	$studentName = $studentData['studentName'];
 	$Department = $studentData['Department'];
 	$Gender = $studentData['Gender'];
@@ -12,15 +12,26 @@ if (!empty($_GET['id'])) {
 	$Maths = $studentData['Maths'];
 	$Total = $studentData['Total'];
 	$Percentage = $studentData['Percentage'];
-	$startDate = $studentData['startDate'];
-	$endDate = $studentData['endDate'];
-	$studentLeave = $studentData['studentLeave'];
+	$studentLeaveData = $crudObj->readRecordOfStudentLeaveOfIndividualStudent($_GET['id']);
 }
 ?>
 <html>
+<head>
+<h3 align=center>Student Record</h1>
+</head>
 <body bgcolor = "sky blue">
-<table>
+<table width=80% border=3>
 <tr>
+<th>Student Name</th>
+<th>Department</th>
+<th>Gender</th>
+<th>Roll_no</th>
+<th>Physics</th>
+<th>Chemistry</th>
+<th>Maths</th>
+<th>Total</th>
+<th>Percentage</th>
+</tr><tr>
 <td><?php echo $studentName ?></td>
 <td><?php echo $Department ?></td>
 <td><?php echo $Gender ?></td>
@@ -30,9 +41,6 @@ if (!empty($_GET['id'])) {
 <td><?php echo $Maths ?></td>
 <td><?php echo $Total ?></td>
 <td><?php echo $Percentage ?></td>
-<td><?php echo $startDate ?></td>
-<td><?php echo $endDate ?></td>
-<td><?php echo $studentLeave ?></td>
 </tr>
 </table>
 </body>
