@@ -26,6 +26,8 @@ if ($resultOfLeaveTable->num_rows > 0) {
         <td><?php echo $studentData["startDate"] ?></td>
         <td><?php echo $studentData["endDate"] ?></td>
         <td><?php echo $studentData["studentLeave"] ?></td>
+        <td width=250>
+        <a href="editOfStudentLeave.php?id=<?php echo $studentData['id'] ?>">Edit</a>
         </tr>
        <?php
     }

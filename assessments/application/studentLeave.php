@@ -30,9 +30,9 @@ function days()
     var form = document.forms['form'];
     var startDate = form.startDate.value;
     var endDate = form.endDate.value;
-    var firstDate = new Date(startDate);
-    var lastDate = new Date(endDate);
-    var timeDiff = Math.abs(lastDate.getTime() - firstDate.getTime());
+    var startDate = new Date(startDate);
+    var endDate = new Date(endDate);
+    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24) + 1);
     document.getElementById('leave').value = diffDays; 
 }

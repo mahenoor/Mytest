@@ -1,7 +1,6 @@
 <?php
 require 'crudoperations.php';
 require 'validation.php';
-require 'validatingLeave.php';
 if (!empty($_GET['id'])) {
     $crudObj = new CrudOperations();
     $studentData = $crudObj->readRecord($_GET['id']);
@@ -27,7 +26,7 @@ if ($_POST) {
     $responseOfValidationOfLeave = $validationObjectOfLeave->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
     $errorMessage = $responseOfValidationOfLeave['message'];
-    if ($responseOfValidation['status'] && $responseOfValidationOfLeave['status']) {
+    if ($responseOfValidation['status'] === true) {
         $responseOfEdit = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }
     if ($responseOfEdit === true ) {
@@ -42,7 +41,7 @@ $Gender = $input['Gender'];
 <h1 align="center">Update Information</h1>
 <title>Student Information</title>
 <style>
-.error
+.button
 {
     color :yellow;
     background : red;
@@ -149,32 +148,8 @@ if (!empty($errorMessage['Maths'])) {
 ?>
 </td>
 </tr>
-<tr>
-<td><label>Enter the start date:</label></td>
-<td><input type="date" name="startDate" value="<?php echo $input['startDate'] ?>" >
-<?php 
-if (!empty($errorMessage['startDate'])) {
-    echo $errorMessage['startDate'];
-} else {
-    echo '';
-}
-?>
-</td>
-</tr>
-<tr>
-<td><label>Enter the end date:</label></td>
-<td><input type="date" name="endDate" value="<?php echo $input['endDate'] ?>" >
-<?php 
-if (!empty($errorMessage['endDate'])) {
-    echo $errorMessage['endDate'];
-} else {
-    echo '';
-}
-?>
-</td>
-</tr>
 </table>
-<input type="submit" name="update" value="update" class="error">
+<input type="submit" name="update" value="update" class="button">
 </form>
 </body>
 <a href="index.php">Go to index page</a>
