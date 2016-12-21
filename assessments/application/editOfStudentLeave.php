@@ -1,25 +1,36 @@
 <?php
 require 'crudoperations.php';
 if (!empty($_GET['id'])) {
-	//print_r($_GET['id']);
 	$crudObj = new CrudOperations();
-	$studentData = $crudObj->readRecord($_GET['id']);
-	print_r($studentData);exit;
-    $input['startDate'] = $studentData['startDate'];
+	$studentData = $crudObj->studentLeaveRecordToBeEdited($_GET['id']);
+	$input['startDate'] = $studentData['startDate'];
     $input['endDate'] = $studentData['endDate'];
     $input['studentLeave'] = $studentData['studentLeave'];
 }		
-if ($_POST) {
-	$crudObj = new CrudOperations();
-    $responseOfStudentLeave = $crudObj-> editStudentLeaveRecord($_POST, $_GET['id']);
-    if ($responseOfStudentLeave === true) {
-        header('Location:index.php');
+if (isset($_POST['submit'])) {
+	$responseOfStudentLeave = $crudObj-> editStudentLeaveRecord($_POST, $_GET['id']);
+	if ($responseOfStudentLeave === true) {
+        header('Location:indexOfLeave.php');
     }
 }
 ?>
 <html>
 <head>
-<h1 align="center">Update Information</h1>
+<script>
+function days()
+{
+    var form = document.forms['form'];
+    var startDate = form.startDate.value;
+    var endDate = form.endDate.value;
+    var firstDate = new Date(startDate);
+    var lastDate = new Date(endDate);
+    var timeDiff = Math.abs(lastDate.getTime() - firstDate.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24) + 1);
+    document.getElementById('leave').value = diffDays; 
+}
+</script>
+</head>
+<h1 align="center">Update Student Leave Information</h1>
 <title>Student Information</title>
 <style>
 .button
@@ -39,7 +50,7 @@ if ($_POST) {
 </tr>
 <tr>
 <th>Enter the End date of leave</th>
-<td><input type="text" name="endDate" value="<?php echo $input['endDate']; ?>" />
+<td><input type="text" name="endDate" onblur="days()" value="<?php echo $input['endDate']; ?>" />
 </td>
 </tr>
 <th>Numbers of days the student will be on leave</th>

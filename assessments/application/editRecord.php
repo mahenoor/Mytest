@@ -13,19 +13,13 @@ if (!empty($_GET['id'])) {
     $input['Maths'] = $studentData['Maths'];
     $input['Total'] = $studentData['Total'];
     $input['Percentage'] = $studentData['Percentage'];
-    $input['startDate'] = $studentData['startDate'];
-    $input['endDate'] = $studentData['endDate'];
-    $input['studentLeave'] = $studentData['studentLeave'];
 }
-if ($_POST) {
+if (isset($_POST['submit'])) {
     $responseOfEdit = "";
     $crudObj = new CrudOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
-    $validationObjectOfLeave = new ValidatingLeave();
-    $responseOfValidationOfLeave = $validationObjectOfLeave->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
-    $errorMessage = $responseOfValidationOfLeave['message'];
     if ($responseOfValidation['status'] === true) {
         $responseOfEdit = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }

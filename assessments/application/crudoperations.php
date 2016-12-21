@@ -82,21 +82,9 @@ class CrudOperations
 		$startDate = $inputData['startDate'];
 		$endDate = $inputData['endDate'];
 		$studentLeave = $inputData['studentLeave'];
-?>
-		<script>
-	    var form = document.forms['form'];
-	    var startDate = form.startDate.value;
-	    var endDate = form.endDate.value;
-	    var firstDate = new Date(startDate);
-	    var lastDate = new Date(endDate);
-	    var timeDiff = Math.abs(lastDate.getTime() - firstDate.getTime());
-	    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24) + 1);
-    	document.getElementById('leave').value = diffDays; 
-    	</script>
-<?php
 		try {
 				$update_query = "UPDATE studentLeave SET startDate = '$startDate', endDate = 
-				'$endDate', studentLeave = '$studentLeave'  WHERE id = '$id'"; 
+				'$endDate', studentLeave = '$studentLeave' WHERE id = $id"; 
 				if (mysqli_query($this->conn, $update_query)) {
 	                return true;
 	        	}
@@ -110,7 +98,8 @@ class CrudOperations
 	public function readRecord($id)
 	{
 		try {
-				$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
+				$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id 
+				where s.id = {$id}";
 				$result = $this->conn->query($read_query); 
 				$studentData = $result->fetch_assoc();
 	        	return $studentData;
@@ -118,7 +107,18 @@ class CrudOperations
 	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
 	    }
 	}
-	public function readRecordByRow($id)
+	public function studentLeaveRecordToBeEdited($id)
+	{
+		try {
+				$read_query = "SELECT * from studentLeave sl where sl.id = {$id}";
+				$result = $this->conn->query($read_query); 
+				$studentData = $result->fetch_assoc();
+	        	return $studentData;
+			} catch(Exception $e) {
+	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
+	    }
+	}
+	public function readRecordOfIndividualStudent($id)
 	{
 		try {
 			$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
