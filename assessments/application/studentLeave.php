@@ -1,14 +1,38 @@
+<?php
+require 'crudoperations.php';
+if (isset($_POST['submit'])) {
+    $crudObj = new CrudOperations();
+    $responseOfStudentLeave = $crudObj->studentLeave($_POST,$_GET['id']);
+    if ($responseOfStudentLeave === true) {
+        header('Location:index.php');
+    }
+}
+?>  
 <html>
 <head>
+<style type = "text/css">
+.button 
+{
+    text-align : center;
+    color : purple;
+    background : red;
+    padding : 2px;
+}
+.error
+{
+    color : red;
+    font : bold;
+}
+</style>
 <script type="text/javascript">
 function days()
 {
     var form = document.forms['form'];
     var startDate = form.startDate.value;
     var endDate = form.endDate.value;
-    var startDate = new Date(startDate);
-    var endDate = new Date(endDate);
-    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+    var firstDate = new Date(startDate);
+    var lastDate = new Date(endDate);
+    var timeDiff = Math.abs(lastDate.getTime() - firstDate.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24) + 1);
     document.getElementById('leave').value = diffDays; 
 }
@@ -29,10 +53,10 @@ function days()
 </td>
 </tr>
 <th>Numbers of days the student will be on leave</th>
-<td><input type="text" id="leave"/>
+<td><input type="text" name="studentLeave" id="leave"/>
 </td>
 </table>
-</form>
+<input type="submit" name="submit" value="submit" class="button"></form>
 </body>
 <a href="index.php">Go to index page</a>
 </html>

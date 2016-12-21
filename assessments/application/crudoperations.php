@@ -14,10 +14,10 @@ class CrudOperations
 		    die("Unable to connect database" .mysqli_error($this->conn));
 		}
 	}
-	public function deleteRecord($id)
+	public function deleteRecord($student_id)
 	{
 		try {
-			$delete_query = "DELETE from Student where id = {$id}"; 
+			$delete_query = "DELETE from studentLeave where student_id = {$student_id}";
 			$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
 	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
@@ -97,7 +97,6 @@ class CrudOperations
 			<h3 align="center">Student Record Table</h3>
 			<table width=80% border=5>
 			<tr>
-			<th>id</th>
 			<th>StudentName</th>
 			<th>Department</th>
 			<th>Gender</th>
@@ -112,7 +111,6 @@ class CrudOperations
 			foreach($result as $value) {
 ?>
 				<tr>
-				<td><?php echo $value['student_id']; ?></td>
 				<td><?php echo $value['studentName']; ?></td>
 				<td><?php echo $value['Department']; ?></td>
 				<td><?php echo $value['Gender']; ?></td> 
@@ -167,8 +165,7 @@ class CrudOperations
 	{
 		$startDate = $inputData['startDate'];
 		$endDate = $inputData['endDate'];
-		$calculation = new Calculation();
-		$studentLeave = $calculation->studentLeave($inputData['startDate'], $inputData['endDate']);
+		$studentLeave = $inputData['studentLeave'];
 		$errorMessage = "";
 		try {
 			$insert_query = "INSERT INTO studentLeave(student_id, startDate, endDate, studentLeave) 

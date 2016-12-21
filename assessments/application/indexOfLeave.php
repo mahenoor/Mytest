@@ -19,14 +19,15 @@ if ($resultOfLeaveTable->num_rows > 0) {
     </tr>
     <?php
     while ($studentData = $resultOfLeaveTable ->fetch_assoc()) {
-?>
+?>  
+
         <tr>
         <td><?php echo $studentData["id"] ?></td>
         <td><?php echo $studentData["student_id"] ?></td>
         <td><?php echo $studentData["startDate"] ?></td>
         <td><?php echo $studentData["endDate"] ?></td>
         <td><?php echo $studentData["studentLeave"] ?></td>
-       </tr> 
+        </tr>
        <?php
     }
 ?>
@@ -37,3 +38,5 @@ if ($resultOfLeaveTable->num_rows > 0) {
 }
 ?>
 <a href="index.php">Back to index page</a>
+</body>
+</html>
