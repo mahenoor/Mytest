@@ -66,8 +66,8 @@ class CrudOperations
 		try {
 				$update_query = "UPDATE Student SET studentName = '$studentName', Department = '$Department', 
 	            Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
-	            '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = '$id'"; 
-	          	if (mysqli_query($this->conn, $update_query)) {
+	            '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = {$id}"; 
+				if (mysqli_query($this->conn, $update_query)) {
 	                return true;
 	        	}
 	        	if (!mysqli_query($this->conn, $update_query)) {
@@ -98,7 +98,7 @@ class CrudOperations
 	public function readRecord($id)
 	{
 		try {
-				$read_query = "SELECT * from Student s where s.id=$id";
+				$read_query = "SELECT * from Student s where s.id={$id}";
 				$result = $this->conn->query($read_query); 
 				$studentData = $result->fetch_assoc();
 	        	return $studentData;

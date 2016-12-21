@@ -17,7 +17,7 @@ if (!empty($_GET['id'])) {
 ?>
 <html>
 <head>
-<h3 align=center>Student Record</h1>
+<h3 align=center>Student Details</h1>
 </head>
 <body bgcolor = "sky blue">
 <table width=80% border=3>
@@ -52,12 +52,12 @@ if (!empty($_GET['id'])) {
 <th>Student Leave</th>
 </tr>
 <?php
-foreach ($studentLeaveData as $value) {
+foreach ($studentLeaveData as $studentLeaveRecords) {
 ?>
 	<tr>
-	<td><?php echo $value['startDate'] ?></td>
-	<td><?php echo $value['endDate'] ?></td>
-	<td><?php echo $value['studentLeave'] ?></td>
+	<td><?php echo $studentLeaveRecords['startDate'] ?></td>
+	<td><?php echo $studentLeaveRecords['endDate'] ?></td>
+	<td><?php echo $studentLeaveRecords['studentLeave'] ?></td>
 	</tr>
 <?php
 }
