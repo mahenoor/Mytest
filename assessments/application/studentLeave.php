@@ -46,25 +46,11 @@ function days()
 <tr>
 <th>Enter the Start date of leave</th>
 <td><input type="text" name="startDate"/>
-<?php 
-if (!empty($errorMessage['startDate'])) {
-    echo $errorMessage['startDate'];
-} else {
-    echo '';
-}
-?>
 </td>
 </tr>
 <tr>
 <th>Enter the End date of leave</th>
 <td><input type="text" name="endDate" onblur="days()" /> 
-<?php 
-if (!empty($errorMessage['endDate'])) {
-    echo $errorMessage['endDate'];
-} else {
-    echo '';
-}
-?>
 </td>
 </tr>
 <th>Numbers of days the student will be on leave</th>
