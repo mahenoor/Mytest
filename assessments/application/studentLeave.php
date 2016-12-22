@@ -1,9 +1,8 @@
 <?php
 require 'crudoperations.php';
-require 'validatingLeave.php';
 if (isset($_POST['submit'])) {
     $crudObj = new CrudOperations();
-    $responseOfStudentLeave = $crudObj->studentLeave($_POST,$_GET['id']);
+    $responseOfStudentLeave = $crudObj->studentLeave($_POST, $_GET['id']);
     if ($responseOfStudentLeave === true) {
         header('Location:index.php');
     }
@@ -26,11 +25,43 @@ if (isset($_POST['submit'])) {
 }
 </style>
 <script type="text/javascript">
+function startDate(startDate)
+{
+    if (empty(startDate)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+function endDate(endDate)
+{
+    if (empty(endDate)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+function validate()
+{
+    var startDate = document.getElementById('startDate').value;
+    var endDate = document.getElementById('endDate').value;
+    var value = true;
+    if (startDate == '') {
+        var startDateError = document.getElementById('startDateError').innerHTML = "plz enter date";
+        value = false;
+    } 
+    if (endDate == '') {
+        var endDateError = document.getElementById('endDateError').innerHTML = "plz enter date";
+        value = false;
+    }
+    if(value) {
+    document.getElementById('form').submit(); }
+}
 function days()
 {
     var form = document.forms['form'];
     var startDate = form.startDate.value;
-    var endDate = form.endDate.value;
+    var endDate = form.endDate.value; 
     var firstDate = new Date(startDate);
     var lastDate = new Date(endDate);
     var timeDiff = Math.abs(lastDate.getTime() - firstDate.getTime());
@@ -42,22 +73,25 @@ function days()
 </head>
 <body bgcolor="pink">
 <form method="post" name="form" id="form" action="">
-<table border=3 width=40%>
+<table border=3 width=60%>
 <tr>
 <th>Enter the Start date of leave</th>
-<td><input type="text" name="startDate"/>
+<td>
+<input type="text" id="startDate" name="startDate"/><p id="startDateError"></p>
 </td>
 </tr>
 <tr>
 <th>Enter the End date of leave</th>
-<td><input type="text" name="endDate" onblur="days()" /> 
+<td>
+<input type="text" id="endDate" name="endDate" onblur="days()" /><p id="endDateError"></p>
 </td>
 </tr>
 <th>Numbers of days the student will be on leave</th>
-<td><input type="text" name="studentLeave" id="leave"/>
+<td>
+<input type="text" name="studentLeave" id="leave"/>
 </td>
 </table>
-<input type="submit" name="submit" value="submit" class="button"></form>
+<input type="button" name="submit" value="submit" onClick="return validate()" class="button"></form>
 </body>
 <a href="index.php">Go to index page</a>
 </html>
