@@ -2,7 +2,7 @@
 require 'crudoperations.php';
 if (!empty($_GET['id'])) {
 	$crudObj = new CrudOperations();
-	$studentData = $crudObj->studentLeaveRecordToBeEdited($_GET['id']);
+	$studentData = $crudObj->readStudentLeaveRecord($_GET['id']);
 	$input['startDate'] = $studentData['startDate'];
     $input['endDate'] = $studentData['endDate'];
     $input['studentLeave'] = $studentData['studentLeave'];

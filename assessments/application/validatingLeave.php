@@ -5,12 +5,14 @@ class ValidatingLeave
 	{
         $resultOfValidation = true;
         $errorMessageArray = array();
-        if (empty($studentRecord['startDate']) || !preg_match("/^(20|16)\d\d[\-\/.](0[1-9]|1[012])[\-\/.](0[1-9]|[12][0-9]|3[01])$/",$studentRecord['startDate'])) {
+        if (empty($studentRecord['startDate']) || !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-
+            (0[1-9]|[1-2][0-9]|3[0-1])$/",$studentRecord['startDate'])) {
             $startDateError = "***please enter start date";
             $errorMessageArray['startDate'] = $startDateError; 
             $resultOfValidation = false;
         }
-        if (empty($studentRecord['endDate']) || !preg_match("/^(20|16)\d\d[\-\/.](0[1-9]|1[012])[\-\/.](0[1-9]|[12][0-9]|3[01])$/",$studentRecord['endDate'])) {
+        if (empty($studentRecord['endDate']) || !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-
+            (0[1-9]|[1-2][0-9]|3[0-1])$/",$studentRecord['endDate'])) {
             $endDateError = "***please enter end date";
             $errorMessageArray['endDate'] = $endDateError; 
             $resultOfValidation = false;

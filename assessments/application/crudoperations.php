@@ -14,10 +14,10 @@ class CrudOperations
 		    die("Unable to connect database" .mysqli_error($this->conn));
 		}
 	}
-	public function deleteRecord($student_id)
+	public function deleteRecord($id)
 	{
 		try {
-				$delete_query = "DELETE from studentLeave where student_id = {$student_id}";
+				$delete_query = "DELETE from Student where id = {$id}";
 				$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
 	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
@@ -112,10 +112,10 @@ class CrudOperations
 				$studentData = $result->fetch_assoc();
 	        	return $studentData;
         } catch(Exception $e) {
-	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
+	    	echo "Error: " . $read_query.  "<br>" . mysqli_error($this->conn);
 	    }
 	}
-	public function studentLeaveRecordToBeEdited($id)
+	public function readStudentLeaveRecord($id)
 	{
 		try {
 				$read_query = "SELECT * from studentLeave sl where sl.id = {$id}";
@@ -123,17 +123,17 @@ class CrudOperations
 				$studentData = $result->fetch_assoc();
 	        	return $studentData;
 			} catch(Exception $e) {
-	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
+	    	echo "Error: " . $read_query.  "<br>" . mysqli_error($this->conn);
 	    }
 	}
-	public function readRecordOfStudentLeaveOfIndividualStudent($id)
+	public function readRecordOfIndividualStudent($id)
 	{
 		try {
 				$read_query = "SELECT * from Student s left outer JOIN studentLeave sl on s.id = sl.student_id where s.id = {$id}";
 				$resultOfReadRecordOfIndividualStudent = $this->conn->query($read_query); 
 				return $resultOfReadRecordOfIndividualStudent;
 		} catch(Exception $e) {
-	    	echo "Error: " . $read_query.  "<br>" . $e->getMessage();
+	    	echo "Error: " . $read_query.  "<br>" . mysqli_error($this->conn);
 	    }
 	}
 	public function viewRecords()

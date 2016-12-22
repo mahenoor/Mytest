@@ -12,7 +12,7 @@ if (!empty($_GET['id'])) {
 	$Maths = $studentData['Maths'];
 	$Total = $studentData['Total'];
 	$Percentage = $studentData['Percentage'];
-	$studentLeaveData = $crudObj->readRecordOfStudentLeaveOfIndividualStudent($_GET['id']);
+	$studentLeaveData = $crudObj->readRecordOfIndividualStudent($_GET['id']);
 }
 ?>
 <html>

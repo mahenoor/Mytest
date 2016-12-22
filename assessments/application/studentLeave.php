@@ -1,8 +1,15 @@
 <?php
 require 'crudoperations.php';
+require 'validatingLeave.php';
 if (isset($_POST['submit'])) {
     $crudObj = new CrudOperations();
-    $responseOfStudentLeave = $crudObj->studentLeave($_POST,$_GET['id']);
+    $validationObject = new ValidatingLeave();
+    $responseOfValidation = $validationObject->validate($_POST);
+    $errorMessage = $responseOfValidation['message'];
+    $responseOfStudentLeave = "";
+    if ($responseOfValidation['status']) {
+        $responseOfStudentLeave = $crudObj->studentLeave($_POST,$_GET['id']);
+    }
     if ($responseOfStudentLeave === true) {
         header('Location:index.php');
     }
@@ -45,11 +52,25 @@ function days()
 <tr>
 <th>Enter the Start date of leave</th>
 <td><input type="text" name="startDate"/>
+<?php 
+if (!empty($errorMessage['startDate'])) {
+    echo $errorMessage['startDate'];
+} else {
+    echo '';
+}
+?>
 </td>
 </tr>
 <tr>
 <th>Enter the End date of leave</th>
-<td><input type="text" name="endDate" onblur="days()" />
+<td><input type="text" name="endDate" onblur="days()" /> 
+<?php 
+if (!empty($errorMessage['endDate'])) {
+    echo $errorMessage['endDate'];
+} else {
+    echo '';
+}
+?>
 </td>
 </tr>
 <th>Numbers of days the student will be on leave</th>
