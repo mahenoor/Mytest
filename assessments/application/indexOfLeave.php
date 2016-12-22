@@ -6,7 +6,7 @@ require 'crudoperations.php';
 <?php
 $crudObj = new CrudOperations();
 if (!empty($_GET['student_id'])) {
-    $resultOfDeleteOfStudentLeave = $crudObj->deleteRecordOfStudentLeave($_GET['student_id']);
+    $responseOfDelete = $crudObj->deleteRecordOfStudentLeave($_GET['student_id']);
 }
 $resultOfLeaveTable = $crudObj->viewRecordsOfLeaveTable();
 if ($resultOfLeaveTable->num_rows > 0) {

@@ -3,13 +3,7 @@ require 'crudoperations.php';
 require 'validatingLeave.php';
 if (isset($_POST['submit'])) {
     $crudObj = new CrudOperations();
-    $validationObject = new ValidatingLeave();
-    $responseOfValidation = $validationObject->validate($_POST);
-    $errorMessage = $responseOfValidation['message'];
-    $responseOfStudentLeave = "";
-    if ($responseOfValidation['status']) {
-        $responseOfStudentLeave = $crudObj->studentLeave($_POST,$_GET['id']);
-    }
+    $responseOfStudentLeave = $crudObj->studentLeave($_POST,$_GET['id']);
     if ($responseOfStudentLeave === true) {
         header('Location:index.php');
     }

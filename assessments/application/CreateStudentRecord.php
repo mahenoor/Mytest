@@ -5,6 +5,7 @@ if (isset($_POST['submit'])) {
     $crudObj = new CrudOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
+    $responseOfInsert = "";
     $errorMessage = $responseOfValidation['message'];
     if ($responseOfValidation['status']) {
             $responseOfInsert = $crudObj->createStudentRecord($_POST);
