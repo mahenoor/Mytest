@@ -5,6 +5,9 @@ require 'crudoperations.php';
 <h1 align="center">Student Information</h1>
 <?php
 $crudObj = new CrudOperations();
+if (!empty($_GET['student_id'])) {
+    $resultOfDeleteOfStudentLeave = $crudObj->deleteRecordOfStudentLeave($_GET['student_id']);
+}
 $resultOfLeaveTable = $crudObj->viewRecordsOfLeaveTable();
 if ($resultOfLeaveTable->num_rows > 0) {
 ?>  
@@ -28,6 +31,8 @@ if ($resultOfLeaveTable->num_rows > 0) {
         <td><?php echo $studentData["studentLeave"] ?></td>
         <td width=250>
         <a href="editOfStudentLeave.php?id=<?php echo $studentData['id'] ?>">Edit</a>
+        <a href="indexOfLeave.php?id=<?php echo $studentData['student_id'] ?>">Delete</a>
+
         </tr>
        <?php
     }

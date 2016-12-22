@@ -23,6 +23,15 @@ class CrudOperations
 	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
 	    }
 	}
+	public function deleteRecordOfStudentLeave($student_id)
+	{
+		try {
+				$delete_query = "DELETE from studentLeave where student_id = {$student_id}";
+				$result = $this->conn->query($delete_query);
+		} catch(Exception $e) {
+	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
+	    }
+	}
 	public function createStudentRecord($inputData)
 	{
 		$studentName = $inputData['studentName'];
