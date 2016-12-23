@@ -5,6 +5,7 @@ class Validation
     {
         $resultOfValidation = true;
         $errorMessageArray = array();
+        echo "hi";
         if (empty($studentRecord['studentName']) || !preg_match("/^['a-z']{3,9}$/",$studentRecord['studentName'])) {
             $studentNameError = "***please enter name";
             $errorMessageArray['studentName'] = $studentNameError; 

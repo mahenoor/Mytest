@@ -20,7 +20,7 @@ class CrudOperations
 				$delete_query = "DELETE from Student where id = {$id}";
 				$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
-	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
+	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn);
 	    }
 	}
 	public function deleteRecordOfStudentLeave($student_id)
@@ -29,7 +29,7 @@ class CrudOperations
 				$delete_query = "DELETE from studentLeave where student_id = {$student_id}";
 				$result = $this->conn->query($delete_query);
 		} catch(Exception $e) {
-	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn) . "<br>" . $e->getMessage();
+	    	echo "Error: " . $delete_query . "<br>" . mysqli_error($this->conn);
 	    }
 	}
 	public function createStudentRecord($inputData)
@@ -58,7 +58,7 @@ class CrudOperations
 	    	echo "Error: " . $insert_query . "<br>" . mysqli_error($this->conn);
 	    }
     }
-	public function editStudentRecord($inputData,$id) 
+	public function editStudentRecord($inputData, $id) 
 	{
 		$studentName = $inputData['studentName']; 
 		$Department = $inputData['Department'];
@@ -86,7 +86,7 @@ class CrudOperations
 	    	echo "Error: " . $update_query . "<br>" . mysqli_error($this->conn);
 	    }
 	}
-	public function editStudentLeaveRecord($inputData,$id)
+	public function editStudentLeaveRecord($inputData, $id)
 	{
 		$startDate = $inputData['startDate'];
 		$endDate = $inputData['endDate'];

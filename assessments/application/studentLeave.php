@@ -47,15 +47,16 @@ function validate()
     var endDate = document.getElementById('endDate').value;
     var value = true;
     if (startDate == '') {
-        var startDateError = document.getElementById('startDateError').innerHTML = "plz enter date";
+        var startDateError = document.getElementById('startDateError').innerHTML = "plz enter start date";
         value = false;
     } 
     if (endDate == '') {
-        var endDateError = document.getElementById('endDateError').innerHTML = "plz enter date";
+        var endDateError = document.getElementById('endDateError').innerHTML = "plz enter end date";
         value = false;
     }
-    if(value) {
-    document.getElementById('form').submit(); }
+    if (value) {
+    document.getElementById('form').submit();
+    }
 }
 function days()
 {
@@ -66,7 +67,7 @@ function days()
     var lastDate = new Date(endDate);
     var timeDiff = Math.abs(lastDate.getTime() - firstDate.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24) + 1);
-    document.getElementById('leave').value = diffDays; 
+    document.getElementById('studentLeave').value = diffDays; 
 }
 </script>
 <h2 align="center">Apply for leave</h2>
@@ -88,10 +89,12 @@ function days()
 </tr>
 <th>Numbers of days the student will be on leave</th>
 <td>
-<input type="text" name="studentLeave" id="leave"/>
+<input type="text" name="studentLeave" id="studentLeave"/>
 </td>
 </table>
-<input type="button" name="submit" value="submit" onClick="return validate()" class="button"></form>
+<input type="button" name="submit" value="validate" onClick="return validate()" class="button">
+<input type="submit" name="submit" value="submit" class="button">
+</form>
 </body>
 <a href="index.php">Go to index page</a>
 </html>
