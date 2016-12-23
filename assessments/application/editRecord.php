@@ -14,14 +14,12 @@ if (!empty($_GET['id'])) {
     $input['Total'] = $studentData['Total'];
     $input['Percentage'] = $studentData['Percentage'];
 }
-if (isset($_POST['submit'])) {
-    $responseOfEdit = "";
+if (isset($_POST['update'])) {
     $crudObj = new CrudOperations();
     $validationObject = new Validation();
     $responseOfValidation = $validationObject->validate($_POST);
     $errorMessage = $responseOfValidation['message'];
     if ($responseOfValidation['status'] === true) {
-        print_r("hi");exit;
         $responseOfEdit = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }
     if ($responseOfEdit === true ) {
@@ -84,8 +82,8 @@ if (!empty($errorMessage['Department'])) {
 </tr>
 <tr>
 <td><label>Enter the Gender:</label></td>
-<td><input type="radio" name="Gender" value="male" checked="checked" />Male
-<input type="radio" name="Gender" value="female"  checked="checked" />Female
+<td><input type="radio" <?php if ($Gender == "male") {echo "checked = 'checked'"; } ?> name="Gender" value="male" />Male
+<input type="radio" <?php if ($Gender == "female") {echo "checked = 'checked'"; } ?> name="Gender" value="female" />Female
 </td>
 <?php 
 if (!empty($errorMessage['Gender'])) {
