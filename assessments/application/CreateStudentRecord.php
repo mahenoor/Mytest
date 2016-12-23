@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'crudoperations.php';
 require 'validation.php';
 if (isset($_POST['submit'])) {
@@ -11,9 +12,10 @@ if (isset($_POST['submit'])) {
             $responseOfInsert = $crudObj->createStudentRecord($_POST);
     }
     if ($responseOfInsert === true) {
-        header('Location:index.php');
+       $_SESSION['message'] = 'Student record inserted successfully'; 
+       header("Location:index.php"); 
     }
-}   
+}  
 $Department = !empty($Department) ? $Department : '' ;
 $Gender = !empty($Gender) ? $Gender : '' ;
 ?>

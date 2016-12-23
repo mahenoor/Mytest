@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'crudoperations.php';
 require 'validation.php';
 if (!empty($_GET['id'])) {
@@ -23,7 +24,8 @@ if (isset($_POST['update'])) {
         $responseOfEdit = $crudObj->editStudentRecord($_POST, $_GET['id']);
     }
     if ($responseOfEdit === true ) {
-        header('Location:index.php');
+        $_SESSION['message'] = 'Student record updated successfully'; 
+        header("Location:index.php"); 
     }
 } 
 $Department = $input['Department'];
@@ -60,7 +62,7 @@ if (!empty($errorMessage['studentName'])) {
 <tr>
 <td><label>Enter the Department:</label></td>
 <td><select name="Department">
-<option disable selected value>select</option>
+<option disabled>select</option>
 <option <?php if ($Department == 'Computer Science') { ?> selected <?php } ?> value="Computer Science">Computer Science</option>
 <option <?php if ($Department == 'Electronics') { ?> selected <?php } ?> value="Electronics">Electronics</option>
 <option <?php if ($Department == 'Mechanical') { ?> selected <?php } ?> value="Mechanical">Mechanical</option>
@@ -82,8 +84,8 @@ if (!empty($errorMessage['Department'])) {
 </tr>
 <tr>
 <td><label>Enter the Gender:</label></td>
-<td><input type="radio" <?php if ($Gender == "male") {echo "checked = 'checked'"; } ?> name="Gender" value="male" />Male
-<input type="radio" <?php if ($Gender == "female") {echo "checked = 'checked'"; } ?> name="Gender" value="female" />Female
+<td><input type="radio" <?php if ($Gender == "male") { echo "checked = 'checked'"; } ?> name="Gender" value="male" />Male
+<input type="radio" <?php if ($Gender == "female") { echo "checked = 'checked'"; } ?> name="Gender" value="female" />Female
 </td>
 <?php 
 if (!empty($errorMessage['Gender'])) {
