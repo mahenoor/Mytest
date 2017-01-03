@@ -17,16 +17,16 @@ class StudentRecordController
 	}
 	public function createStudentRecord()
 	{
-		$responseOfValidation = $this->validationObj->validate($_POST);
+		$validationArray = $this->validationObj->validate($_POST);
 		//print_r($responseOfValidation);exit;
-		if (!$responseOfValidation['status']) {
-			$_SESSION['errorMsg'] = $responseOfValidation['message'];
-			header('Location:StudentRecordController.php?action=createStudentRecord_view');
+		if (!$validationArray['status']) {
+			$_SESSION['errorMessage'] = $validationArray['message'];
+			header('Location:studentRecordController.php?action=createStudentRecord_view');
 		} else {
-			unset($_SESSION['errorMsg']);
+			unset($_SESSION['errorMessage']);
 			$response = $this->modelObj->createStudentRecord($_POST);
 			if ($response) {
-				header('Location:StudentRecordController.php?action=viewRecords');
+				header('Location:studentRecordController.php?action=viewRecords');
 			}
 		}
 	}

@@ -1,3 +1,8 @@
+<?php
+
+$Department = !empty($Department) ? $Department : '' ;
+$Gender = !empty($Gender) ? $Gender : '' ;
+?>
 <html>
 <head>
 <h1 align="center">Student Information</h1>
@@ -18,7 +23,7 @@
 </style>
 </head>
 <body bgcolor="pink">
-<form method="post" action="" >
+<form method="post" action="studentRecordController.php?action=createStudentRecord">
 <table>
 <tr>
 <td><label>Enter the Student Name:</label></td>

@@ -4,7 +4,7 @@ if (isset($_SESSION['message'])) {
     echo $_SESSION['message'];
     unset($_SESSION['message']);
 }
-require 'crudoperations.php';
+//require 'crudoperations.php';
 ?>
 <html>
 <h1 align="center">Student Information</h1>
@@ -63,7 +63,7 @@ if ($resultOfView->num_rows > 0) {
 }
 ?>
 <br />
-<a href="CreateStudentRecord.php">Insert a new student record</a>
+<a href="StudentRecordController.php?action=createStudentRecord_view">Insert a new student record</a>
 <br />
 <a href="indexOfLeave.php">View the studentLeave table</a>
 
