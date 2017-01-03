@@ -1,10 +1,11 @@
 <?php
 session_start();
+require 'crudoperations.php';
 if (isset($_SESSION['message'])) {
     echo $_SESSION['message'];
     unset($_SESSION['message']);
 }
-require 'crudoperations.php';
+
 ?>
 <html>
 <h1 align="center">Student Information</h1>
@@ -14,6 +15,7 @@ $resultOfLeaveTable = $crudObj->viewRecordsOfLeaveTable();
 if ($resultOfLeaveTable->num_rows > 0) {
 ?>  
     <body bgcolor="#7FFFD4">
+    <form method="post" action="">
     <table align="center" width="79%" border="5">
     <tr>
     <th>id</th>
@@ -43,6 +45,6 @@ if ($resultOfLeaveTable->num_rows > 0) {
     echo "0 results";
 }
 ?>
-<a href="index.php">Back to index page</a>
+<a href="studentRecordController.php?action=viewRecords">Back to index page</a>
 </body>
 </html>

@@ -12,13 +12,18 @@ class StudentRecordController
 	}
 	public function viewRecords()
 	{
-		$viewRecords = $this->modelObj->viewRecords();
+		$studentRecords = $this->modelObj->viewRecords();
 		require 'index.php';
+	}
+	public function viewRecordsOfLeaveTable()
+	{
+		$viewRecordsOfLeaveTable = $this->modelObj->viewRecordsOfLeaveTable();
+		//require 'indexOfLeave.php';
 	}
 	public function createStudentRecord()
 	{
 		$validationArray = $this->validationObj->validate($_POST);
-		//print_r($responseOfValidation);exit;
+		//print_r($validationArray);exit;
 		if (!$validationArray['status']) {
 			$_SESSION['errorMessage'] = $validationArray['message'];
 			header('Location:studentRecordController.php?action=createStudentRecord_view');
@@ -37,9 +42,43 @@ class StudentRecordController
 		}
 		require 'CreateStudentRecord_view.php';
 	}
-	
+
+
+
+	/*public function editStudentRecord()
+	{
+		$validationArray = $this->validationObj->validate($_POST);
+		if (!$validationArray['status']) {
+			$_SESSION['errorMessage'] = $validationArray['message'];
+			header('Location:studentRecordController.php?action=editStudentRecord_view');
+		} else {
+			unset($_SESSION['errorMessage']);
+			$response = $this->modelObj->editStudentRecord($_POST, $_GET['id']);
+			if ($response) {
+				header('Location:studentRecordController.php?action=viewRecords');
+			}
+		}
+	}
+	public function editStudentRecord_view()
+	{
+		if (!empty($_SESSION['errorMessage'])) {
+			$errorMessage = $_SESSION['errorMessage'];
+		}
+		require 'editRecord_view.php';
+	}
+
+	/*public function delete()
+	{
+		if (!empty($_GET['id'])) {
+	    $responseOfStudentLeaveDelete = $this->modelObj->deleteRecordOfStudentLeave($_GET['id']);
+	    $responseOfDelete = $this->modelObj->deleteRecord($_GET['id']);
+	    header('Location:studentRecordController.php?action=viewRecords');
+		}
+	}*/
+
 }
 $controllerObj = new StudentRecordController();
+//$controllerObj->$action();
 if (!isset($_REQUEST['action'])) {
 	$action = 'viewRecords';
 } else {

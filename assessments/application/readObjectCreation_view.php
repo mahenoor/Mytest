@@ -3,6 +3,7 @@
 <h3 align=center>Student Details</h1>
 </head>
 <body bgcolor = "sky blue">
+<form method="post" action="studentRecordController.php?action=readStudentRecord">
 <table width=80% border=3>
 <tr>
 <th>Student Name</th>

@@ -11,7 +11,7 @@
 </style>
 </head>
 <body bgcolor="pink">
-<form method="post" action="">
+<form method="post" action="studentRecordController.php?action=editStudentRecord">
 <table>
 <tr>
 <td><label>Enter the Student Name:</label></td>
@@ -115,5 +115,5 @@ if (!empty($errorMessage['Maths'])) {
 <input type="submit" name="update" value="update" class="button">
 </form>
 </body>
-<a href="index.php">Go to index page</a>
+<a href="studentRecordController.php?action=viewRecords">Go to index page</a>
 </html>

@@ -138,12 +138,17 @@ class CrudOperations
 	}
 	public function viewRecords()
 	{
-		try {
 				$view_query = "SELECT * from Student";
-				return $result = $this->conn->query($view_query);
-		} catch(Exception $e) {
-	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
-	    }
+				$result = $this->conn->query($view_query);
+				$studentRecords = array();
+				while ($studentRecord = $result->fetch_assoc()) {
+					$studentRecords[] = $studentRecord;
+
+				}
+				//print_r($studentRecords);exit;
+				return $studentRecords;
+
+		
 	}
 	public function studentLeave($inputData, $student_id)
 	{

@@ -16,7 +16,5 @@ if (isset($_POST['submit'])) {
        header("Location:index.php");
     }
 }  
-$Department = !empty($Department) ? $Department : '' ;
-$Gender = !empty($Gender) ? $Gender : '' ;
 include ('CreateStudentRecord_view.php');
 ?>
