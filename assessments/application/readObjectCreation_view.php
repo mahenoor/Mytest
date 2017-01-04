@@ -48,5 +48,5 @@ foreach ($studentLeaveData as $studentLeaveRecords) {
 ?>
 </table>
 </body>
-<a href="index.php">Go to index page</a>
+<a href="studentRecordController.php?action=viewRecords">Go to index page</a>
 </html>

@@ -25,7 +25,7 @@ function days()
 </style>
 </head>
 <body bgcolor="pink">
-<form method="post" name="form" id="form" action="">
+<form method="post" name="form" id="form" action="studentRecordController.php?action=editStudentLeave">
 <table border=3 width=40%>
 <tr>
 <th>Enter the Start date of leave</th>
@@ -44,5 +44,5 @@ function days()
 <input type="submit" name="submit" value="submit" class="button">
 </form>
 </body>
-<a href="index.php">Go to index page</a>
+<a href="StudentRecordController.php?action=editStudentLeave">Go to index page</a>
 </html>

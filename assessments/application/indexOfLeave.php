@@ -15,7 +15,8 @@ $resultOfLeaveTable = $crudObj->viewRecordsOfLeaveTable();
 if ($resultOfLeaveTable->num_rows > 0) {*/
 ?>  
     <body bgcolor="#7FFFD4">
-    <form method="post" action="">
+    <form method="post" action="studentRecordController.php?action=editStudentLeave_view">
+    <input type="hidden" name="id" value="<?php echo $id ?>" /> 
     <table align="center" width="79%" border="5">
     <tr>
     <th>id</th>
@@ -34,7 +35,7 @@ if ($resultOfLeaveTable->num_rows > 0) {*/
         <td><?php echo $studentData["endDate"] ?></td>
         <td><?php echo $studentData["studentLeave"] ?></td>
         <td width=250>
-        <a href="editOfStudentLeave.php?id=<?php echo $studentData['id'] ?>">Edit</a>
+        <a href="studentRecordController.php?action=editStudentLeave&id=<?php echo $studentData["id"] ?>">Edit</a>
         </tr>
        <?php
     }

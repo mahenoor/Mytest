@@ -23,7 +23,6 @@ class StudentRecordController
 	public function createStudentRecord()
 	{
 		$validationArray = $this->validationObj->validate($_POST);
-		//print_r($validationArray);exit;
 		if (!$validationArray['status']) {
 			$_SESSION['errorMessage'] = $validationArray['message'];
 			header('Location:studentRecordController.php?action=createStudentRecord_view');
@@ -42,18 +41,6 @@ class StudentRecordController
 		}
 		require 'CreateStudentRecord_view.php';
 	}
-	public function studentLeave()
-	{
-		$response = $this->modelObj->studentLeave($_POST, $_GET['id']);
-		//print_r($response);exit;
-		if ($response) {
-			header('Location:studentRecordController.php?action=viewRecords');
-		}
-	}
-	public function studentLeave_view()
-	{
-		require 'studentLeave_view.php';
-	}
 	public function readRecord()
 	{
 		if (!empty($_GET['id'])) {
@@ -68,7 +55,7 @@ class StudentRecordController
 		$Total = $studentData['Total'];
 		$Percentage = $studentData['Percentage'];
 		$studentLeaveData = $this->modelObj->readRecordOfIndividualStudent($_GET['id']);
-	}
+		}
 	require 'readObjectCreation_view.php';
 	}
 	public function delete()
@@ -79,25 +66,19 @@ class StudentRecordController
 	    header('Location:studentRecordController.php?action=viewRecords');
 		}
 	}
-	public function edit()
-	{
-		$validationArray = $this->validationObj->validate($_POST);
-		if (!$validationArray['status']) {
-			$_SESSION['errorMessage'] = $validationArray['message'];
-			header('Location:studentRecordController.php?action=edit_view');
-		} else {
-			unset($_SESSION['errorMessage']);
-			$response = $this->modelObj->editStudentRecord($_POST, $_GET['id']);
-			if ($response) {
-				header('Location:studentRecordController.php?action=viewRecords');
-			} 
-		}
-		/*$Department = $input['Department'];
-		$Gender = $input['Gender'];*/
-	}
 	public function edit_view()
 	{
+		$this->edit();
+		if (!empty($_SESSION['errorMessage'])) {
+			$errorMessage = $_SESSION['errorMessage'];
+		}
+	}
+	public function edit()
+	{
 		if (!empty($_GET['id'])) {
+		   $id = $_GET['id'];
+		}
+		if (isset($_GET['id'])) {
 		    $studentData = $this->modelObj->readRecord($_GET['id']);
 		    $input['studentName'] = $studentData['studentName'];
 		    $input['Department'] = $studentData['Department'];
@@ -108,11 +89,53 @@ class StudentRecordController
 		    $input['Maths'] = $studentData['Maths'];
 		    $input['Total'] = $studentData['Total'];
 		    $input['Percentage'] = $studentData['Percentage'];
-		    $id = $_GET['id'];
+		    $Department = $input['Department'];
+			$Gender = $input['Gender'];
+			//$id = $_GET['id'];
+			include('editRecord_view.php');
 		}
-		require 'editRecord_view.php';
+		if (isset($_POST['update'])) {
+			$validationArray = $this->validationObj->validate($_POST);
+			if (!$validationArray['status']) {
+				$_SESSION['errorMessage'] = $validationArray['message'];
+				header('Location:studentRecordController.php?action=edit_view');
+			} else {
+				unset($_SESSION['errorMessage']);
+				$response = $this->modelObj->editStudentRecord($_POST, $_GET['id']);
+				if ($response) {
+					header('Location:studentRecordController.php?action=viewRecords');
+				}
+			}
+		}
 	}
-	
+	public function editStudentLeave_view()
+	{
+		$this->editStudentLeave();
+		if (!empty($_SESSION['errorMessage'])) {
+			$errorMessage = $_SESSION['errorMessage'];
+		}
+	}
+	public function editStudentLeave()
+	{
+		if (!empty($_GET['id'])) {
+		   $id = $_GET['id'];
+		}
+		if (isset($_GET['id'])) {
+			//require 'editOfStudentLeave_view.php';
+			$studentData = $this->modelObj->readStudentLeaveRecord($_GET['id']);
+			$input['startDate'] = $studentData['startDate'];
+		    $input['endDate'] = $studentData['endDate'];
+		    $input['studentLeave'] = $studentData['studentLeave'];
+		    $id = $_GET['id'];
+		    include('editOfStudentLeave_view.php');
+		}
+		if (isset($_POST['submit'])) {
+			$responseOfStudentLeave = $this->modelObj->editStudentLeaveRecord($_POST, $_GET['id']);
+			if ($responseOfStudentLeave === true) {
+		        header('Location:studentRecordController.php?action=viewRecords');
+		    }
+		}
+	}		
 }
 $controllerObj = new StudentRecordController();
 //$controllerObj->$action();

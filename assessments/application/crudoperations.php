@@ -60,6 +60,7 @@ class CrudOperations
     }
 	public function editStudentRecord($inputData, $id) 
 	{
+		$id = $_POST['id'];
 		$studentName = $inputData['studentName']; 
 		$Department = $inputData['Department'];
 		$Gender = $inputData['Gender'];
@@ -75,7 +76,8 @@ class CrudOperations
 		try {
 				$update_query = "UPDATE Student SET studentName = '$studentName', Department = '$Department', 
 	            Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
-	            '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = {$id}"; 
+	            '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = $id"; 
+	            //print_r($update_query);exit;
 				if (mysqli_query($this->conn, $update_query)) {
 	                return true;
 	        	}
@@ -88,9 +90,12 @@ class CrudOperations
 	}
 	public function editStudentLeaveRecord($inputData, $id)
 	{
+		//$_POST = $POST;
+		//$id = $_POST['id'];
 		$startDate = $inputData['startDate'];
 		$endDate = $inputData['endDate'];
 		$studentLeave = $inputData['studentLeave'];
+		$id = $_POST['id'];
 		try {
 				$update_query = "UPDATE studentLeave SET startDate = '$startDate', endDate = 
 				'$endDate', studentLeave = '$studentLeave' WHERE id = $id"; 

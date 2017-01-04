@@ -27,7 +27,7 @@ if (isset($_POST['update'])) {
         $_SESSION['message'] = 'Student record updated successfully'; 
         header("Location:index.php"); 
     }
-} 
+}
 $Department = $input['Department'];
 $Gender = $input['Gender'];
 include ('editRecord_view.php');
