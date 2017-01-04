@@ -121,7 +121,6 @@ class StudentRecordController
 		   $id = $_GET['id'];
 		}
 		if (isset($_GET['id'])) {
-			//require 'editOfStudentLeave_view.php';
 			$studentData = $this->modelObj->readStudentLeaveRecord($_GET['id']);
 			$input['startDate'] = $studentData['startDate'];
 		    $input['endDate'] = $studentData['endDate'];
@@ -131,14 +130,20 @@ class StudentRecordController
 		}
 		if (isset($_POST['submit'])) {
 			$responseOfStudentLeave = $this->modelObj->editStudentLeaveRecord($_POST, $_GET['id']);
-			if ($responseOfStudentLeave === true) {
+			if ($responseOfStudentLeave) {
 		        header('Location:studentRecordController.php?action=viewRecords');
 		    }
+		}
+	}
+	public function studentLeave()
+	{
+		$response = $this->modelObj->studentLeave($_POST, $_GET['id']);
+		if ($response) {
+			header('Location:studentRecordController.php?action=viewRecords');
 		}
 	}		
 }
 $controllerObj = new StudentRecordController();
-//$controllerObj->$action();
 if (!isset($_REQUEST['action'])) {
 	$action = 'viewRecords';
 } else {

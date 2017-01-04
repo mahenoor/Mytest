@@ -90,15 +90,14 @@ class CrudOperations
 	}
 	public function editStudentLeaveRecord($inputData, $id)
 	{
-		//$_POST = $POST;
-		//$id = $_POST['id'];
+		$id = $_POST['id'];
 		$startDate = $inputData['startDate'];
 		$endDate = $inputData['endDate'];
 		$studentLeave = $inputData['studentLeave'];
-		$id = $_POST['id'];
 		try {
 				$update_query = "UPDATE studentLeave SET startDate = '$startDate', endDate = 
 				'$endDate', studentLeave = '$studentLeave' WHERE id = $id"; 
+				//print_r($update_query);exit;
 				if (mysqli_query($this->conn, $update_query)) {
 	                return true;
 	        	}
