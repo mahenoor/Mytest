@@ -11,7 +11,8 @@
 </style>
 </head>
 <body bgcolor="pink">
-<form method="post" action="studentRecordController.php?action=editStudentRecord">
+<form method="post" action="studentRecordController.php?action=edit">
+<input type="hidden" name="id" value="<?php echo $id ?>" />
 <table>
 <tr>
 <td><label>Enter the Student Name:</label></td>

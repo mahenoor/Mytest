@@ -63,7 +63,7 @@ function days()
 <h2 align="center">Apply for leave</h2>
 </head>
 <body bgcolor="pink">
-<form method="post" name="form" id="form" action="">
+<form method="post" name="form" id="form" action="StudentRecordController.php?action=studentLeave">
 <table border=3 width=60%>
 <tr>
 <th>Enter the Start date of leave</th>
@@ -86,5 +86,5 @@ function days()
 <input type="submit" name="submit" value="submit" class="button">
 </form>
 </body>
-<a href="index.php">Go to index page</a>
+<a href="studentRecordController.php?action=viewRecords">Go to index page</a>
 </html>

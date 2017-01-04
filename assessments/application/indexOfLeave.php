@@ -1,18 +1,18 @@
 <?php
-session_start();
+/*session_start();
 require 'crudoperations.php';
 if (isset($_SESSION['message'])) {
     echo $_SESSION['message'];
     unset($_SESSION['message']);
 }
-
+*/
 ?>
 <html>
 <h1 align="center">Student Information</h1>
 <?php
-$crudObj = new CrudOperations();
+/*$crudObj = new CrudOperations();
 $resultOfLeaveTable = $crudObj->viewRecordsOfLeaveTable();
-if ($resultOfLeaveTable->num_rows > 0) {
+if ($resultOfLeaveTable->num_rows > 0) {*/
 ?>  
     <body bgcolor="#7FFFD4">
     <form method="post" action="">
@@ -25,7 +25,7 @@ if ($resultOfLeaveTable->num_rows > 0) {
     <th>studentLeave</th>
     </tr>
     <?php
-    while ($studentData = $resultOfLeaveTable ->fetch_assoc()) {
+    foreach($studentLeaveRecords as $studentData) {
 ?>  
         <tr>
         <td><?php echo $studentData["id"] ?></td>
@@ -40,10 +40,10 @@ if ($resultOfLeaveTable->num_rows > 0) {
     }
 ?>
     </table>
-    <?php
+    <?php/*
     } else {
     echo "0 results";
-}
+}*/
 ?>
 <a href="studentRecordController.php?action=viewRecords">Back to index page</a>
 </body>

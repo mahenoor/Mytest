@@ -47,8 +47,13 @@ if ($resultOfView->num_rows > 0) {
         <td><?php echo $studentData["Total"] ?></td>
         <td><?php echo $studentData["Percentage"] ?></td>
         <td width=250>
+        <a href="studentRecordController.php?action=readRecord&id=<?php echo $studentData['id']  ?>">Read</a>
+        <a href="studentRecordController.php?action=edit&id=<?php echo $studentData['id']  ?>">Edit</a>
+        <a href="studentRecordController.php?action=delete&id=<?php echo $studentData['id']  ?>">Delete</a>
+        <a href="studentRecordController.php?action=studentLeave&id=<?php echo $studentData['id']  ?>">Leave</a>
         </td>
         </tr>
+
         <?php
     }
 ?>
@@ -61,7 +66,7 @@ if ($resultOfView->num_rows > 0) {
 <br />
 <a href="StudentRecordController.php?action=createStudentRecord_view">Insert a new student record</a>
 <br />
-<a href="indexOfLeave.php">View the studentLeave table</a>
+<a href="studentRecordController.php?action=viewRecordsOfLeaveTable">View the studentLeave table</a>
 
 </body>
 </html>

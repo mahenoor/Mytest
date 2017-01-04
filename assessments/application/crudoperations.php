@@ -138,17 +138,13 @@ class CrudOperations
 	}
 	public function viewRecords()
 	{
-				$view_query = "SELECT * from Student";
-				$result = $this->conn->query($view_query);
-				$studentRecords = array();
-				while ($studentRecord = $result->fetch_assoc()) {
-					$studentRecords[] = $studentRecord;
-
-				}
-				//print_r($studentRecords);exit;
-				return $studentRecords;
-
-		
+		$view_query = "SELECT * from Student";
+		$result = $this->conn->query($view_query);
+		$studentRecords = array();
+		while ($studentRecord = $result->fetch_assoc()) {
+			$studentRecords[] = $studentRecord;
+		}
+		return $studentRecords;
 	}
 	public function studentLeave($inputData, $student_id)
 	{
@@ -170,15 +166,13 @@ class CrudOperations
 	}
 	public function viewRecordsOfLeaveTable()
 	{
-		try {
-				$view_query = "SELECT * FROM studentLeave";
-				return $result = $this->conn->query($view_query);
-				if (!$result) {
-				 	throw new Exception();
-			    }
-		} catch(Exception $e) {
-		    echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
+		$view_query = "SELECT * FROM studentLeave";
+		$result = $this->conn->query($view_query);
+		$studentLeaveRecords = array();
+		while ($studentLeaveRecord = $result->fetch_assoc()) {
+			$studentLeaveRecords[] = $studentLeaveRecord;
 		}
+		return $studentLeaveRecords;
 	}
 }    
 ?>
