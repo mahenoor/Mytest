@@ -30,9 +30,7 @@
        <?php
     }
 ?>
-    </table>
-<?php
-?>
+</table>
 <a href="studentRecordController.php?action=viewRecords">Back to index page</a>
 </body>
 </html>
