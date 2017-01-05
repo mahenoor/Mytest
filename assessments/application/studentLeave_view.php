@@ -64,6 +64,7 @@ function days()
 </head>
 <body bgcolor="pink">
 <form method="post" name="form" id="form" action="studentRecordController.php?action=studentLeave">
+<input type="hidden" name="id" value="<?php echo $id ?>"/>
 <table border=3 width=60%>
 <tr>
 <th>Enter the Start date of leave</th>

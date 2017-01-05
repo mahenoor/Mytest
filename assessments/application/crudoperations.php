@@ -150,11 +150,12 @@ class CrudOperations
 		}
 		return $studentRecords;
 	}
-	public function studentLeave($inputData, $student_id)
+	public function studentLeave($inputData)
 	{
 		$startDate = $inputData['startDate'];
 		$endDate = $inputData['endDate'];
 		$studentLeave = $inputData['studentLeave'];
+		$student_id = $inputData['id'];
 		$errorMessage = "";
 		try {
 				$insert_query = "INSERT INTO studentLeave(student_id, startDate, endDate, studentLeave) 

@@ -26,10 +26,11 @@ function days()
 </head>
 <body bgcolor="pink">
 <form method="post" name="form" id="form" action="studentRecordController.php?action=editStudentLeave">
+<input type="hidden" name="id" value="<?php echo $id ?>" />
 <table border=3 width=40%>
 <tr>
 <th>Enter the Start date of leave</th>
-<td><input type="text" name="startDate" value="<?php echo $input['startDate']; ?>"/>
+<td><input type="text" name="startDate" value="<?php echo $input['startDate']; ?>" />
 </td>
 </tr>
 <tr>
@@ -44,5 +45,5 @@ function days()
 <input type="submit" name="submit" value="submit" class="button">
 </form>
 </body>
-<a href="StudentRecordController.php?action=editStudentLeave">Go to index page</a>
+<a href="studentRecordController.php?action=viewRecords">Go to index page</a>
 </html>
