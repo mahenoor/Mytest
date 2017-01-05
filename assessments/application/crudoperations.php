@@ -77,8 +77,7 @@ class CrudOperations
 				$update_query = "UPDATE Student SET studentName = '$studentName', Department = '$Department', 
 	            Gender = '$Gender', Roll_no = '$Roll_no', Physics = '$Physics', Chemistry = '$Chemistry', Maths = 
 	            '$Maths', Total = '$Total',  Percentage = '$Percentage' WHERE id = $id"; 
-	            //print_r($update_query);exit;
-				if (mysqli_query($this->conn, $update_query)) {
+	            if (mysqli_query($this->conn, $update_query)) {
 	                return true;
 	        	}
 	        	if (!mysqli_query($this->conn, $update_query)) {
@@ -97,7 +96,6 @@ class CrudOperations
 		try {
 				$update_query = "UPDATE studentLeave SET startDate = '$startDate', endDate = 
 				'$endDate', studentLeave = '$studentLeave' WHERE id = $id"; 
-				//print_r($update_query);exit;
 				if (mysqli_query($this->conn, $update_query)) {
 	                return true;
 	        	}
@@ -142,13 +140,17 @@ class CrudOperations
 	}
 	public function viewRecords()
 	{
-		$view_query = "SELECT * from Student";
-		$result = $this->conn->query($view_query);
-		$studentRecords = array();
-		while ($studentRecord = $result->fetch_assoc()) {
-			$studentRecords[] = $studentRecord;
-		}
-		return $studentRecords;
+		try {
+			$view_query = "SELECT * from Student";
+			$result = $this->conn->query($view_query);
+			$studentRecords = array();
+			while ($studentRecord = $result->fetch_assoc()) {
+				$studentRecords[] = $studentRecord;
+			}
+			return $studentRecords;
+		} catch(Exception $e) {
+	    	echo "Error: " . $view_query.  "<br>" . mysqli_error($this->conn);
+	    }
 	}
 	public function studentLeave($inputData)
 	{
@@ -171,13 +173,17 @@ class CrudOperations
 	}
 	public function viewRecordsOfLeaveTable()
 	{
-		$view_query = "SELECT * FROM studentLeave";
-		$result = $this->conn->query($view_query);
-		$studentLeaveRecords = array();
-		while ($studentLeaveRecord = $result->fetch_assoc()) {
-			$studentLeaveRecords[] = $studentLeaveRecord;
-		}
-		return $studentLeaveRecords;
+		try {
+			$view_query = "SELECT * FROM studentLeave";
+			$result = $this->conn->query($view_query);
+			$studentLeaveRecords = array();
+			while ($studentLeaveRecord = $result->fetch_assoc()) {
+				$studentLeaveRecords[] = $studentLeaveRecord;
+			}
+			return $studentLeaveRecords;
+		}  catch(Exception $e) {
+	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
+	    }
 	}
 }    
 ?>

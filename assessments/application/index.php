@@ -42,7 +42,7 @@ foreach ($studentRecords as $studentData) {
 ?>
 </table>
 <br />
-<a href="StudentRecordController.php?action=createStudentRecord_view">Insert a new student record</a>
+<a href="studentRecordController.php?action=createStudentRecord_view">Insert a new student record</a>
 <br />
 <a href="studentRecordController.php?action=viewRecordsOfLeaveTable">View the studentLeave table</a>
 </body>
