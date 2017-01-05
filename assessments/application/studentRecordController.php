@@ -20,6 +20,13 @@ class StudentRecordController
 		$studentLeaveRecords = $this->modelObj->viewRecordsOfLeaveTable();
 		require 'indexOfLeave.php';
 	}
+	public function createStudentRecord_view()
+	{
+		if (!empty($_SESSION['errorMessage'])) {
+			$errorMessage = $_SESSION['errorMessage'];
+		}
+		require 'CreateStudentRecord_view.php';
+	}
 	public function createStudentRecord()
 	{
 		$validationArray = $this->validationObj->validate($_POST);
@@ -33,13 +40,6 @@ class StudentRecordController
 				header('Location:studentRecordController.php?action=viewRecords');
 			}
 		}
-	}
-	public function createStudentRecord_view()
-	{
-		if (!empty($_SESSION['errorMessage'])) {
-			$errorMessage = $_SESSION['errorMessage'];
-		}
-		require 'CreateStudentRecord_view.php';
 	}
 	public function readRecord()
 	{
@@ -91,7 +91,6 @@ class StudentRecordController
 		    $input['Percentage'] = $studentData['Percentage'];
 		    $Department = $input['Department'];
 			$Gender = $input['Gender'];
-			//$id = $_GET['id'];
 			include('editRecord_view.php');
 		}
 		if (isset($_POST['update'])) {
