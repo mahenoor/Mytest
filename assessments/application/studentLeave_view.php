@@ -45,7 +45,7 @@ function validate()
         value = false;
     }
     if (value) {
-    document.getElementById('form').submit();
+        document.getElementById('form').submit();
     }
 }
 function days()

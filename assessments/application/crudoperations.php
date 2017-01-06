@@ -141,11 +141,11 @@ class CrudOperations
 	public function viewRecords()
 	{
 		try {
-			$view_query = "SELECT * from Student";
-			$result = $this->conn->query($view_query);
-			$studentRecords = array();
-			while ($studentRecord = $result->fetch_assoc()) {
-				$studentRecords[] = $studentRecord;
+				$view_query = "SELECT * from Student";
+				$result = $this->conn->query($view_query);
+				$studentRecords = array();
+				while ($studentRecord = $result->fetch_assoc()) {
+					$studentRecords[] = $studentRecord;
 			}
 			return $studentRecords;
 		} catch(Exception $e) {
@@ -174,13 +174,13 @@ class CrudOperations
 	public function viewRecordsOfLeaveTable()
 	{
 		try {
-			$view_query = "SELECT * FROM studentLeave";
-			$result = $this->conn->query($view_query);
-			$studentLeaveRecords = array();
-			while ($studentLeaveRecord = $result->fetch_assoc()) {
-				$studentLeaveRecords[] = $studentLeaveRecord;
-			}
-			return $studentLeaveRecords;
+				$view_query = "SELECT * FROM studentLeave";
+				$result = $this->conn->query($view_query);
+				$studentLeaveRecords = array();
+				while ($studentLeaveRecord = $result->fetch_assoc()) {
+					$studentLeaveRecords[] = $studentLeaveRecord;
+				}
+				return $studentLeaveRecords;
 		}  catch(Exception $e) {
 	    	echo "Error: " . $view_query. "<br>" . mysqli_error($this->conn);
 	    }
